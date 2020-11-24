@@ -1,0 +1,94 @@
+html {
+  line-height: 1.15;;
+  -webkit-text-size-adjust: none;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+html, body, div, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  box-sizing: border-box;
+}
+h1,h2,h3,h4,h5,h6,em,i,strong {
+  font-style: normal;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, main
+footer, header, hgroup, menu, nav, section, video {
+  display: block;
+}
+input,
+button,
+optgroup,
+textarea,
+select {
+  margin: 0;
+  padding: 0;
+  line-height: 1.15;
+  outline: 0;
+  box-sizing: border-box;
+}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  border: 1px solid transparent;
+  outline: none; 
+  background-color: transparent;
+  -webkit-appearance: button;
+}
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+img {
+  display: block;
+  width: 100%;
+}
+ol, ul, li {
+  list-style: none;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+[hidden] {
+  display: none;
+}

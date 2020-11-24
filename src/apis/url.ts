@@ -1,0 +1,1 @@
+export const GET_BANNERS: string = '/banners'; // 获取banner数据
