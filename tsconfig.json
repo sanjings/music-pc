@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "module": "esnext",
     "strict": true,
@@ -10,11 +11,25 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": [
+      "/@/*": [
         "src/*"
-      ]
+      ],
+      "/pages/*": [
+        "src/pages/*"
+      ],
+      "/components/*": [
+        "src/components/*"
+      ],
+      "/assets/*": [
+        "src/assets/*"
+      ],
+      "/utils/*": [
+        "src/utils/*"
+      ],
+      "/requests/*": [
+        "src/apis/requests/*"
+      ],
     }
   },
   "include": [

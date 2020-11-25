@@ -1,5 +1,10 @@
-import axios, { AxiosInstance, AxiosError, AxiosResponse, AxiosPromise } from 'axios';
+import axios, { AxiosInstance, AxiosError } from 'axios';
 import { BASE_URL, TIME_OUT, errorHandle } from './config';
+
+interface IResponseData {
+  code: number,
+  [key: string]: unknown
+}
 
 /**
  * 创建axios实例
@@ -13,7 +18,7 @@ const axiosInstance: AxiosInstance = axios.create({
  * 响应拦截处理
  */
 axiosInstance.interceptors.response.use(
-  (res: AxiosResponse): Promise<any> => {
+  (res) => {
     if (res.status === 200) {
       const code = res.data.code;
       if (code === 200) {
@@ -23,21 +28,18 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(res.data);
   },
   (error: AxiosError) => {
-    if (error) {
-      if (error.response) {
-        // 请求已发出，但是不在2xx的范围
-        errorHandle(error.response.status);
-        return Promise.reject(error.response);
-      }
-    } else {
-      console.log("网络请求失败, 请刷新重试");
-      return Promise.reject(error);
+    if (error && error.response) {
+      // 请求已发出，但是不在2xx的范围
+      errorHandle(error.response.status);
+      return Promise.reject(error.response);
     }
+    console.log("网络请求失败, 请刷新重试");
+    return Promise.reject(error);
   }
 );
 
-const ajaxGet = (url: string, params: any): Promise<any> => axiosInstance.get(url, { params });
-const ajaxPost = (url: string, params: any): Promise<any> => axiosInstance.post(url, params);
+const ajaxGet = (url: string, params: unknown): Promise<IResponseData> => axiosInstance.get(url, { params });
+const ajaxPost = (url: string, params: unknown): Promise<IResponseData> => axiosInstance.post(url, params);
 
 export {
   ajaxGet,

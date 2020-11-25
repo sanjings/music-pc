@@ -5,6 +5,10 @@ body{
   color: #111;
   background-color: #fff;
 }
+.width-container{
+  margin: auto;
+  width: 1100px;
+}
 /* 清除浮动 */
 .clearfix {
   zoom: 1;
