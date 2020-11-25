@@ -1,14 +1,12 @@
 <template>
-  <div class="discover-wrapper">
-
-  </div>
+  <div class="friend-wrapper"></div>
 </template>
 
 <script lang='ts'>
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Discover'
+  name: 'Friend'
 })
 </script>
 

@@ -1,45 +1,101 @@
 <template>
   <header class="header-wrapper">
-    <div class="header-inner width-container">
-      <div class="logo"></div>
-      <header-nav :listData="navListData" />
+    <!-- 顶部 -->
+    <div class="top-wrapper">
+      <div class="top-inner width-max-container">
+        <div class="left-part">
+          <!-- logo -->
+          <Logo />
+          <!-- 导航 -->
+          <Nav :listData="headerNavList" />
+        </div>
+        <div class="right-part">
+          <!-- 搜索栏 -->
+          <Search />
+          <!-- 创作者中心 -->
+          <button class="produce-center">
+            <a href="javascript:;">创作者中心</a>
+          </button>
+          <!-- 登录 -->
+          <button class="login">登录</button>
+        </div>
+      </div>
     </div>
+    <!-- 子菜单 -->
+    <SubNav />
   </header>
 </template>
 
 <script lang='ts'>
-import { defineComponent } from "vue";
-import { IHeaderNavList } from "/@/apis/data";
-import HeaderNav from './nav.vue'
+import { defineComponent, PropType } from "vue";
+import { headerNavList } from "/@/apis/data";
+import Logo from "./logo.vue";
+import Nav from "./nav.vue";
+import Search from "./search.vue";
+import SubNav from "./subNav.vue";
 
 export default defineComponent({
   name: "Header",
   components: {
-    HeaderNav
+    Logo,
+    Nav,
+    Search,
+    SubNav
   },
-  props: {
-    navListData: {
-      type: Array
+  setup () {
+    return {
+      headerNavList
     }
-  },
-  setup() {},
+  }
 });
 </script>
 
 <style lang='scss' scoped>
 .header-wrapper {
-  width: 100%;
-  height: 70px;
-  color: #fff;
-  background-color: #242424;
-  .header-inner {
-    display: flex;
-    height: 100%;
-    .logo {
-      width: 176px;
+  .top-wrapper {
+    width: 100%;
+    height: 70px;
+    color: #fff;
+    background-color: #242424;
+    border-bottom: 1px solid #000000;
+    .top-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       height: 100%;
-      background: url("../../assets/images/sprite_logo.png") no-repeat 0 0;
-      overflow: hidden;
+      .left-part,
+      .right-part {
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+      .right-part {
+        .produce-center {
+          margin: 0 19px;
+          width: 90px;
+          height: 32px;
+          border: 1px solid #4f4f4f;
+          border-radius: 20px;
+          overflow: hidden;
+          &:hover {
+            border-color: #ccc;
+          }
+          a {
+            display: block;
+            line-height: 32px;
+            font-size: 12px;
+            color: #ccc;
+          }
+        }
+        .login {
+          font-size: 12px;
+          color: #787878;
+          cursor: pointer;
+          &:hover {
+            color: #999;
+          }
+        }
+      }
     }
   }
 }

@@ -1,30 +1,27 @@
 <template>
-  <div class="container">
-    <Header :navListData="headerNavList" />
+  <div class="home-container">
+    <Header />
     <router-view></router-view>
+    <Footer />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Header from "/components/Header/index.vue";
-import { headerNavList } from "/@/apis/data";
+import Footer from "/components/Footer/index.vue";
 
 export default defineComponent({
   name: "HomeLayout",
   components: {
     Header,
-  },
-  setup() {
-    return {
-      headerNavList
-    };
-  },
+    Footer
+  }
 });
 </script>
 
 <style lang='scss' scoped>
-.container {
+.home-container {
   display: flex;
   flex-direction: column;
   width: 100%;

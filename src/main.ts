@@ -5,6 +5,7 @@ import store from './store/index';
 
 import './assets/styles/reset.css';
 import './assets/styles/common.css';
+import './assets/fonts/iconfont/iconfont.css';
 
 /**
  * 捕获全局promise-reject

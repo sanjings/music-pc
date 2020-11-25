@@ -3,9 +3,10 @@
     <template v-for="item of listData" :key="item.link">
       <li :class="['nav-item', { active: $route.path === item.link }]">
         <router-link :to="item.link" v-if="item.isSelf">
-          {{ item.name }}
+          {{ item.title }}
         </router-link>
-        <a :href="item.link" v-else>{{ item.name }}</a>
+        <a :href="item.link" target="_blank" v-else>{{ item.title }}</a>
+        <i class="arrow" v-show="$route.path === item.link" />
       </li>
     </template>
   </ul>
@@ -13,14 +14,11 @@
 
 <script lang='ts'>
 import { defineComponent } from "vue";
-import { IHeaderNavList } from "/@/apis/data";
 
 export default defineComponent({
   name: "HeaderNav",
   props: {
-    listData: {
-      type: Array
-    },
+    listData: Array
   }
 });
 </script>
@@ -31,6 +29,7 @@ export default defineComponent({
   align-items: center;
   height: 70px;
   .nav-item {
+    position: relative;
     height: 100%;
     a {
       display: flex;
@@ -39,6 +38,17 @@ export default defineComponent({
       width: 100%;
       height: 100%;
       color: #ccc;
+    }
+    .arrow{
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid #c20c0c;
     }
     &.active {
       a {

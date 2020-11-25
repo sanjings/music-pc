@@ -3,11 +3,15 @@ body{
   font-size: 14px;
   font-weight: 400;
   color: #111;
-  background-color: #fff;
+  background-color: #f5f5f5;
 }
-.width-container{
+.width-max-container{
   margin: auto;
   width: 1100px;
+}
+.width-default-container{
+  margin: auto;
+  width: 980px;
 }
 /* 清除浮动 */
 .clearfix {
