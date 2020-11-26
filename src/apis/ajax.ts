@@ -1,9 +1,9 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { BASE_URL, TIME_OUT, errorHandle } from './config';
+import { IUnknowObject } from '/@/typings/index';
 
-interface IResponseData {
-  code: number,
-  [key: string]: unknown
+interface IResponseData extends IUnknowObject {
+  code: number;
 }
 
 /**

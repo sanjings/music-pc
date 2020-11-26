@@ -10,5 +10,6 @@ export default {
     '/assets/': resolve('./src/assets'),
     '/utils/': resolve('./src/utils'),
     '/requests/': resolve('./src/apis/requests'),
+    '/typings/': resolve('./src/typings'),
   }
 }

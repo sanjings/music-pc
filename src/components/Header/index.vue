@@ -21,26 +21,23 @@
         </div>
       </div>
     </div>
-    <!-- 子菜单 -->
-    <SubNav />
+    <div class="divider"></div>
   </header>
 </template>
 
 <script lang='ts'>
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import { headerNavList } from "/@/apis/data";
-import Logo from "./logo.vue";
-import Nav from "./nav.vue";
-import Search from "./search.vue";
-import SubNav from "./subNav.vue";
+import Logo from "./Logo.vue";
+import Nav from "./Nav.vue";
+import Search from "./Search.vue";
 
 export default defineComponent({
   name: "Header",
   components: {
     Logo,
     Nav,
-    Search,
-    SubNav
+    Search
   },
   setup () {
     return {
@@ -97,6 +94,11 @@ export default defineComponent({
         }
       }
     }
+  }
+  .divider{
+    width: 100%;
+    height: 5px;
+    background-color: #c20c0c;
   }
 }
 </style>

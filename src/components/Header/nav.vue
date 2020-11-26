@@ -1,12 +1,10 @@
 <template>
   <ul class="nav-list">
     <template v-for="item of listData" :key="item.link">
-      <li :class="['nav-item', { active: $route.path === item.link }]">
-        <router-link :to="item.link" v-if="item.isSelf">
-          {{ item.title }}
-        </router-link>
+      <li class="nav-item">
+        <router-link :to="item.link" v-if="item.isSelf">{{ item.title }}</router-link>
         <a :href="item.link" target="_blank" v-else>{{ item.title }}</a>
-        <i class="arrow" v-show="$route.path === item.link" />
+        <i class="arrow" v-show="$route.path.includes(item.link)" />
       </li>
     </template>
   </ul>
@@ -32,12 +30,16 @@ export default defineComponent({
     position: relative;
     height: 100%;
     a {
-      display: flex;
-      align-items: center;
+      display: block;
       padding: 0 19px;
       width: 100%;
       height: 100%;
+      line-height: 70px;
       color: #ccc;
+      &.router-link-active{
+        background-color: #000;
+        color: #fff;
+      }
     }
     .arrow{
       position: absolute;
@@ -49,12 +51,6 @@ export default defineComponent({
       border-left: 6px solid transparent;
       border-right: 6px solid transparent;
       border-bottom: 6px solid #c20c0c;
-    }
-    &.active {
-      a {
-        background-color: #000;
-        color: #fff;
-      }
     }
   }
 }

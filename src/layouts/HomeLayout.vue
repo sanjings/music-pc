@@ -1,8 +1,8 @@
 <template>
   <div class="home-container">
-    <Header />
+    <Header v-once />
     <router-view></router-view>
-    <Footer />
+    <Footer v-once />
   </div>
 </template>
 
