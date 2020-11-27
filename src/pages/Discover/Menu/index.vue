@@ -1,7 +1,7 @@
 <template>
-  <div class="menu-wrapper">
-    <div class="menu-inner width-max-container">
-      <ul class="list-wrapper" v-if="menuList.length">
+  <div class="menu-wrap">
+    <div class="menu-inner w-max-container">
+      <ul class="list-wrap" v-if="menuList.length">
         <template v-for="item of menuList" :key="item.link">
           <li class="list-item">
             <router-link :to="item.link">
@@ -26,13 +26,13 @@ export default defineComponent({
 </script>
 
 <style lang='scss' scoped>
-.menu-wrapper {
+.menu-wrap {
   width: 100%;
   background-color: #c20c0c;
   border-bottom: 1px solid #a40011;
   .menu-inner{
     padding-left: 180px;
-    .list-wrapper{
+    .list-wrap{
       display: flex;
       padding-bottom: 5px;
       .list-item{

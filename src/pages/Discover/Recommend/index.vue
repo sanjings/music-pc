@@ -1,26 +1,37 @@
 <template>
-  <div class="recommend-wrapper">
+  <div class="recommend-wrap">
     <Banner :bannerData='bannerData' />
+    <div class="recommend-inner w-def-container">
+      <section class="inner-left">
+        
+      </section>
+      <section class="inner-right">
+        <LoginTip />
+      </section>
+    </div>
   </div>
 </template>
 
 <script lang='ts'>
 import { defineComponent, onMounted, reactive, toRefs } from 'vue';
 import { getBannersRequest, EBannerType } from '/requests/recommend';
-import { IState } from './typing';
+import { IBannerData, IState } from './typing';
 import Banner from './Banner/index.vue';
+import LoginTip from '/components/LoginTip/index.vue';
+import Hot from '/components/LoginTip/index.vue';
 
 export default defineComponent({
   name: 'Recommend',
   components: {
-    Banner
+    Banner,
+    LoginTip
   },
   setup () {
     const state = reactive<IState>({
       bannerData: [] // banner数据
     });
 
-    onMounted(() => {
+    onMounted((): void => {
       getBannerData();
     });
 
@@ -38,3 +49,18 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+  .recommend-inner{
+    display: flex;
+    height: 500px;
+    background-color: #fff;
+    .inner-left{
+      flex: 1;
+      overflow: hidden;
+    }
+    .inner-right{
+      width: 250px;
+    }
+  }
+</style>

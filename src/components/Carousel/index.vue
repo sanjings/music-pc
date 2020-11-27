@@ -1,18 +1,23 @@
 <template>
-  <div class="carousel-wrapper">
-    <ul class="list-wrapper">
+  <div class="carousel-wrap">
+    <ul class="list-wrap">
       <template v-for="(item, index) of listData" :key="index">
         <li :class="['carousel-item', { active: index === curIndex }]">
           <img :src="item.imageUrl" class="item-image" alt="banner" />
         </li>
       </template>
     </ul>
+    <ul class="pagination" v-if="pagination" @click="changeCurIndex($event)">
+      <template v-for="(item, index) of listData.length" :key="index">
+        <li :class="['dot', { active: index === curIndex }]" :data-index="index"></li>
+      </template>
+    </ul>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, watch, watchEffect } from "vue";
-import { EChangeType, IIndex } from './typing';
+import { defineComponent, ref, watch } from "vue";
+import { MoveTypeEnum, IChangeParam } from "./typing";
 
 export default defineComponent({
   name: "Carousel",
@@ -26,21 +31,25 @@ export default defineComponent({
       default: false,
     },
     interval: {
-      type: Number,
-      default: 5000,
+      type: [Number, String],
+      default: 3000,
     },
+    pagination: {
+      type: Boolean,
+      default: false
+    }
   },
   setup(props, ctx) {
     const curIndex = ref<number>(0);
     let timer: NodeJS.Timeout | null = null;
 
-     /**
-     * listData有数据时，开启自动轮播
+    /**
+     * 监听listData，根据autoplay值，判断是否开启自动轮播
      */
     watch(
       () => props.listData,
       (newValue, preValue, onInvalidate) => {
-        newValue.length && props.autoplay && autoplayAction();
+        newValue.length > 1 && props.autoplay && autoplayAction();
         onInvalidate(() => {
           timer && clearAutoplay();
         });
@@ -51,10 +60,10 @@ export default defineComponent({
      * 轮播切换时，向父组件触发change事件
      */
     watch(curIndex, () => {
-      const param: IIndex = {
-        index: curIndex.value
+      const param: IChangeParam = {
+        index: curIndex.value,
       };
-      ctx.emit('change', param);
+      ctx.emit("change", param);
     });
 
     /**
@@ -66,8 +75,8 @@ export default defineComponent({
       timer && clearAutoplay();
 
       timer = setInterval((): void => {
-        changeCurIndex(EChangeType.NEXT);
-      }, interval);
+        move(MoveTypeEnum.NEXT);
+      }, Number(interval));
     };
 
     /**
@@ -79,19 +88,23 @@ export default defineComponent({
     };
 
     /**
-     * 切换当前index
+     * 向前或向后切换item
      */
-    const changeCurIndex = (type: EChangeType): void => {
+    const move = (type: MoveTypeEnum): void => {
       const listLengh = props.listData.length;
 
-      if (type === EChangeType.NEXT) {
-        curIndex.value++;
-      } else if (type === EChangeType.PREV) {
-        curIndex.value--;
-      } else {
-        return;
+      if (listLengh <= 1) return;
+
+      switch(type) {
+        case MoveTypeEnum.NEXT:
+          curIndex.value++;
+          break;
+        case MoveTypeEnum.PREV:
+          curIndex.value--;
+          break;
+        default: return;
       }
-      
+
       if (curIndex.value > listLengh - 1) {
         curIndex.value = 0;
       } else if (curIndex.value < 0) {
@@ -100,27 +113,51 @@ export default defineComponent({
     };
 
     /**
-     * 手动切换item
+     * 改变curIndex
      */
-    const changeItem = (type: EChangeType): void => {
-      changeCurIndex(type);
+    const changeCurIndex = (e: MouseEvent): void => {
+      const tar = e.target as HTMLElement;
+
+      if (tar.className === 'dot') {
+        const index = Number(tar.dataset.index);
+        curIndex.value = index;
+        props.autoplay && autoplayAction();
+      }
+    };
+
+    /**
+     * 切换下一张
+     */
+    const moveNext = (): void => {
+      move(MoveTypeEnum.NEXT);
       props.autoplay && autoplayAction();
-    }
+    };
+
+    /**
+     * 切换上一张
+     */
+    const movePrev = (): void => {
+      move(MoveTypeEnum.PREV);
+      props.autoplay && autoplayAction();
+    };
 
     return {
       curIndex,
-      changeItem
+      changeCurIndex,
+      moveNext,
+      movePrev
     };
   }
 });
 </script>
 
 <style lang='scss' scoped>
-.carousel-wrapper {
+.carousel-wrap {
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  .list-wrapper {
+  .list-wrap {
     position: relative;
     width: 100%;
     height: 100%;
@@ -128,12 +165,45 @@ export default defineComponent({
       position: absolute;
       height: 100%;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 0.6s;
       &.active {
         opacity: 1;
       }
       .item-image {
         height: 100%;
+      }
+    }
+  }
+  .pagination {
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    .dot {
+      width: 22px;
+      height: 22px;
+      text-align: center;
+      background-color: transparent;
+      cursor: pointer;
+      &.active{
+        &::after {
+          background-color: #c20c0c;
+        }
+      }
+      &:hover {
+        &::after {
+          background-color: #c20c0c;
+        }
+      }
+      &::after {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background-color: #ccc;
+        border-radius: 50%;
       }
     }
   }

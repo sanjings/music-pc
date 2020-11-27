@@ -1,5 +1,5 @@
 <template>
-  <div class="search-wrapper">
+  <div class="search-wrap">
     <i class="iconfont icon-search" />
     <input 
       type="text"
@@ -26,7 +26,7 @@ export default defineComponent({
 </script>
 
 <style lang='scss' scoped>
-.search-wrapper {
+.search-wrap {
   display: flex;
   align-items: center;
   padding-right: 6px;

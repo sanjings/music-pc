@@ -1,6 +1,6 @@
 <template>
-  <footer class="footer-wrapper">
-    <div class="footer-inner width-default-container">
+  <footer class="footer-wrap">
+    <div class="footer-inner w-def-container">
       <Copy />
       <Enter />
     </div>
@@ -22,7 +22,7 @@ export default defineComponent({
 </script>
 
 <style lang='scss' scoped>
-.footer-wrapper {
+.footer-wrap {
   padding: 15px 0 60px;
   border-top: 1px solid #d3d3d3;
   background: #f2f2f2;

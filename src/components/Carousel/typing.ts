@@ -1,8 +1,8 @@
-export enum EChangeType {
+export enum MoveTypeEnum {
   NEXT = 'NEXT',
   PREV = 'PREV'
-}
+};
 
-export interface IIndex {
+export interface IChangeParam {
   index: number
-}
+};

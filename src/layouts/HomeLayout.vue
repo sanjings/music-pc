@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <Header v-once />
-    <router-view></router-view>
+    <router-view />
     <Footer v-once />
   </div>
 </template>

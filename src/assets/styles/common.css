@@ -5,11 +5,11 @@ body{
   color: #111;
   background-color: #f5f5f5;
 }
-.width-max-container{
+.w-max-container{
   margin: auto;
   width: 1100px;
 }
-.width-default-container{
+.w-def-container{
   margin: auto;
   width: 980px;
 }

@@ -1,8 +1,9 @@
 <template>
-  <header class="header-wrapper">
+  <header class="header-wrap">
     <!-- 顶部 -->
-    <div class="top-wrapper">
-      <div class="top-inner width-max-container">
+    {{test}}
+    <div class="top-wrap">
+      <div class="top-inner w-max-container">
         <div class="left-part">
           <!-- logo -->
           <Logo />
@@ -26,7 +27,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from "vue";
+import { defineComponent, onUpdated } from "vue";
 import { headerNavList } from "/@/apis/data";
 import Logo from "./Logo.vue";
 import Nav from "./Nav.vue";
@@ -39,7 +40,8 @@ export default defineComponent({
     Nav,
     Search
   },
-  setup () {
+  props: ['test'],
+  setup (props) {
     return {
       headerNavList
     }
@@ -48,8 +50,8 @@ export default defineComponent({
 </script>
 
 <style lang='scss' scoped>
-.header-wrapper {
-  .top-wrapper {
+.header-wrap {
+  .top-wrap {
     width: 100%;
     height: 70px;
     color: #fff;

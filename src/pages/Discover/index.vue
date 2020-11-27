@@ -1,7 +1,7 @@
 <template>
-  <div class="discover-wrapper">
+  <div class="discover-wrap">
     <Menu :menuList="discoverMenu" />
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 

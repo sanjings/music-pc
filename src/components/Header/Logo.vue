@@ -11,7 +11,7 @@ export default {
 <style lang='scss' scoped>
 .logo {
   width: 176px;
-  height: 100%;
+  height: 69px;
   background: url("../../assets/images/sprite_logo.png") no-repeat 0 0;
   overflow: hidden;
 }
