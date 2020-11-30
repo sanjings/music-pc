@@ -53,14 +53,16 @@ export default defineComponent({
 <style lang="scss" scoped>
   .recommend-inner{
     display: flex;
-    height: 500px;
     background-color: #fff;
     .inner-left{
       flex: 1;
+      border-left: 1px solid #d3d3d3;
+      border-right: 1px solid #d3d3d3;
       overflow: hidden;
     }
     .inner-right{
       width: 250px;
+      border-right: 1px solid #d3d3d3;
     }
   }
 </style>

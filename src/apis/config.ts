@@ -1,4 +1,4 @@
-const BASE_URL: string = 'http://47.108.168.252/music-api';
+const BASE_URL: string = 'http://api.sanjings.com/music';
 
 const TIME_OUT: number = 10 * 1000;
 
