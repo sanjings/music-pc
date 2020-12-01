@@ -1,4 +1,4 @@
-import { IUnknowObject } from '/@/typings/index';
+import { IUnknowObject, IPlayData, IAlbumData, ISingerData } from '/@/typings/index';
 
 export interface IBannerData extends IUnknowObject {
   imageUrl: string;
@@ -6,5 +6,8 @@ export interface IBannerData extends IUnknowObject {
 }
 
 export interface IState {
-  bannerData: IBannerData[];
+  bannerList: IBannerData[];
+  hotPlayList: IPlayData[];
+  albumList: IAlbumData[];
+  singerList: ISingerData[];
 }

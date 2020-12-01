@@ -8,7 +8,7 @@
       <div class="carousel-section">
         <Carousel
           ref='carouselRef'
-          :listData='bannerData'
+          :listData='bannerList'
           autoplay
           pagination
           :interval='8000' 
@@ -45,7 +45,10 @@ export default defineComponent({
     Carousel
   },
   props: {
-    bannerData: Array as PropType<IBannerData[]>
+    bannerList: {
+      type: Array as PropType<IBannerData[]>,
+      required: true
+    } 
   },
   setup (props) {
     const carouselRef = ref(null);
@@ -55,7 +58,7 @@ export default defineComponent({
      * 初始化背景图
      */
     watch(
-      () => props.bannerData,
+      () => props.bannerList,
       (newValue) => {
         if (newValue && newValue.length) {
           bgUrl.value = newValue[0].imageUrl;
@@ -67,9 +70,9 @@ export default defineComponent({
      * 轮播切换时的回调
      */
     const handleCarouselChange = ({ index }: IChangeParam): void => {
-      if (props.bannerData) {
-        const bannerData = props.bannerData;
-        bgUrl.value = bannerData[index].imageUrl;
+      if (props.bannerList) {
+        const bannerList = props.bannerList;
+        bgUrl.value = bannerList[index].imageUrl;
       }
     };
 

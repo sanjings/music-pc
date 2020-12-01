@@ -27,7 +27,7 @@ export const discoverMenu: Array<ILinkItem> = [
   },
   {
     title: "歌单",
-    link: "/discover/songlist"
+    link: "/discover/playlist"
   },
   {
     title: "主播电台",

@@ -182,8 +182,8 @@ export default defineComponent({
     display: flex;
     align-items: center;
     .dot {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       text-align: center;
       background-color: transparent;
       cursor: pointer;

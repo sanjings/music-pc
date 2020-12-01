@@ -38,7 +38,7 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-const ajaxGet = (url: string, params: unknown): Promise<IResponseData> => axiosInstance.get(url, { params });
+const ajaxGet = (url: string, params?: unknown): Promise<IResponseData> => axiosInstance.get(url, { params });
 const ajaxPost = (url: string, params: unknown): Promise<IResponseData> => axiosInstance.post(url, params);
 
 export {

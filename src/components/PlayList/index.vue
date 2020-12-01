@@ -1,22 +1,23 @@
 <template>
-  <div class="hot-recom">
-    <h2>热门推荐</h2>
-    <PlayList :listData='playList' />
+  <div class="play-list">
+    <template v-for="item of listData" :key="item.id">
+      <PlayItem :data='item' />
+    </template>
   </div>
 </template>
 
 <script lang='ts'>
 import { defineComponent, PropType } from 'vue';
-import PlayList from '/components/PlayList/index.vue';
+import PlayItem from './item.vue';
 import { IPlayData } from '/@/typings';
 
 export default defineComponent({
-  name: 'Hot',
+  name: 'PlayList',
   components: {
-    PlayList
+    PlayItem
   },
   props: {
-    playList: {
+    listData: {
       type: Array as PropType<IPlayData[]>,
       required: true
     }
@@ -25,5 +26,9 @@ export default defineComponent({
 </script>
 
 <style lang='scss' scoped>
-
+.play-list{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 </style>

@@ -1,12 +1,19 @@
 <template>
   <div class="recommend-wrap">
-    <Banner :bannerData='bannerData' />
+    <!-- banner -->
+    <Banner :bannerList='bannerList' />
     <div class="recommend-inner w-def-container">
       <section class="inner-left">
-        
+        <!-- 热门推荐 -->
+        <Hot :playList='hotPlayList' />
+        <!-- 新碟上架 -->
+        <RecomAlbum :albumList="albumList" />
       </section>
       <section class="inner-right">
+        <!-- 登录提示 -->
         <LoginTip />
+        <!-- 入驻歌手 -->
+        <RecomSinger :singerList='singerList' />
       </section>
     </div>
   </div>
@@ -14,33 +21,74 @@
 
 <script lang='ts'>
 import { defineComponent, onMounted, reactive, toRefs } from 'vue';
-import { getBannersRequest, EBannerType } from '/requests/recommend';
+import { 
+  getBannersRequest,
+  getHotPlayListRequest,
+  getNewEstRequest,
+  getHotSingerRequest,
+  BannerTypeEnum
+} from '/requests/recommend';
 import { IBannerData, IState } from './typing';
 import Banner from './Banner/index.vue';
 import LoginTip from '/components/LoginTip/index.vue';
-import Hot from '/components/LoginTip/index.vue';
+import Hot from './Hot/index.vue';
+import RecomAlbum from './RecomAlbum/index.vue';
+import RecomSinger from './RecomSinger/index.vue';
 
 export default defineComponent({
   name: 'Recommend',
   components: {
     Banner,
-    LoginTip
+    LoginTip,
+    Hot,
+    RecomAlbum,
+    RecomSinger
   },
   setup () {
     const state = reactive<IState>({
-      bannerData: [] // banner数据
+      bannerList: [], // banner
+      hotPlayList: [], // 热门歌单
+      albumList: [], // 热门新碟
+      singerList: [], // 推荐歌手
     });
 
     onMounted((): void => {
-      getBannerData();
+      getBannerList();
+      getHotPlayList();
+      getNewEstList();
+      getSingerList();
     });
 
     /**
      * 获取banner数据
      */
-    const getBannerData = async () => {
-      const { banners } = await getBannersRequest(EBannerType.PC);
-      state.bannerData = banners;
+    const getBannerList = async () => {
+      const { banners } = await getBannersRequest(BannerTypeEnum.PC);
+      state.bannerList = banners;
+    };
+
+    /**
+     * 获取热门歌单数据
+     */
+    const getHotPlayList = async () => {
+      const { result } = await getHotPlayListRequest(8);
+      state.hotPlayList = result;
+    };
+
+    /**
+     * 获取热门新碟数据
+     */
+    const getNewEstList = async () => {
+      const { albums } = await getNewEstRequest();
+      state.albumList = albums.slice(0, 5);
+    };
+
+    /**
+     * 获取推荐歌手数据
+     */
+    const getSingerList = async () => {
+      const { artists } = await getHotSingerRequest(5);
+      state.singerList = artists;
     };
 
     return {
@@ -56,6 +104,7 @@ export default defineComponent({
     background-color: #fff;
     .inner-left{
       flex: 1;
+      padding: 20px;
       border-left: 1px solid #d3d3d3;
       border-right: 1px solid #d3d3d3;
       overflow: hidden;
