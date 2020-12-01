@@ -14,6 +14,9 @@
         </div>
       </template>
     </div>
+    <div class="apply-wrap">
+      <button class="apply-btn">申请成为网易音乐人</button>
+    </div>
   </div>
 </template>
 
@@ -68,6 +71,26 @@ export default defineComponent({
           font-size: 12px;
           color: #666;
         }
+      }
+    }
+  }
+  .apply-wrap{
+    margin-top: 14px;
+    text-align: center;
+    .apply-btn{
+      width: 205px;
+      height: 31px;
+      line-height: 31px;
+      text-align: center;
+      font-weight: 550;
+      font-size: 12px;
+      color: #333;
+      background-color: #f6f6f6;
+      border: 1px solid #d3d3d3;
+      border-radius: 4px;
+      cursor: pointer;
+      &:hover{
+        background-color: #fff;
       }
     }
   }

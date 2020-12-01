@@ -8,6 +8,8 @@
         <Hot :playList='hotPlayList' />
         <!-- 新碟上架 -->
         <RecomAlbum :albumList="albumList" />
+        <!-- 榜单 -->
+        <RecomRank :rankList='rankList' />
       </section>
       <section class="inner-right">
         <!-- 登录提示 -->
@@ -21,19 +23,17 @@
 
 <script lang='ts'>
 import { defineComponent, onMounted, reactive, toRefs } from 'vue';
-import { 
-  getBannersRequest,
-  getHotPlayListRequest,
-  getNewEstRequest,
-  getHotSingerRequest,
-  BannerTypeEnum
-} from '/requests/recommend';
+import { getBannersRequest, getHotPlayListRequest, BannerTypeEnum } from '/requests/recommend';
+import { getNewAlbumRequest } from '/requests/album';
+import { getHotSingerRequest } from '/requests/singer';
+import { getRankDetailRequest } from '/requests/rank';
 import { IBannerData, IState } from './typing';
 import Banner from './Banner/index.vue';
 import LoginTip from '/components/LoginTip/index.vue';
 import Hot from './Hot/index.vue';
 import RecomAlbum from './RecomAlbum/index.vue';
 import RecomSinger from './RecomSinger/index.vue';
+import RecomRank from './RecomRank/index.vue';
 
 export default defineComponent({
   name: 'Recommend',
@@ -42,7 +42,8 @@ export default defineComponent({
     LoginTip,
     Hot,
     RecomAlbum,
-    RecomSinger
+    RecomSinger,
+    RecomRank
   },
   setup () {
     const state = reactive<IState>({
@@ -50,13 +51,15 @@ export default defineComponent({
       hotPlayList: [], // 热门歌单
       albumList: [], // 热门新碟
       singerList: [], // 推荐歌手
+      rankList: [], // 推荐榜单
     });
 
     onMounted((): void => {
       getBannerList();
       getHotPlayList();
-      getNewEstList();
+      getNewAlbumList();
       getSingerList();
+      getRankList();
     });
 
     /**
@@ -78,8 +81,8 @@ export default defineComponent({
     /**
      * 获取热门新碟数据
      */
-    const getNewEstList = async () => {
-      const { albums } = await getNewEstRequest();
+    const getNewAlbumList = async () => {
+      const { albums } = await getNewAlbumRequest();
       state.albumList = albums.slice(0, 5);
     };
 
@@ -87,9 +90,20 @@ export default defineComponent({
      * 获取推荐歌手数据
      */
     const getSingerList = async () => {
-      const { artists } = await getHotSingerRequest(5);
+      const { artists } = await getHotSingerRequest(10);
       state.singerList = artists;
     };
+
+    /**
+     * 获取推荐榜单数据
+     */
+    const getRankList = async () => {
+      const res = await Promise.all([19723756, 3779629, 2884035].map(item => {
+        return getRankDetailRequest(item);
+      }))
+
+      state.rankList = res.map(item => item.playlist);
+    }
 
     return {
       ...toRefs(state)

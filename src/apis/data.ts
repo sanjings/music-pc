@@ -30,10 +30,6 @@ export const discoverMenu: Array<ILinkItem> = [
     link: "/discover/playlist"
   },
   {
-    title: "主播电台",
-    link: "/discover/djradio"
-  },
-  {
     title: "歌手",
     link: "/discover/singers"
   },

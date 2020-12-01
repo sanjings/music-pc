@@ -10,4 +10,5 @@ export interface IState {
   hotPlayList: IPlayData[];
   albumList: IAlbumData[];
   singerList: ISingerData[];
+  rankList: any[];
 }
