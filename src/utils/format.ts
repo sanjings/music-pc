@@ -3,7 +3,6 @@ import { ISingerData } from '/typings/index';
 /**
  * 格式化数量
  * @param {Number} count 
- * @return {String}
  */
 export const formatCount = (count: number): string | number => {
   if (count < 0) return '';

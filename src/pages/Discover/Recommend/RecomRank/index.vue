@@ -1,6 +1,6 @@
 <template>
   <div class="recom-rank">
-    <h2>榜单</h2>
+    <h2 class="module-title">榜单</h2>
     <ul class="rank-list">
       <template v-for='(item, index) of rankList' :key="index">
         <RankSongs :data='item' />
@@ -10,8 +10,9 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import RankSongs from './RankSongs.vue';
+import { IRankData } from '/@/typings';
 
 export default defineComponent({
   name: 'RecomRank',
@@ -20,7 +21,7 @@ export default defineComponent({
   },
   props: {
     rankList: {
-      type: Array,
+      type: Array as PropType<IRankData[]>,
       required: true
     }
   }
@@ -29,6 +30,7 @@ export default defineComponent({
 
 <style lang='scss' scoped>
 .recom-rank {
+  padding-top: 20px;
   .rank-list {
     display: flex;
     padding: 20px 0;

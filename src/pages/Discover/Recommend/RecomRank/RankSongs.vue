@@ -9,6 +9,7 @@
         <p class="rank-name">{{ data.name }}</p>
         <p class="controls">
           <i class="iconfont icon-play-circle" />
+          <i class="iconfont icon-add" />
         </p>
       </div>
     </div>
@@ -16,23 +17,26 @@
     <ul class="song-list">
       <template v-for='(item, index) of data.tracks.slice(0, 10)' :key="item.id">
         <li :class="['song-item', {'stripe': index % 2 === 0}]">
-          <span :class="['song-index', {'top-index': index < 3}]" >{{ index +1 }}</span>
+          <span :class="['song-index', {'top-index': index < 3}]" >{{ index + 1 }}</span>
           <span class="song-name ellipsis">{{ item.name }}</span>
         </li>
       </template>
-      <li class="song-item show-all">查看全部</li>
+      <li class="song-item show-all">
+        <span>查看全部</span>
+      </li>
     </ul>
   </li>
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
+import { IRankData } from '/@/typings';
 
 export default defineComponent({
   name: 'RankSongs',
   props: {
     data: {
-      type: Object,
+      type: Object as PropType<IRankData>,
       required: true
     }
   }
@@ -47,7 +51,7 @@ export default defineComponent({
   overflow: hidden;
   .top {
     display: flex;
-    padding: 20px;
+    padding: 20px 0 20px 20px;
     .cover-wrap {
       margin-right: 10px;
       width: 80px;
@@ -61,10 +65,22 @@ export default defineComponent({
         padding: 10px 0;
         font-weight: 550;
       }
-      i {
-        color: #bbb;
-        font-size: 22px;
-      }
+      .controls {
+        display: flex;
+        align-items: center;
+        i {
+          color: #bbb;
+          font-size: 22px;
+          cursor: pointer;
+          &:hover {
+            color: #999;
+          }
+          &.icon-add {
+            margin-left: 8px;
+            font-size: 26px;
+          }
+        }
+      } 
     }
   }
   .song-list {
@@ -80,9 +96,12 @@ export default defineComponent({
       &.show-all {
         display: flex;
         flex-direction: row-reverse;
-        &:hover {
-          text-decoration: underline;
-          cursor: pointer;
+        background-color: #e8e8e8;
+        span {
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
         }
       }
       .song-index{

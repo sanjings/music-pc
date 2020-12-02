@@ -1,8 +1,8 @@
 <template>
-  <div class="album-cover">
+  <div :class="['album-cover', size]">
     <div
       class="cover-wrap"
-      :style="{ 'background-image': `url(${data.picUrl}?param=100y100)` }"
+      :style="{ 'background-image': `url(${data.picUrl}?param=130y130)` }"
     >
       <div class="mask"></div>
       <i class="iconfont icon-play-circle" />
@@ -22,42 +22,53 @@ export default defineComponent({
   props: {
     data: {
       type: Object as PropType<IAlbumData>,
-      required: true
+      required: true,
     },
+    size: String
   },
   setup() {
     return {
-      formatSingerName
+      formatSingerName,
     };
-  }
+  },
 });
 </script>
 
 <style lang='scss' scoped>
 .album-cover {
-  width: 118px;
+  width: 100%;
   border-radius: 2px;
   overflow: hidden;
+  &.small {
+    .cover-wrap {
+      width: 100px;
+      height: 100px;
+      .mask {
+        width: 118px;
+        background-position: 0 -570px;
+      }
+    }
+  }
   .cover-wrap {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     cursor: pointer;
     &:hover .icon-play-circle {
       display: block;
     }
-    .mask{
+    .mask {
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
-      width: 118px;
-      background: url('../../assets/images/sprite_cover.png') no-repeat 0 -570px;
+      width: 153px;
+      background: url("../../assets/images/sprite_cover.png") no-repeat 0 -845px;
     }
-    .icon-play-circle{
+    .icon-play-circle {
       display: none;
       position: absolute;
       right: 6px;
@@ -69,7 +80,7 @@ export default defineComponent({
   .name {
     padding-top: 7px;
   }
-  .singers{
+  .singers {
     color: #666;
   }
   .name,

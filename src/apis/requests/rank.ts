@@ -1,14 +1,13 @@
 import { ajaxGet } from '../ajax';
-import { GET_PLAYLIST_DETAIL } from '../url';
+import { GET_RANK_LIST } from '../url';
 
 /**
- * 请求排行榜详情数据
- * @param {Number} id 排行榜id
+ * 请求排行榜数据
  */
-const getRankDetailRequest = (id: number) => {
-  return ajaxGet(GET_PLAYLIST_DETAIL, { id });
+const getRankListRequest = () => {
+  return ajaxGet(GET_RANK_LIST);
 }
 
 export {
-  getRankDetailRequest
+  getRankListRequest
 }

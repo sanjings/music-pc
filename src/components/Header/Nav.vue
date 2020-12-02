@@ -36,6 +36,10 @@ export default defineComponent({
       height: 100%;
       line-height: 70px;
       color: #ccc;
+      &:hover {
+        background-color: #000;
+        color: #fff;
+      }
       &.router-link-active{
         background-color: #000;
         color: #fff;

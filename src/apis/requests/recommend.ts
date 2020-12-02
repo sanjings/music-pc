@@ -1,5 +1,6 @@
 import { ajaxGet } from '../ajax';
 import { GET_BANNERS, GET_HOT_PLAYLIST } from './../url';
+import { IAlbumData } from '/@/typings';
 
 export enum BannerTypeEnum {
   PC = 0,
@@ -21,7 +22,17 @@ const getBannersRequest = (type: BannerTypeEnum) => {
  * @param {Number} limit 列表长度
  */
 const getHotPlayListRequest = (limit: number) => {
-  return ajaxGet(GET_HOT_PLAYLIST, { limit });
+  return ajaxGet(GET_HOT_PLAYLIST, { limit }).then(res => {
+    return {
+      ...res,
+      result: res.result.map((item: IAlbumData) => {
+        return {
+          ...item,
+          coverImgUrl: item.picUrl
+        }
+      })
+    }
+  });
 }
 
 export {

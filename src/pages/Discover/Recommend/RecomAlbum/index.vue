@@ -1,11 +1,13 @@
 <template>
   <div class="recom-album">
-    <h2>全部新碟</h2>
-    <div class="album-list">
+    <h2 class="module-title">全部新碟</h2>
+    <ul class="album-list">
       <template v-for="item of albumList" :key="item.id">
-        <AlbumCover :data='item' />
+        <li class="list-item">
+          <AlbumCover :data='item' size='small' />
+        </li>
       </template>
-    </div>
+    </ul>
   </div>
 </template>
 
@@ -30,6 +32,7 @@ export default defineComponent({
 
 <style lang='scss' scoped>
 .recom-album {
+  padding-top: 40px;
   .album-list {
     display: flex;
     flex-wrap: wrap;
@@ -39,6 +42,9 @@ export default defineComponent({
     background-color: #f5f5f5;
     border: 1px solid #d3d3d3;
     border-radius: 2px;
+    .list-item {
+      width: 118px;
+    }
   }
 }
 </style>

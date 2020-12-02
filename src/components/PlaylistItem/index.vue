@@ -2,7 +2,7 @@
   <div class="play-item">
     <div
       class="cover-wrap"
-      :style="{ 'background-image': `url(${data.picUrl}?param=140y140)` }"
+      :style="{ 'background-image': `url(${data.coverImgUrl}?param=140y140)` }"
     >
       <div class="mask"></div>
       <div class="play-count">
@@ -22,7 +22,7 @@ import { IPlayData } from "/@/typings";
 import { formatCount } from "/@/utils/format";
 
 export default defineComponent({
-  name: "PlayItem",
+  name: "PlaylistItem",
   props: {
     data: {
       type: Object as PropType<IPlayData>,
@@ -39,15 +39,11 @@ export default defineComponent({
 
 <style lang='scss' scoped>
 .play-item {
-  margin: 20px 0;
-  width: 140px;
-  border-radius: 2px;
-  overflow: hidden;
+  width: 100%;
   .cover-wrap {
     position: relative;
+    padding-bottom: 100%;
     width: 100%;
-    height: 140px;
-    background-size: 140px 140px;
     background-repeat: no-repeat;
     .mask {
       position: absolute;

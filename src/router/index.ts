@@ -18,6 +18,21 @@ const routes: Array<RouteRecordRaw> = [
             path: '/discover/recommend',
             name: 'recommend',
             component: () => import(/* webpackChunkName: "Recommend" */'../pages/Discover/Recommend/index.vue'),
+          },
+          {
+            path: '/discover/rank',
+            name: 'rank',
+            component: () => import(/* webpackChunkName: "Rank" */'../pages/Discover/Rank/index.vue')
+          },
+          {
+            path: '/discover/playlist',
+            name: 'playlist',
+            component: () => import(/* webpackChunkName: "PlayList" */'../pages/Discover/Playlist/index.vue')
+          },
+          {
+            path: '/discover/album',
+            name: 'album',
+            component: () => import(/* webpackChunkName: "Album" */'../pages/Discover/Album/index.vue')
           }
         ]
       },

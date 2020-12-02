@@ -1,11 +1,4 @@
-export interface ILinkItem {
-  readonly title: string;
-  readonly link: string;
-}
-
-export interface IHeaderNav extends ILinkItem {
-  readonly isSelf: boolean;
-}
+import { AreaEnum, IArea, IHeaderNav, ILinkItem } from "../typings/localData";
 
 export const headerNavList: Array<IHeaderNav> = [
   { title: '发现音乐', link: '/discover', isSelf: true },
@@ -83,4 +76,27 @@ export const footerImages: Array<ILinkItem> = [
     link: "https://music.163.com/uservideo#/plan",
     title: "视频奖励"
   }
+]
+
+export const areaList: IArea[] = [
+  {
+    title: '全部',
+    value: AreaEnum.ALL
+  },
+  {
+    title: '华语',
+    value: AreaEnum.ZH
+  },
+  {
+    title: '欧美',
+    value: AreaEnum.EA
+  },
+  {
+    title: '韩国',
+    value: AreaEnum.KR
+  },
+  {
+    title: '日本',
+    value: AreaEnum.JP
+  },
 ]

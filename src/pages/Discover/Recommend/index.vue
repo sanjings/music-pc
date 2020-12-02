@@ -24,9 +24,8 @@
 <script lang='ts'>
 import { defineComponent, onMounted, reactive, toRefs } from 'vue';
 import { getBannersRequest, getHotPlayListRequest, BannerTypeEnum } from '/requests/recommend';
-import { getNewAlbumRequest } from '/requests/album';
+import { getHotAlbumRequest, getAlbumDetailRequest } from '/requests/album';
 import { getHotSingerRequest } from '/requests/singer';
-import { getRankDetailRequest } from '/requests/rank';
 import { IBannerData, IState } from './typing';
 import Banner from './Banner/index.vue';
 import LoginTip from '/components/LoginTip/index.vue';
@@ -57,7 +56,7 @@ export default defineComponent({
     onMounted((): void => {
       getBannerList();
       getHotPlayList();
-      getNewAlbumList();
+      getHotAlbumList();
       getSingerList();
       getRankList();
     });
@@ -81,8 +80,8 @@ export default defineComponent({
     /**
      * 获取热门新碟数据
      */
-    const getNewAlbumList = async () => {
-      const { albums } = await getNewAlbumRequest();
+    const getHotAlbumList = async () => {
+      const { albums } = await getHotAlbumRequest();
       state.albumList = albums.slice(0, 5);
     };
 
@@ -98,11 +97,12 @@ export default defineComponent({
      * 获取推荐榜单数据
      */
     const getRankList = async () => {
-      const res = await Promise.all([19723756, 3779629, 2884035].map(item => {
-        return getRankDetailRequest(item);
+      const res = await Promise.all([19723756, 3779629, 2884035].map((item: number) => {
+        return getAlbumDetailRequest(item);
       }))
 
       state.rankList = res.map(item => item.playlist);
+      console.log(res.map(item => item.playlist))
     }
 
     return {
@@ -118,7 +118,7 @@ export default defineComponent({
     background-color: #fff;
     .inner-left{
       flex: 1;
-      padding: 20px;
+      padding: 0 20px 20px;
       border-left: 1px solid #d3d3d3;
       border-right: 1px solid #d3d3d3;
       overflow: hidden;
