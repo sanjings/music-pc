@@ -2,6 +2,8 @@ export interface IUnknowObject {
   [key: string]: any;
 }
 
+export type SizeType = 'small' | 'default' | 'large';
+
 // 作者
 export interface ICreator extends IUnknowObject {
   nickName: string
@@ -17,7 +19,7 @@ export interface ITracks extends IUnknowObject {
 export interface ISingerData extends IUnknowObject {
   id: number;
   name: string;
-  picUrl: string;
+  img1v1Url: string;
   alias: Array<string | undefined>;
   company?: string;
 }
@@ -44,4 +46,5 @@ export interface IAlbumData extends IUnknowObject {
 
 export interface IRankData extends IPlayData {
   ToplistType?: string;
+  updateFrequency: string;
 }

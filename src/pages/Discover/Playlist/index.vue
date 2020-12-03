@@ -1,5 +1,8 @@
 <template>
   <div class="playlist w-def-container">
+    <ModuleTitle :title='queryParams.cat' size='large'>
+      
+    </ModuleTitle>
     <!-- 歌单列表 -->
     <div class="list-wrap">
       <template v-for="item of playList" :key="item.id">
@@ -14,13 +17,15 @@
 <script lang='ts'>
 import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import PlaylistItem from '/components/PlaylistItem/index.vue';
+import ModuleTitle from '/components/ModuleTitle/index.vue';
 import { getCatListRequest, getPlaylistRequest } from '/requests/playlist';
 import { IState } from './typing';
 
 export default defineComponent({
   name: "Playlist",
   components: {
-    PlaylistItem
+    PlaylistItem,
+    ModuleTitle
   },
   setup () {
     const state = reactive<IState>({
@@ -66,6 +71,8 @@ export default defineComponent({
 .playlist {
   padding: 40px;
   background-color: #fff;
+  border-left: 1px solid #d3d3d3;
+  border-right: 1px solid #d3d3d3;
   .list-wrap {
     display: flex;
     justify-content: space-between;

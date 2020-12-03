@@ -27,7 +27,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, onUpdated } from "vue";
+import { defineComponent } from "vue";
 import { headerNavList } from "/@/apis/data";
 import Logo from "./Logo.vue";
 import Nav from "./Nav.vue";
@@ -40,7 +40,6 @@ export default defineComponent({
     Nav,
     Search
   },
-  props: ['test'],
   setup (props) {
     return {
       headerNavList

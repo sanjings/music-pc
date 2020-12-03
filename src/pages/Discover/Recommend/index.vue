@@ -25,7 +25,7 @@
 import { defineComponent, onMounted, reactive, toRefs } from 'vue';
 import { getBannersRequest, getHotPlayListRequest, BannerTypeEnum } from '/requests/recommend';
 import { getHotAlbumRequest, getAlbumDetailRequest } from '/requests/album';
-import { getHotSingerRequest } from '/requests/singer';
+import { getSingerListRequest } from '/requests/singer';
 import { IBannerData, IState } from './typing';
 import Banner from './Banner/index.vue';
 import LoginTip from '/components/LoginTip/index.vue';
@@ -86,10 +86,10 @@ export default defineComponent({
     };
 
     /**
-     * 获取推荐歌手数据
+     * 获取入驻歌手数据
      */
     const getSingerList = async () => {
-      const { artists } = await getHotSingerRequest(10);
+      const { artists } = await getSingerListRequest({ limit: 10 });
       state.singerList = artists;
     };
 
@@ -102,7 +102,6 @@ export default defineComponent({
       }))
 
       state.rankList = res.map(item => item.playlist);
-      console.log(res.map(item => item.playlist))
     }
 
     return {

@@ -5,7 +5,7 @@
       <template v-for="item of singerList" :key="item.id">
         <div class="singer-item">
           <div class="cover-wrap">
-            <img :src="item.picUrl + '?param=62y62'" class="cover" alt="singer" />
+            <img :src="item.img1v1Url + '?param=62y62'" class="cover" alt="singer" />
           </div>
           <div class="info">
             <p class="alias ellipsis">{{ item.alias.toString() || item.name }}</p>

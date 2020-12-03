@@ -1,4 +1,4 @@
-import { AreaEnum, IArea, IHeaderNav, ILinkItem } from "../typings/localData";
+import { AreaEnum, IArea, IHeaderNav, ILinkItem, ISingerCategories } from "../typings/localData";
 
 export const headerNavList: Array<IHeaderNav> = [
   { title: '发现音乐', link: '/discover', isSelf: true },
@@ -99,4 +99,111 @@ export const areaList: IArea[] = [
     title: '日本',
     value: AreaEnum.JP
   },
+]
+
+export const singerCategories: ISingerCategories[] = [
+  {
+    title: '推荐',
+    area: -1,
+    subList: [
+      {
+        title: '推荐歌手',
+        type: 'RECOM'
+      }, 
+      {
+        title: '入驻歌手',
+        type: -1
+      }
+    ]
+  },
+  {
+    title: '华语',
+    area: 7,
+    subList: [
+      {
+        title: '华语男歌手',
+        type: 1
+      }, 
+      {
+        title: '华语女歌手',
+        type: 2
+      },
+      {
+        title: '华语组合/乐队',
+        type: 3
+      }
+    ]
+  },
+  {
+    title: '欧美',
+    area: 96,
+    subList: [
+      {
+        title: '欧美男歌手',
+        type: 1
+      }, 
+      {
+        title: '欧美女歌手',
+        type: 2
+      },
+      {
+        title: '欧美组合/乐队',
+        type: 3
+      }
+    ]
+  },
+  {
+    title: '日本',
+    area: 8,
+    subList: [
+      {
+        title: '日本男歌手',
+        type: 1
+      }, 
+      {
+        title: '日本女歌手',
+        type: 2
+      },
+      {
+        title: '日本组合/乐队',
+        type: 3
+      }
+    ]
+  },
+  {
+    title: '韩国',
+    area: 16,
+    subList: [
+      {
+        title: '韩国男歌手',
+        type: 1
+      }, 
+      {
+        title: '韩国女歌手',
+        type: 2
+      },
+      {
+        title: '韩国组合/乐队',
+        type: 3
+      }
+    ]
+  },
+  {
+    title: '其他',
+    area: 0,
+    subList: [
+      {
+        title: '其他男歌手',
+        type: 1
+      }, 
+      {
+        title: '其他女歌手',
+        type: 2
+      },
+      {
+        title: '其他组合/乐队',
+        type: 3
+      }
+    ]
+  }
 ]

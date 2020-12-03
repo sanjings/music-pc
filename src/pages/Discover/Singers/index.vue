@@ -1,7 +1,7 @@
 <template>
-  <div class="rank-wrap w-def-container">
+  <div class="singers-wrap w-def-container">
     <section class="left">
-      <RankList :rankList='rankList' />
+      <Categories :listData='singerCategories' />
     </section>
     <section class="right">
 
@@ -11,54 +11,50 @@
 
 <script lang='ts'>
 import { defineComponent, reactive, toRefs, onMounted } from "vue";
-import { getRankListRequest } from '/requests/rank';
-import RankList from './RankList/index.vue';
+import { getSingerListRequest } from '/requests/singer';
+import { singerCategories } from '/@/apis/data';
+import Categories from './Categories/index.vue';
 import { IState } from './typing';
 import { IRankData } from "/@/typings";
 
 export default defineComponent({
-  name: "Rank",
+  name: "Singers",
   components: {
-    RankList
+    Categories
   },
   setup () {
     const state = reactive<IState>({
-      rankList: [], // 排行榜列表
+      singerList: [], // 排行榜列表
     });
 
     onMounted((): void => {
-      getRankList();
+      getSingerList();
     });
 
     /**
      * 获取歌单分类
      */
-    const getRankList = async () => {
-      const { list } = await getRankListRequest();
-      state.rankList.push({
-        name: '云音乐特色榜',
-        subList: list.filter((item: IRankData) => Boolean(item.ToplistType))
-      }, {
-        name: '全球媒体榜',
-        subList: list.filter((item: IRankData) => !item.ToplistType)
-      })
+    const getSingerList = async () => {
+      const { list } = await getSingerListRequest({ limit: 100 });
+      state.singerList = list;
     };
 
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      singerCategories
     }
   }
 });
 </script>
 
 <style lang='scss' scoped>
-.rank-wrap {
+.singers-wrap {
   display: flex;
   background-color: #fff;
   border-left: 1px solid #d3d3d3;
   border-right: 1px solid #d3d3d3;
   .left {
-    width: 240px;
+    width: 180px;
   }
   .right {
     flex: 1;

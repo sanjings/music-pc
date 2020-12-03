@@ -1,6 +1,6 @@
 <template>
   <div class="album-wrap w-def-container">
-    <h2 class="module-title">热门新碟</h2>
+    <ModuleTitle title='热门新碟' size='large' />
     <!-- 热门新碟列表 -->
     <ul class="hot-album-list">
       <template v-for="item of hotAlbumList" :key="item.id">
@@ -10,7 +10,7 @@
       </template>
     </ul>
     <div class="all-album-wrap">
-      <h2 class="module-title">全部新碟</h2>
+      <ModuleTitle title='全部新碟' size='large' />
       <!-- 分类新碟列表 -->
       <ul class="all-album-list">
         <template v-for="item of allAlbumList" :key="item.id">
@@ -26,6 +26,7 @@
 <script lang='ts'>
 import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import AlbumCover from "/components/AlbumCover/index.vue";
+import ModuleTitle from '/components/ModuleTitle/index.vue';
 import { getHotAlbumRequest, getNewAlbumListRequest } from "/requests/album";
 import { areaList } from "/@/apis/data";
 import { AreaEnum } from "/@/typings/localData";
@@ -35,6 +36,7 @@ export default defineComponent({
   name: "Album",
   components: {
     AlbumCover,
+    ModuleTitle
   },
   setup() {
     const state = reactive<IState>({
@@ -82,6 +84,8 @@ export default defineComponent({
 .album-wrap {
   padding: 40px;
   background-color: #fff;
+  border-left: 1px solid #d3d3d3;
+  border-right: 1px solid #d3d3d3;
   .all-album-wrap {
     margin-top: 40px;
   }
