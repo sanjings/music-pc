@@ -1,5 +1,6 @@
 <template>
   <div class="module-title">
+    <span class="circle" v-show="circle"></span>
     <h1 :class="['title-text', size]">{{ title }}</h1>
     <div class="slot-default">
       <slot name='default' />
@@ -24,6 +25,10 @@ export default defineComponent({
     size: {
       type: String as PropType<SizeType>,
       default: 'default'
+    },
+    circle: {
+      type: Boolean,
+      default: false
     }
   }
 });
@@ -37,6 +42,24 @@ export default defineComponent({
   padding-bottom: 5px;
   width: 100%;
   border-bottom: 2px solid #c20c0c;
+  .circle {
+    position: relative;
+    margin: 0 6px;
+    width: 14px;
+    height: 14px;
+    background-color: #c20c0c;
+    border-radius: 50%;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 6px;
+      height: 6px;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+  }
   .title-text {
     font-weight: 500;
     &.default {

@@ -1,6 +1,13 @@
 <template>
   <div class="recom-rank">
-    <h2 class="module-title">榜单</h2>
+    <ModuleTitle title="榜单" circle>
+      <template v-slot:right>
+        <router-link to='/discover/rank' class="more">
+          <span class="more-text">更多</span>
+          <i class="iconfont icon-arrowsright" />
+        </router-link>
+      </template>
+    </ModuleTitle>
     <ul class="rank-list">
       <template v-for='(item, index) of rankList' :key="index">
         <RankSongs :data='item' />
@@ -12,12 +19,14 @@
 <script lang='ts'>
 import { defineComponent, PropType } from 'vue';
 import RankSongs from './RankSongs.vue';
+import ModuleTitle from "/components/ModuleTitle/index.vue";
 import { IRankData } from '/@/typings';
 
 export default defineComponent({
   name: 'RecomRank',
   components: {
-    RankSongs
+    RankSongs,
+    ModuleTitle
   },
   props: {
     rankList: {
@@ -31,6 +40,23 @@ export default defineComponent({
 <style lang='scss' scoped>
 .recom-rank {
   padding-top: 20px;
+  .more {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .more-text {
+      margin-right: 4px;
+      font-size: 12px;
+      color: #666;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .icon-arrowsright {
+      font-size: 12px;
+      color: #c20c0c;
+    }
+  }
   .rank-list {
     display: flex;
     padding: 20px 0;

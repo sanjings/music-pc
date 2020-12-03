@@ -1,10 +1,17 @@
 <template>
   <div class="hot-recom">
-    <h2 class="module-title">热门推荐</h2>
+    <ModuleTitle title="热门推荐" circle>
+      <template v-slot:right>
+        <router-link to='/discover/playlist' class="more">
+          <span class="more-text">更多</span>
+          <i class="iconfont icon-arrowsright" />
+        </router-link>
+      </template>
+    </ModuleTitle>
     <div class="playlist">
       <template v-for="item of playList" :key="item.id">
         <div class="list-item">
-          <PlaylistItem :data='item' />
+          <PlaylistItem :data="item" />
         </div>
       </template>
     </div>
@@ -12,27 +19,46 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, PropType } from 'vue';
-import PlaylistItem from '/components/PlaylistItem/index.vue';
-import { IPlayData } from '/@/typings';
+import { defineComponent, PropType } from "vue";
+import PlaylistItem from "/components/PlaylistItem/index.vue";
+import ModuleTitle from "/components/ModuleTitle/index.vue";
+import { IPlayData } from "/@/typings";
 
 export default defineComponent({
-  name: 'Hot',
+  name: "Hot",
   components: {
-    PlaylistItem
+    PlaylistItem,
+    ModuleTitle
   },
   props: {
     playList: {
       type: Array as PropType<IPlayData[]>,
-      required: true
+      required: true,
     }
   }
-})
+});
 </script>
 
 <style lang='scss' scoped>
 .hot-recom {
   padding-top: 20px;
+  .more {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .more-text {
+      margin-right: 4px;
+      font-size: 12px;
+      color: #666;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .icon-arrowsright {
+      font-size: 12px;
+      color: #c20c0c;
+    }
+  }
   .playlist {
     display: flex;
     justify-content: space-between;

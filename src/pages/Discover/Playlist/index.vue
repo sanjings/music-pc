@@ -1,7 +1,9 @@
 <template>
   <div class="playlist w-def-container">
     <ModuleTitle :title='queryParams.cat' size='large'>
-      
+      <template v-slot:right>
+        <i class="hot-tag">热门</i>
+      </template>
     </ModuleTitle>
     <!-- 歌单列表 -->
     <div class="list-wrap">
@@ -73,6 +75,17 @@ export default defineComponent({
   background-color: #fff;
   border-left: 1px solid #d3d3d3;
   border-right: 1px solid #d3d3d3;
+  .hot-tag {
+    display: inline-block;
+    width: 46px;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    font-size: 12px;
+    background-color: #c20c0c;
+    color: #fff;
+    border-radius: 4px;
+  }
   .list-wrap {
     display: flex;
     justify-content: space-between;

@@ -1,6 +1,13 @@
 <template>
   <div class="recom-album">
-    <h2 class="module-title">全部新碟</h2>
+    <ModuleTitle title="新碟上架" circle>
+      <template v-slot:right>
+        <router-link to='/discover/album' class="more">
+          <span class="more-text">更多</span>
+          <i class="iconfont icon-arrowsright" />
+        </router-link>
+      </template>
+    </ModuleTitle>
     <ul class="album-list">
       <template v-for="item of albumList" :key="item.id">
         <li class="list-item">
@@ -15,11 +22,13 @@
 import { defineComponent, PropType } from 'vue';
 import { IAlbumData } from '/@/typings';
 import AlbumCover from '/components/AlbumCover/index.vue';
+import ModuleTitle from "/components/ModuleTitle/index.vue";
 
 export default defineComponent({
   name: 'RecomAlbum',
   components: {
-    AlbumCover
+    AlbumCover,
+    ModuleTitle
   },
   props: {
     albumList: {
@@ -33,6 +42,23 @@ export default defineComponent({
 <style lang='scss' scoped>
 .recom-album {
   padding-top: 40px;
+  .more {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .more-text {
+      margin-right: 4px;
+      font-size: 12px;
+      color: #666;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .icon-arrowsright {
+      font-size: 12px;
+      color: #c20c0c;
+    }
+  }
   .album-list {
     display: flex;
     flex-wrap: wrap;
