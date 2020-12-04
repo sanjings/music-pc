@@ -117,7 +117,7 @@ export default defineComponent({
     background-color: #fff;
     .inner-left{
       flex: 1;
-      padding: 0 20px 20px;
+      padding: 20px;
       border-left: 1px solid #d3d3d3;
       border-right: 1px solid #d3d3d3;
       overflow: hidden;

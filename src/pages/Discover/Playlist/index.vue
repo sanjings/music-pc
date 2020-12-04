@@ -13,13 +13,24 @@
         </div>
       </template>
     </div>
+    <!-- 分页 -->
+    <div class="pagination">
+      <Pagination 
+        :page-size='queryParams.limit'
+        :total='listTotal'
+        :current-page='currentPage'
+        @pageChange='handleChangePage'
+      />
+    </div>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, reactive, toRefs, onMounted } from "vue";
+import { defineComponent, reactive, toRefs, onMounted, computed } from "vue";
+import { useRoute } from 'vue-router';
 import PlaylistItem from '/components/PlaylistItem/index.vue';
 import ModuleTitle from '/components/ModuleTitle/index.vue';
+import Pagination from '/components/Pagination/index.vue';
 import { getCatListRequest, getPlaylistRequest } from '/requests/playlist';
 import { IState } from './typing';
 
@@ -27,9 +38,12 @@ export default defineComponent({
   name: "Playlist",
   components: {
     PlaylistItem,
-    ModuleTitle
+    ModuleTitle,
+    Pagination
   },
   setup () {
+    const route = useRoute();
+
     const state = reactive<IState>({
       queryParams: {
         cat: '全部',
@@ -41,10 +55,21 @@ export default defineComponent({
       listTotal: 0 // 跟单列表总数
     });
 
+    /**
+     * 计算当前页码
+     */
+    const currentPage = computed((): number => (state.queryParams.offset / state.queryParams.limit) + 1);
+
     onMounted((): void => {
+      init();
+    });
+
+    const init = (): void => {
+      const routeParams = route.params;
+      state.queryParams.cat = routeParams.cat as string || '全部';
       getCatList();
       getPlayList();
-    });
+    }
 
     /**
      * 获取歌单分类
@@ -62,8 +87,18 @@ export default defineComponent({
       state.listTotal = total;
     }
 
+     /**
+     * 切换分页
+     */
+    const handleChangePage = (value: number): void => {
+      state.queryParams.offset = (value - 1) * state.queryParams.limit;
+      getPlayList();
+    }
+
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      currentPage,
+      handleChangePage
     }
   }
 });
@@ -97,6 +132,10 @@ export default defineComponent({
         margin-right: 0;
       }
     }
+  }
+  .pagination {
+    padding-top: 40px;
+    text-align: center;
   }
 }
 </style>

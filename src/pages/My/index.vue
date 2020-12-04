@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <div class="my-wrap w-def-container">
     <div class="login-tip">
       <div class="bg-pic">

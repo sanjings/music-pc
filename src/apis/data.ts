@@ -1,4 +1,4 @@
-import { AreaEnum, IArea, IHeaderNav, ILinkItem, ISingerCategories } from "../typings/localData";
+import { IPlaylistCat, IArea, IHeaderNav, ILinkItem, ISingerCategories } from "../typings/localData";
 
 export const headerNavList: Array<IHeaderNav> = [
   { title: '发现音乐', link: '/discover', isSelf: true },
@@ -80,25 +80,48 @@ export const footerImages: Array<ILinkItem> = [
 
 export const areaList: IArea[] = [
   {
-    title: '全部',
-    value: AreaEnum.ALL
+    name: '全部',
+    value: 'ALL'
   },
   {
-    title: '华语',
-    value: AreaEnum.ZH
+    name: '华语',
+    value: 'ZH'
   },
   {
-    title: '欧美',
-    value: AreaEnum.EA
+    name: '欧美',
+    value: 'EA'
   },
   {
-    title: '韩国',
-    value: AreaEnum.KR
+    name: '韩国',
+    value: 'KR'
   },
   {
-    title: '日本',
-    value: AreaEnum.JP
+    name: '日本',
+    value: 'JP'
   },
+]
+
+export const playlistCatList: IPlaylistCat[] = [
+  {
+    name: '华语',
+    value: '华语'
+  },
+  {
+    name: '流行',
+    value: '流行'
+  },
+  {
+    name: '摇滚',
+    value: '摇滚'
+  },
+  {
+    name: '民谣',
+    value: '民谣'
+  },
+  {
+    name: '电子',
+    value: '电子'
+  }
 ]
 
 export const singerCategories: ISingerCategories[] = [

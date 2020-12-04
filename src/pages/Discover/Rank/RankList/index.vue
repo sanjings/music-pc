@@ -38,8 +38,6 @@ export default defineComponent({
 
 <style lang='scss' scoped>
 .rank-list {
-  padding: 20px 0;
-  border-right: 1px solid #d3d3d3;
   .rank-item {
     padding-top: 20px;
     .rank-name {

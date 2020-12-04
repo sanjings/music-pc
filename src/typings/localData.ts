@@ -7,17 +7,16 @@ export interface IHeaderNav extends ILinkItem {
   readonly isSelf: boolean;
 }
 
-export enum AreaEnum {
-  ALL = 'ALL',
-  ZH = 'ZH',
-  EA = 'EA',
-  KR = 'KR',
-  JP = 'JP'
-}
+export type AreaType = 'ALL' | 'ZH' | 'EA' | 'KR' | 'JP';
 
 export interface IArea {
-  title: string,
-  value: AreaEnum
+  name: string;
+  value: AreaType;
+}
+
+export interface IPlaylistCat {
+  name: string;
+  value: string;
 }
 
 export interface ISingerCategories {

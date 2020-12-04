@@ -1,3 +1,4 @@
+import { IQueryParams } from './../../pages/Discover/Album/typing';
 import { ajaxGet } from '../ajax';
 import { GET_HOT_ALBUM, GET_ALBUM_BY_AREA, GET_ALBUM_DETAIL } from './../url';
 
@@ -11,7 +12,7 @@ const getHotAlbumRequest = () => {
 /**
  * 请求最新专辑数据
  */
-const getNewAlbumListRequest = (params: any) => {
+const getNewAlbumListRequest = (params: IQueryParams) => {
   return ajaxGet(GET_ALBUM_BY_AREA, params);
 }
 

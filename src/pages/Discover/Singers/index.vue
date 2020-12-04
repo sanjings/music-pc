@@ -32,7 +32,7 @@ export default defineComponent({
     });
 
     /**
-     * 获取歌单分类
+     * 获取歌手分类
      */
     const getSingerList = async () => {
       const { list } = await getSingerListRequest({ limit: 100 });
@@ -54,7 +54,9 @@ export default defineComponent({
   border-left: 1px solid #d3d3d3;
   border-right: 1px solid #d3d3d3;
   .left {
+    padding: 50px 10px 40px;
     width: 180px;
+    border-right: 1px solid #d3d3d3;
   }
   .right {
     flex: 1;

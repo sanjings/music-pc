@@ -1,7 +1,7 @@
 <template>
   <div class="recom-rank">
     <ModuleTitle title="榜单" circle>
-      <template v-slot:right>
+      <template #right>
         <router-link to='/discover/rank' class="more">
           <span class="more-text">更多</span>
           <i class="iconfont icon-arrowsright" />
@@ -59,7 +59,7 @@ export default defineComponent({
   }
   .rank-list {
     display: flex;
-    padding: 20px 0;
+    padding-top: 20px;
   }
 }
 </style>

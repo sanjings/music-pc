@@ -58,7 +58,9 @@ export default defineComponent({
   border-left: 1px solid #d3d3d3;
   border-right: 1px solid #d3d3d3;
   .left {
+    padding: 20px 0 40px;
     width: 240px;
+    border-right: 1px solid #d3d3d3;
   }
   .right {
     flex: 1;

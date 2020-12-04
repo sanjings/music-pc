@@ -39,12 +39,12 @@ export default defineComponent({
   position: relative;
   display: flex;
   align-items: center;
-  padding-bottom: 5px;
+  padding-bottom: 6px;
   width: 100%;
   border-bottom: 2px solid #c20c0c;
   .circle {
     position: relative;
-    margin: 0 6px;
+    margin: 0 8px;
     width: 14px;
     height: 14px;
     background-color: #c20c0c;
@@ -72,7 +72,7 @@ export default defineComponent({
   .slot-right {
     position: absolute;
     right: 0;
-    bottom: 5px;
+    bottom: 6px;
   }
 }
 </style>

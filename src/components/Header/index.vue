@@ -1,7 +1,6 @@
 <template>
   <header class="header-wrap">
     <!-- 顶部 -->
-    {{test}}
     <div class="top-wrap">
       <div class="top-inner w-max-container">
         <div class="left-part">

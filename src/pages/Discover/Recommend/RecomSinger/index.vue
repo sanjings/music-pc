@@ -1,6 +1,9 @@
 <template>
   <div class="recom-singer">
-    <h2>入驻歌手</h2>
+    <h2 class="title">
+      <span class="title-text">入驻歌手</span>
+      <router-link to='/discover/singers' class="more-link">查看全部</router-link>
+    </h2>
     <div class="singer-list">
       <template v-for="item of singerList" :key="item.id">
         <div class="singer-item">
@@ -38,6 +41,23 @@ export default defineComponent({
 <style lang='scss' scoped>
 .recom-singer{
   padding: 20px;
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    font-size: 12px;
+    border-bottom: 1px solid #d3d3d3;
+    .title-text {
+      font-weight: 550;
+    }
+    .more-link {
+      color: #666;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
   .singer-list{
     .singer-item{
       display: flex;

@@ -1,8 +1,8 @@
 import { IAlbumData } from "/@/typings";
-import { AreaEnum } from "/@/typings/localData";
+import { AreaType } from "/@/typings/localData";
 
 export interface IQueryParams {
-  area: AreaEnum;
+  area: AreaType;
   limit: number;
   offset: number;
 }

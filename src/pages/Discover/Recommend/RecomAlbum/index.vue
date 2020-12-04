@@ -1,7 +1,7 @@
 <template>
   <div class="recom-album">
     <ModuleTitle title="新碟上架" circle>
-      <template v-slot:right>
+      <template #right>
         <router-link to='/discover/album' class="more">
           <span class="more-text">更多</span>
           <i class="iconfont icon-arrowsright" />

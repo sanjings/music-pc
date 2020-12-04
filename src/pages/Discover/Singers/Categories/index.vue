@@ -32,8 +32,6 @@ export default defineComponent({
 
 <style lang='scss' scoped>
 .categories-wrap {
-  padding: 50px 10px 40px;
-  border-right: 1px solid #d3d3d3;
   .categories-item {
     padding: 10px 0;
     .categories-title {
