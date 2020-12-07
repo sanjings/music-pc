@@ -1,89 +1,161 @@
 <template>
   <div class="pagination-wrap">
-    <button :class="['prev-btn',{ 'disabled': currentPage === 1 }]" @click="movePrev">上一页</button>
+    <button
+      :class="['prev-btn', { disabled: currentPage === 1 }]"
+      @click="movePrev"
+    >
+      上一页
+    </button>
     <ul class="page-list" @click="handleClickPage">
-      <template v-for="num of pageCount" :key="num">
-        <li 
-          :class="['page-item', { 'active': num === currentPage }]"
-          :data-num='num'
+      <li :class="['page-item', { active: currentPage === 1 }]" :data-num="1">
+        1
+      </li>
+      <span v-if="countList[0] !== 2" class="dots">...</span>
+      <template v-for="num of countList" :key="num">
+        <li
+          :class="['page-item', { active: num === currentPage }]"
+          :data-num="num"
         >
           {{ num }}
         </li>
       </template>
+      <span v-if="countList[countList.length - 1] !== allCount - 1" class="dots"
+        >...</span
+      >
+      <li
+        :class="['page-item', { active: currentPage === allCount }]"
+        :data-num="allCount"
+      >
+        {{ allCount }}
+      </li>
     </ul>
-    <button :class="['next-btn',{ 'disabled': currentPage === pageCount }]" @click='moveNext'>下一页</button>
+    <button
+      :class="['next-btn', { disabled: currentPage === allCount }]"
+      @click="moveNext"
+    >
+      下一页
+    </button>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, computed } from 'vue';
-import { debounce } from '/utils/tool';
+import { defineComponent, computed, watch, ref } from "vue";
+import { debounce } from "/utils/tool";
 
 export default defineComponent({
-  name: 'Pagination',
+  name: "Pagination",
   props: {
     total: {
       type: Number,
-      default: 0
+      default: 0,
     },
     pageSize: {
       type: Number,
-      default: 35
+      default: 35,
     },
     currentPage: {
       type: Number,
-      default: 1
+      default: 1,
     },
     maxCount: {
       type: Number,
-      default: 9
-    }
+      default: 9,
+    },
   },
-  setup (props, ctx) {
+  setup(props, ctx) {
+    const countList = ref<number[]>([]);
+
     /**
-     * 根据总数和pageSize计算分页数
+     * 根据总数和pageSize计算总的分页数
      */
-    const pageCount = computed((): number => Math.ceil(props.total / props.pageSize));
+    const allCount = computed((): number =>
+      Math.ceil(props.total / props.pageSize)
+    );
+
+    /**
+     * 监听总数变化，计算分页数组
+     */
+    watch(
+      () => props.total,
+      () => initCountList()
+    );
+
+    const initCountList = () => {
+      const maxCount: number = props.maxCount;
+      const currentPage: number = props.currentPage;
+      const allCountNum: number = allCount.value;
+      const numList: Array<number> = [];
+      if (allCountNum > maxCount) {
+        for (let i = 2; i < maxCount; i++) {
+          numList.push(i);
+        }
+      } else {
+        for (let i = 2; i < allCountNum; i++) {
+          numList.push(i);
+        }
+      }
+      countList.value = numList;
+    };
 
     /**
      * 页码点击事件
      */
     const handleClickPage = (e: MouseEvent): void => {
       const target = e.target as HTMLElement;
-      if (target.className === 'page-item') {
-        const curNum = target.dataset.num;
-        ctx.emit('pageChange', curNum);
+      if (target.className === "page-item") {
+        const curNum: number = Number(target.dataset.num);
+        ctx.emit("pageChange", curNum);
+        changeCountList(curNum);
       }
-    }
+    };
 
     /**
      * 点击上一页
      */
     const movePrev = debounce((): void => {
       if (props.currentPage !== 1) {
-        const curNum = props.currentPage - 1;
-        ctx.emit('pageChange', curNum);
+        const curNum: number = props.currentPage - 1;
+        ctx.emit("pageChange", curNum);
       }
-    }, 200)
+    }, 200);
 
     /**
      * 点击下一页
      */
     const moveNext = debounce((): void => {
-      if (props.currentPage !== pageCount.value) {
-        const curNum = props.currentPage + 1;
-        ctx.emit('pageChange', curNum);
+      if (props.currentPage !== allCount.value) {
+        const curNum: number = props.currentPage + 1;
+        ctx.emit("pageChange", curNum);
       }
-    }, 200)
+    }, 200);
+
+    /**
+     * 根据当前点击页，判断分页条显示逻辑
+     */
+    const changeCountList = (currentPage: number): void => {
+      const allCountNum: number = allCount.value;
+      const newList: Array<number> = [];
+      if (allCountNum < props.maxCount) return;
+      if (currentPage === 1) {
+        initCountList();
+        console.log(currentPage)
+      } else if (currentPage === allCountNum) {
+        for (let i = allCountNum - props.maxCount + 2; i < allCountNum; i++) {
+          newList.push(i);
+        }
+        countList.value = newList;
+      }
+    };
 
     return {
-      pageCount,
+      allCount,
+      countList,
       handleClickPage,
       movePrev,
-      moveNext
-    }
-  }
-})
+      moveNext,
+    };
+  },
+});
 </script>
 
 <style lang='scss' scoped>
@@ -91,7 +163,8 @@ export default defineComponent({
   display: inline-block;
   height: 24px;
   font-size: 12px;
-  .prev-btn,.next-btn {
+  .prev-btn,
+  .next-btn {
     width: 70px;
     height: 24px;
     line-height: 24px;
@@ -122,6 +195,14 @@ export default defineComponent({
     float: left;
     display: flex;
     align-items: center;
+    .dots {
+      margin-right: 3px;
+      width: 16px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      font-weight: 700;
+    }
     .page-item {
       margin-right: 3px;
       width: 24px;
@@ -140,7 +221,7 @@ export default defineComponent({
       &.active {
         background-color: #c20c0c;
         color: #fff;
-        border-color: #A2161B;
+        border-color: #a2161b;
       }
     }
   }
