@@ -21,7 +21,6 @@ export interface ISingerData extends IUnknowObject {
   name: string;
   img1v1Url: string;
   alias: Array<string | undefined>;
-  company?: string;
 }
 
 // 歌单

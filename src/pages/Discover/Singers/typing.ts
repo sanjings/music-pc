@@ -1,3 +1,14 @@
+import { ISingerData } from "/@/typings";
+
+export interface IQueryParams {
+  type: number | string;
+  area: number;
+  limit: number;
+  initial: number | string;
+}
+
 export interface IState {
-  singerList: any[]
+  curTitle: string;
+  queryParams: IQueryParams
+  singerList: ISingerData[]
 }

@@ -59,8 +59,8 @@ export default defineComponent({
     },
     maxCount: {
       type: Number,
-      default: 9,
-    },
+      default: 9
+    }
   },
   setup(props, ctx) {
     const countList = ref<number[]>([]);
@@ -80,6 +80,9 @@ export default defineComponent({
       () => initCountList()
     );
 
+    /**
+     * 初始化分页列表
+     */
     const initCountList = () => {
       const maxCount: number = props.maxCount;
       const currentPage: number = props.currentPage;
@@ -116,6 +119,7 @@ export default defineComponent({
       if (props.currentPage !== 1) {
         const curNum: number = props.currentPage - 1;
         ctx.emit("pageChange", curNum);
+        changeCountList(curNum);
       }
     }, 200);
 
@@ -126,6 +130,7 @@ export default defineComponent({
       if (props.currentPage !== allCount.value) {
         const curNum: number = props.currentPage + 1;
         ctx.emit("pageChange", curNum);
+        changeCountList(curNum);
       }
     }, 200);
 
@@ -134,16 +139,41 @@ export default defineComponent({
      */
     const changeCountList = (currentPage: number): void => {
       const allCountNum: number = allCount.value;
+      const countArr: number[] = countList.value,
+            countArrLen: number = countArr.length;
       const newList: Array<number> = [];
       if (allCountNum < props.maxCount) return;
+      // 点击第一页时
       if (currentPage === 1) {
         initCountList();
-        console.log(currentPage)
       } else if (currentPage === allCountNum) {
+        // 点击最后一页时
         for (let i = allCountNum - props.maxCount + 2; i < allCountNum; i++) {
           newList.push(i);
         }
         countList.value = newList;
+      } else if (currentPage >= countArr[countArrLen - 3]) {
+        // 除开第一页和最后一页，点击当前列表最后三项时
+        for (let i = countArr[1]; i <= countArr[countArrLen - 1] + 1; i++) {
+          newList.push(i);
+        }
+        if (newList[newList.length - 1] >= allCountNum) {
+          for (let i = allCountNum - props.maxCount; i < allCountNum; i++) {
+            newList.push(i);
+          }
+        } else {
+          countList.value = newList;
+        }
+      } else if (currentPage <= countArr[1] && countArr[0]!== 2) {
+        // 除开第一页和最后一页，点击当前列表前两页时
+        for (let i = countArr[0] - 1; i <= countArr[countArrLen - 1] - 1; i++) {
+          newList.push(i);
+        }
+        if (newList[0] === 2) {
+          initCountList();
+        } else {
+          countList.value = newList;
+        }
       }
     };
 
@@ -152,9 +182,9 @@ export default defineComponent({
       countList,
       handleClickPage,
       movePrev,
-      moveNext,
+      moveNext
     };
-  },
+  }
 });
 </script>
 
@@ -173,6 +203,7 @@ export default defineComponent({
     border: 1px solid #e3e3e3;
     border-radius: 2px;
     background-color: rgba(80, 80, 80, 0.1);
+    user-select: none;
     cursor: pointer;
     &:hover {
       background-color: rgba(140, 140, 140, 0.1);
@@ -212,6 +243,7 @@ export default defineComponent({
       border: 1px solid #d3d3d3;
       border-radius: 2px;
       cursor: pointer;
+      user-select: none;
       &:last-of-type {
         margin-right: 0;
       }

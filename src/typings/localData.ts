@@ -16,11 +16,16 @@ export interface IArea {
 
 export interface IPlaylistCat {
   name: string;
-  value: string;
+  value: string | number;
 }
 
 export interface ISingerCategories {
   title: string;
   area: number;
   subList: Array<{title: string; type: string | number;}>
+}
+
+export interface IAlphaTypes {
+  name: string;
+  value: string | number;
 }

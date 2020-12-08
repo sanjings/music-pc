@@ -1,3 +1,4 @@
+import { IQueryParams } from './../../pages/Discover/Singers/typing';
 import { ajaxGet } from '../ajax';
 import { GET_RECOM_SINGERS, GET_SINGER_LIST } from './../url';
 
@@ -12,7 +13,7 @@ const getRecomSingersRequest = (limit: number) => {
 /**
  * 请求歌手列表数据
  */
-const getSingerListRequest = (params: any) => {
+const getSingerListRequest = (params: IQueryParams) => {
   return ajaxGet(GET_SINGER_LIST, params);
 }
 

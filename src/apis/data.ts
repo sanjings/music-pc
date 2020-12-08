@@ -1,4 +1,4 @@
-import { IPlaylistCat, IArea, IHeaderNav, ILinkItem, ISingerCategories } from "../typings/localData";
+import { IPlaylistCat, IArea, IHeaderNav, ILinkItem, ISingerCategories, IAlphaTypes } from "../typings/localData";
 
 export const headerNavList: Array<IHeaderNav> = [
   { title: '发现音乐', link: '/discover', isSelf: true },
@@ -230,3 +230,115 @@ export const singerCategories: ISingerCategories[] = [
     ]
   }
 ]
+
+// 歌手首字母
+export const alphaTypes: IAlphaTypes[] = [
+  {
+    value: -1,
+    name: "热门"
+  },
+  {
+    value: "A",
+    name: "A"
+  },
+  {
+    value: "B",
+    name: "B"
+  },
+  {
+    value: "C",
+    name: "C"
+  },
+  {
+    value: "D",
+    name: "D"
+  },
+  {
+    value: "E",
+    name: "E"
+  },
+  {
+    value: "F",
+    name: "F"
+  },
+  {
+    value: "G",
+    name: "G"
+  },
+  {
+    value: "H",
+    name: "H"
+  },
+  {
+    value: "I",
+    name: "I"
+  },
+  {
+    value: "J",
+    name: "J"
+  },
+  {
+    value: "K",
+    name: "K"
+  },
+  {
+    value: "L",
+    name: "L"
+  },
+  {
+    value: "M",
+    name: "M"
+  },
+  {
+    value: "N",
+    name: "N"
+  },
+  {
+    value: "O",
+    name: "O"
+  },
+  {
+    value: "P",
+    name: "P"
+  },
+  {
+    value: "Q",
+    name: "Q"
+  },
+  {
+    value: "R",
+    name: "R"
+  },
+  {
+    value: "S",
+    name: "S"
+  },
+  {
+    value: "T",
+    name: "T"
+  },
+  {
+    value: "U",
+    name: "U"
+  },
+  {
+    value: "V",
+    name: "V"
+  },
+  {
+    value: "W",
+    name: "W"
+  },
+  {
+    value: "X",
+    name: "X"
+  },
+  {
+    value: "Y",
+    name: "Y"
+  },
+  {
+    value: "Z",
+    name: "Z"
+  }
+];

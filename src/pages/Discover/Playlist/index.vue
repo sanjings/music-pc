@@ -123,7 +123,6 @@ export default defineComponent({
   }
   .list-wrap {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     .list-item {
       margin: 20px 30px 0 0;
