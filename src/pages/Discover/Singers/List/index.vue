@@ -20,10 +20,11 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, PropType, onMounted, ref, watch } from 'vue';
+import { defineComponent, PropType, watch } from 'vue';
 import { ISingerData } from '/@/typings';
 import imgLazyload from '/utils/lazyload';
 import { debounce } from '/utils/tool';
+import useLazyload from '/hooks/useLazyload';
 
 export default defineComponent({
   name: 'SingerList',
@@ -34,30 +35,15 @@ export default defineComponent({
     }
   },
   setup (props, ctx) {
-    const listRef = ref(null);
-
-    onMounted(() => {
-      initLazyload();
-    });
-
-    watch(
-      () => props.listData,
-      () => {
-        initLazyload();
-      }
-    );
+    const { listRef, initLazyload } = useLazyload();
 
     /**
-     * 初始化图片懒加载
+     * 监听数据改变，重新初始化懒加载函数
      */
-    const initLazyload = () => {
-      const listDom = listRef.value;
-      const oImages = listDom.getElementsByClassName('cover');
-      setTimeout(() => {
-        imgLazyload(oImages)() // 首次加载显示图片
-        document.addEventListener('scroll', debounce(imgLazyload(oImages), 50), false) // 对scroll事件做节流处理
-      }, 50)
-    };
+    watch(
+      () => props.listData,
+      () => initLazyload()
+    );
 
     return {
       listRef

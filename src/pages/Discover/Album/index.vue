@@ -18,7 +18,7 @@
         />
       </ModuleTitle>
       <!-- 分类新碟列表 -->
-      <ul class="all-album-list">
+      <ul class="all-album-list" ref='listRef'>
         <template v-for="item of allAlbumList" :key="item.id">
           <li class="list-item">
             <AlbumCover :data="item" />

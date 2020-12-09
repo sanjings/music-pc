@@ -18,6 +18,8 @@ export const GET_HOT_ALBUM: string = '/album/newest'; // 获取热门专辑
 
 export const GET_ALBUM_BY_AREA: string = '/album/new'; // 根据区域获取全部新碟
 
+export const GET_COMMENT: string = '/comment/playlist'; // 获取评论
+
 
 
 

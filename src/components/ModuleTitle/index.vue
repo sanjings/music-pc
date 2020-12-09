@@ -39,7 +39,7 @@ export default defineComponent({
   position: relative;
   display: flex;
   align-items: center;
-  padding-bottom: 6px;
+  padding-bottom: 8px;
   width: 100%;
   border-bottom: 2px solid #c20c0c;
   .circle {
@@ -72,7 +72,7 @@ export default defineComponent({
   .slot-right {
     position: absolute;
     right: 0;
-    bottom: 6px;
+    bottom: 8px;
   }
 }
 </style>

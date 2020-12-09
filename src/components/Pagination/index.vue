@@ -73,14 +73,6 @@ export default defineComponent({
     );
 
     /**
-     * 监听总数变化，计算分页数组
-     */
-    watch(
-      () => props.total,
-      () => initCountList()
-    );
-
-    /**
      * 初始化分页列表
      */
     const initCountList = () => {
@@ -177,6 +169,17 @@ export default defineComponent({
       }
     };
 
+    /**
+     * 监听总数变化，计算分页数组
+     */
+    watch(
+      () => props.total,
+      () => initCountList(),
+      {
+        immediate: true
+      }
+    );
+
     return {
       allCount,
       countList,
@@ -236,7 +239,7 @@ export default defineComponent({
     }
     .page-item {
       margin-right: 3px;
-      width: 24px;
+      padding: 0 8px;
       height: 24px;
       line-height: 24px;
       text-align: center;

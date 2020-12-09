@@ -28,6 +28,9 @@
       "/typings/*": [
         "src/typings/*"
       ],
+      "/hooks/*": [
+        "src/hooks/*"
+      ]
     }
   },
   "include": [

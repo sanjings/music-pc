@@ -1,4 +1,15 @@
 import { ISingerData } from '/typings/index';
+import dayjs from 'dayjs';
+
+/**
+ * 格式化时间
+ * @param date 
+ * @param type 时间格式
+ */
+export const formatDate = (date: number | Date | string, type: string = 'YYYY-MM-DD'): string => {
+  if (!date) return '';
+  return dayjs(date).format(type);
+};
 
 /**
  * 格式化数量
@@ -42,7 +53,7 @@ export const formatSongUrl = (id: number): string => {
 
 /**
  * 转换歌曲播放时间
- * @param {Number} interval 
+ * @param {Number} interval 毫秒
  */
 export const formatPlayTime = (interval: number): string => {
   interval = interval | 0; // 向下取整

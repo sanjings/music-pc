@@ -3,7 +3,7 @@
     <!-- 排行榜信息 -->
     <div class="top">
       <div class="cover-wrap">
-        <img :src="data.coverImgUrl" alt="cover" />
+        <img :src="data.coverImgUrl" alt="cover" class="cover" />
       </div>
       <div class="rank-info">
         <p class="rank-name">{{ data.name }}</p>
@@ -56,7 +56,7 @@ export default defineComponent({
       margin-right: 10px;
       width: 80px;
       height: 80px;
-      img {
+      .cover {
         height: 100%;
       }
     }

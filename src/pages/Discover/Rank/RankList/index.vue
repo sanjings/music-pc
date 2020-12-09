@@ -5,7 +5,10 @@
         <h2 class="rank-name">{{ item.name }}</h2>
         <ul class="sub-list">
           <template v-for="sub of item.subList" :key="sub.id">
-            <li class="sub-item">
+            <li 
+              :class="['sub-item', { 'active': curRankId === sub.id }]" 
+              @click="handleItemClick(sub.id)" 
+            >
               <div class="cover-wrap">
                 <img :src="sub.coverImgUrl + '?param=40y40'" alt="cover" />
               </div>
@@ -28,9 +31,22 @@ import { IRankItem } from "../typing";
 export default defineComponent({
   name: "RankList",
   props: {
+    curRankId: Number,
     rankList: {
       type: Array as PropType<IRankItem[]>,
       required: true
+    }
+  },
+  setup (props, ctx) {
+    /**
+     * 监听点击事件
+     */
+    const handleItemClick = (id: number): void => {
+      ctx.emit('onClick', id)
+    };
+
+    return {
+      handleItemClick
     }
   }
 });
@@ -49,6 +65,7 @@ export default defineComponent({
         display: flex;
         padding: 10px 0 10px 20px;
         cursor: pointer;
+        &.active,
         &:hover {
           background-color: #f4f2f2;
         }

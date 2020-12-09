@@ -105,12 +105,12 @@ export default defineComponent({
       font-weight: 550;
       font-size: 12px;
       color: #333;
-      background-color: #f6f6f6;
+      background-color: rgba($color: #f6f6f6, $alpha: .6);
       border: 1px solid #d3d3d3;
       border-radius: 4px;
       cursor: pointer;
       &:hover{
-        background-color: #fff;
+        background-color: rgba($color: #f6f6f6, $alpha: .2);
       }
     }
   }

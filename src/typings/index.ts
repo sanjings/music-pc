@@ -13,6 +13,7 @@ export interface ICreator extends IUnknowObject {
 export interface ITracks extends IUnknowObject {
   id: number;
   name: string;
+  dt: number;
 }
 
 // 歌手
@@ -46,4 +47,7 @@ export interface IAlbumData extends IUnknowObject {
 export interface IRankData extends IPlayData {
   ToplistType?: string;
   updateFrequency: string;
+  subscribedCount: number;
+  shareCount: number;
+  commentCount: number;
 }
