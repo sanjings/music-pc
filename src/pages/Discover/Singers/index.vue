@@ -85,6 +85,7 @@ export default defineComponent({
       const { type, area, title } = params;
       state.queryParams.type = type;
       state.queryParams.area = area;
+      state.queryParams.initial = -1;
       state.curTitle = title;
       if (type === 'RECOM') {
         getRecomSingerList();

@@ -4,6 +4,7 @@ import { IUnknowObject } from '/@/typings';
 
 interface IResponseData extends IUnknowObject {
   code: number;
+  total?: number;
 }
 
 /**

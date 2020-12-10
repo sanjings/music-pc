@@ -1,7 +1,13 @@
 import { IPlayData, IUnknowObject } from "/@/typings";
 
-export interface ICatData extends IUnknowObject {
 
+export interface ICatSub {
+  name: string; 
+  category: number; 
+}
+export interface ICatData extends IUnknowObject {
+  name: string;
+  children: Array<ICatSub>;
 }
 
 export interface IQueryParams {

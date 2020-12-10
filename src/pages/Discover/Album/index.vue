@@ -93,7 +93,7 @@ export default defineComponent({
     const getAlbumList = async () => {
       const { albums, total } = await getNewAlbumListRequest(state.queryParams);
       state.allAlbumList = albums;
-      state.listTotal = total;
+      state.listTotal = Number(total);
     };
 
     /**

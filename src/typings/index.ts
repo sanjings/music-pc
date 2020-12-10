@@ -51,3 +51,8 @@ export interface IRankData extends IPlayData {
   shareCount: number;
   commentCount: number;
 }
+
+export interface IUser extends IUnknowObject {
+  avatarUrl: string;
+  nickname: string;
+}

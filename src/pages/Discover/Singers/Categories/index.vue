@@ -40,7 +40,7 @@ export default defineComponent({
     /**
      * 点击事件
      */
-    const handleClick = (e: MouseEvent) => {
+    const handleClick = (e: MouseEvent): void => {
       const target = e.target as HTMLElement;
       if (target.className === 'sub-item') {
         const { type, area, title } = target.dataset;

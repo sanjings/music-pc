@@ -2,11 +2,13 @@
   <li class="rank-songs">
     <!-- 排行榜信息 -->
     <div class="top">
-      <div class="cover-wrap">
+      <router-link :to="{name: 'rank', params: { id: data.id }}" class="cover-wrap">
         <img :src="data.coverImgUrl" alt="cover" class="cover" />
-      </div>
+      </router-link>
       <div class="rank-info">
-        <p class="rank-name">{{ data.name }}</p>
+        <router-link :to="{name: 'rank', params: { id: data.id }}" class="rank-name">
+          {{ data.name }}
+        </router-link>
         <p class="controls">
           <i class="iconfont icon-play-circle" />
           <i class="iconfont icon-add" />
@@ -21,9 +23,9 @@
           <span class="song-name ellipsis">{{ item.name }}</span>
         </li>
       </template>
-      <li class="song-item show-all">
+      <router-link :to="{name: 'rank', params: { id: data.id }}" class="song-item show-all">
         <span>查看全部</span>
-      </li>
+      </router-link>
     </ul>
   </li>
 </template>
@@ -56,18 +58,23 @@ export default defineComponent({
       margin-right: 10px;
       width: 80px;
       height: 80px;
+      cursor: pointer;
       .cover {
         height: 100%;
       }
     }
     .rank-info {
+      padding-top: 10px;
       .rank-name {
-        padding: 10px 0;
         font-weight: 550;
+        &:hover {
+          text-decoration: underline;
+        }
       }
       .controls {
         display: flex;
         align-items: center;
+        padding-top: 10px;
         i {
           color: #bbb;
           font-size: 22px;

@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="divider"></div>
+    <span class="divider"></span>
   </header>
 </template>
 
@@ -96,6 +96,7 @@ export default defineComponent({
     }
   }
   .divider{
+    display: block;
     width: 100%;
     height: 5px;
     background-color: #c20c0c;

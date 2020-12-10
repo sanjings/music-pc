@@ -1,3 +1,4 @@
+import { IComment } from './../../../components/AlbumDetail/typing';
 import { IRankData } from './../../../typings/index';
 
 export interface IRankItem {
@@ -14,5 +15,5 @@ export interface IState {
   queryParams: IQueryParams;
   rankList: IRankItem[];
   rankDetail: null | IRankData;
-  commentList: any[];
+  commentList: IComment[];
 }

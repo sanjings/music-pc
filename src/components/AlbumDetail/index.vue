@@ -25,6 +25,7 @@ import Top from './Top.vue';
 import SongList from './SongList.vue';
 import Comment from './Comment.vue';
 import Pagination from '/components/Pagination/index.vue';
+import { IComment } from './typing';
 
 export default defineComponent({
   name: "List",
@@ -36,7 +37,7 @@ export default defineComponent({
   },
   props: {
     detailData: Object as PropType<IRankData>,
-    commentList: Array,
+    commentList: Array as PropType<IComment[]>,
     currentPage: Number,
     pageSize: Number,
     handleChangePage: Function

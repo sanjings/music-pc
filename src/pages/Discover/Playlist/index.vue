@@ -1,7 +1,11 @@
 <template>
   <div class="playlist w-def-container">
     <ModuleTitle :title='queryParams.cat' size='large'>
-      <template v-slot:right>
+      <!-- 分类选择 -->
+      <template #default>
+        <Categories :listData='catList' @onClick='handleChangeCat' />
+      </template>
+      <template #right>
         <i class="hot-tag">热门</i>
       </template>
     </ModuleTitle>
@@ -31,12 +35,15 @@ import { useRoute } from 'vue-router';
 import PlaylistItem from '/components/PlaylistItem/index.vue';
 import ModuleTitle from '/components/ModuleTitle/index.vue';
 import Pagination from '/components/Pagination/index.vue';
+import Categories from './Categories/index.vue';
 import { getCatListRequest, getPlaylistRequest } from '/requests/playlist';
 import { IState } from './typing';
+import { IQueryParams } from "./typing";
 
 export default defineComponent({
   name: "Playlist",
   components: {
+    Categories,
     PlaylistItem,
     ModuleTitle,
     Pagination
@@ -68,23 +75,32 @@ export default defineComponent({
       const routeParams = route.params;
       state.queryParams.cat = routeParams.cat as string || '全部';
       getCatList();
-      getPlayList();
+      getPlayList(state.queryParams);
     }
 
     /**
      * 获取歌单分类
      */
     const getCatList = async () => {
-      const { categories, sub } = await getCatListRequest();
+      state.catList = await getCatListRequest();
     };
 
     /**
      * 获取歌单列表
      */
-    const getPlayList = async () => {
-      const { playlists, total } = await getPlaylistRequest(state.queryParams);
+    const getPlayList = async (queryParams: IQueryParams) => {
+      const { playlists, total } = await getPlaylistRequest(queryParams);
       state.playList = playlists;
-      state.listTotal = total;
+      state.listTotal = Number(total);
+    }
+
+    /**
+     * 改变歌单分类
+     */
+    const handleChangeCat = (cat: string): void => {
+      state.queryParams.cat = cat;
+      state.queryParams.offset = 0;
+      getPlayList(state.queryParams);
     }
 
      /**
@@ -92,12 +108,13 @@ export default defineComponent({
      */
     const handleChangePage = (value: number): void => {
       state.queryParams.offset = (value - 1) * state.queryParams.limit;
-      getPlayList();
+      getPlayList(state.queryParams);
     }
 
     return {
       ...toRefs(state),
       currentPage,
+      handleChangeCat,
       handleChangePage
     }
   }
@@ -124,6 +141,7 @@ export default defineComponent({
   .list-wrap {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     .list-item {
       margin: 20px 30px 0 0;
       width: 140px;

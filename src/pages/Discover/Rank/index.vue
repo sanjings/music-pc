@@ -27,7 +27,7 @@ import { getCommentListRequest } from '/requests/comment';
 import { getAlbumDetailRequest } from '/requests/album';
 import RankList from './RankList/index.vue';
 import AlbumDetail from '/components/AlbumDetail/index.vue';
-import { IState } from './typing';
+import { IState, IQueryParams } from './typing';
 import { IRankData } from "/@/typings";
 
 export default defineComponent({
@@ -67,7 +67,7 @@ export default defineComponent({
       state.queryParams.id = Number(routeParams.id) || 19723756;
       getRankList();
       getRankDetail(state.queryParams.id);
-      getCommentList();
+      getCommentList(state.queryParams);
     };
 
     /**
@@ -95,8 +95,8 @@ export default defineComponent({
     /**
      * 获取评论列表
      */
-    const getCommentList = async () => {
-      const { comments, total } = await getCommentListRequest(state.queryParams);
+    const getCommentList = async (queryParams: IQueryParams) => {
+      const { comments, total } = await getCommentListRequest(queryParams);
       state.commentList = comments;
     };
 
@@ -107,15 +107,15 @@ export default defineComponent({
       state.queryParams.id = id;
       state.queryParams.offset = 0;
       getRankDetail(id);
-      getCommentList();
+      getCommentList(state.queryParams);
     };
 
     /**
-     * 切换分页
+     * 切换评论分页
      */
     const handleChangePage = (value: number): void => {
       state.queryParams.offset = (value - 1) * state.queryParams.limit;
-      getCommentList();
+      getCommentList(state.queryParams);
     }
 
     return {

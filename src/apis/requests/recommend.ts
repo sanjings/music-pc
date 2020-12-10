@@ -21,18 +21,17 @@ const getBannersRequest = (type: BannerTypeEnum) => {
  * 请求热门歌单数据
  * @param {Number} limit 列表长度
  */
-const getHotPlayListRequest = (limit: number) => {
-  return ajaxGet(GET_HOT_PLAYLIST, { limit }).then(res => {
-    return {
-      ...res,
-      result: res.result.map((item: IAlbumData) => {
-        return {
-          ...item,
-          coverImgUrl: item.picUrl
-        }
-      })
-    }
-  });
+const getHotPlayListRequest = async (limit: number) => {
+  const res = await ajaxGet(GET_HOT_PLAYLIST, { limit });
+  return {
+    ...res,
+    result: res.result.map((item: IAlbumData) => {
+      return {
+        ...item,
+        coverImgUrl: item.picUrl
+      }
+    })
+  };
 }
 
 export {

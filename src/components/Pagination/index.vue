@@ -1,5 +1,5 @@
 <template>
-  <div class="pagination-wrap">
+  <div class="pagination-wrap" v-if="total">
     <button
       :class="['prev-btn', { disabled: currentPage === 1 }]"
       @click="movePrev"
@@ -7,9 +7,7 @@
       上一页
     </button>
     <ul class="page-list" @click="handleClickPage">
-      <li :class="['page-item', { active: currentPage === 1 }]" :data-num="1">
-        1
-      </li>
+      <li :class="['page-item', { active: currentPage === 1 }]" :data-num="1">1</li>
       <span v-if="countList[0] !== 2" class="dots">...</span>
       <template v-for="num of countList" :key="num">
         <li
@@ -174,7 +172,9 @@ export default defineComponent({
      */
     watch(
       () => props.total,
-      () => initCountList(),
+      () => {
+        props.total && initCountList();
+      },
       {
         immediate: true
       }

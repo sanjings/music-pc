@@ -78,7 +78,7 @@ export default defineComponent({
         line-height: 31px;
         font-size: 12px;
         color: #333;
-        background-color: rgba($color: #f6f6f6, $alpha: .6);
+        background-color: rgba($color: #f6f6f6, $alpha: .8);
         border: 1px solid #d3d3d3;
         border-radius: 4px;
         cursor: pointer;
