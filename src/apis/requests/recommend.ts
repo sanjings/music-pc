@@ -11,7 +11,7 @@ export enum BannerTypeEnum {
 
 /**
  * 请求banner数据
- * @param {Enum} type 终端类型
+ * @param type 终端类型
  */
 const getBannersRequest = (type: BannerTypeEnum) => {
   return ajaxGet(GET_BANNERS, { type });
@@ -19,7 +19,7 @@ const getBannersRequest = (type: BannerTypeEnum) => {
 
 /**
  * 请求热门歌单数据
- * @param {Number} limit 列表长度
+ * @param limit 列表长度
  */
 const getHotPlayListRequest = async (limit: number) => {
   const res = await ajaxGet(GET_HOT_PLAYLIST, { limit });

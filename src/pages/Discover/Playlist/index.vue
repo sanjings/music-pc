@@ -76,7 +76,7 @@ export default defineComponent({
       state.queryParams.cat = routeParams.cat as string || '全部';
       getCatList();
       getPlayList(state.queryParams);
-    }
+    };
 
     /**
      * 获取歌单分类
@@ -92,7 +92,7 @@ export default defineComponent({
       const { playlists, total } = await getPlaylistRequest(queryParams);
       state.playList = playlists;
       state.listTotal = Number(total);
-    }
+    };
 
     /**
      * 改变歌单分类
@@ -101,7 +101,7 @@ export default defineComponent({
       state.queryParams.cat = cat;
       state.queryParams.offset = 0;
       getPlayList(state.queryParams);
-    }
+    };
 
      /**
      * 切换分页
@@ -109,7 +109,7 @@ export default defineComponent({
     const handleChangePage = (value: number): void => {
       state.queryParams.offset = (value - 1) * state.queryParams.limit;
       getPlayList(state.queryParams);
-    }
+    };
 
     return {
       ...toRefs(state),

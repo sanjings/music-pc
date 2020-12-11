@@ -38,6 +38,11 @@ const routes: Array<RouteRecordRaw> = [
             path: '/discover/album',
             name: 'album',
             component: () => import(/* webpackChunkName: "Album" */'../pages/Discover/Album/index.vue')
+          },
+          {
+            path: '/discover/singer/:id',
+            name: 'singer',
+            component: () => import(/* webpackChunkName: "Singer" */'../pages/Singer/index.vue')
           }
         ]
       },
@@ -50,7 +55,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/friend',
         name: 'friend',
         component: () => import(/* webpackChunkName: "Friend" */'../pages/Friend/index.vue')
-      },
+      }
     ]
   }
 ]

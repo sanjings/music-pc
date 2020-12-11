@@ -10,10 +10,12 @@ export interface ICreator extends IUnknowObject {
 }
 
 // 歌曲列表
-export interface ITracks extends IUnknowObject {
+export interface ISong extends IUnknowObject {
   id: number;
   name: string;
   dt: number;
+  al: any[];
+  ar: Array<{id: number; name: string;}>;
 }
 
 // 歌手
@@ -21,6 +23,7 @@ export interface ISingerData extends IUnknowObject {
   id: number;
   name: string;
   img1v1Url: string;
+  picUrl: string;
   alias: Array<string | undefined>;
 }
 
@@ -32,7 +35,7 @@ export interface IPlayData extends IUnknowObject {
   creator?: ICreator;
   coverImgUrl: string;
   playCount: number,
-  tracks?: null | ITracks[]
+  tracks?: null | ISong[]
 }
 
 // 专辑

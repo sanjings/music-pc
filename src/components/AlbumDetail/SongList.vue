@@ -39,7 +39,7 @@
 
 <script lang='ts'>
 import { defineComponent, PropType } from "vue";
-import { ITracks } from "/@/typings";
+import { ISong } from "/@/typings";
 import { formatSingerName, formatPlayTime } from '/utils/format';
 import ModuleTitle from '/components/ModuleTitle/index.vue';
 
@@ -50,7 +50,7 @@ export default defineComponent({
   },
   props: {
     playCount: Number,
-    listData: Object as PropType<ITracks[]>
+    listData: Object as PropType<ISong[]>
   },
   setup () {
     return {
@@ -106,7 +106,6 @@ export default defineComponent({
         width: 173px;
       }
     }
-    
     .song-item {
       display: flex;
       align-items: center;

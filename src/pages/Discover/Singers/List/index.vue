@@ -1,7 +1,7 @@
 <template>
-  <ul class="singer-list" ref='listRef'>
+  <div class="singer-list" ref='listRef'>
     <template v-for="(item, index) of listData" :key="item.id">
-      <li class="singer-item">
+      <router-link :to="{name: 'singer', params: { id: item.id }}" class="singer-item">
         <div class="cover-wrap" v-if="index < 10">
           <img
             class="cover" 
@@ -14,9 +14,9 @@
           <span class="name">{{ item.name }}</span>
           <i class="icon" />
         </div>
-      </li>
+      </router-link>
     </template>
-  </ul>
+  </div>
 </template>
 
 <script lang='ts'>

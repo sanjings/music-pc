@@ -14,6 +14,8 @@ export const GET_RECOM_SINGERS: string = '/top/artists'; // 获取推荐歌手
 
 export const GET_SINGER_LIST: string = '/artist/list'; // 获取歌手列表
 
+export const GET_SINGER_DETAIL: string = '/artists'; // 获取歌手详情
+
 export const GET_HOT_ALBUM: string = '/album/newest'; // 获取热门专辑
 
 export const GET_ALBUM_BY_AREA: string = '/album/new'; // 根据区域获取全部新碟

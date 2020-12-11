@@ -18,7 +18,7 @@ const getNewAlbumListRequest = (params: IQueryParams) => {
 
 /**
  * 请求歌单详情数据
- * @param {Number} id 歌单id
+ * @param id 歌单id
  */
 const getAlbumDetailRequest = (id: number) => {
   return ajaxGet(GET_ALBUM_DETAIL, { id });
