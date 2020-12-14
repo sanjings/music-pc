@@ -27,7 +27,7 @@
               <img :src="item.al.picUrl + '?param=50y50'" alt="cover" class="cover" />
             </div>
             <i class="iconfont icon-play-circle" />
-            <span>{{ item.name }}</span>
+            <span class="item-name" >{{ item.name }}</span>
           </div>
           <div class="item-duration">{{ formatPlayTime(item.dt / 1000) }}</div>
           <div class="item-singer ellipsis">{{ formatSingerName(item.ar) }}</div>
@@ -141,6 +141,12 @@ export default defineComponent({
           cursor: pointer;
           &:hover {
             color: #666;
+          }
+        }
+        .item-name {
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
           }
         }
       }

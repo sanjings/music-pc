@@ -8,7 +8,7 @@
     </button>
     <ul class="page-list" @click="handleClickPage">
       <li :class="['page-item', { active: currentPage === 1 }]" :data-num="1">1</li>
-      <span v-if="countList[0] !== 2" class="dots">...</span>
+      <span v-if="countList.length && countList[0] !== 2" class="dots">...</span>
       <template v-for="num of countList" :key="num">
         <li
           :class="['page-item', { active: num === currentPage }]"
@@ -17,10 +17,11 @@
           {{ num }}
         </li>
       </template>
-      <span v-if="countList[countList.length - 1] !== allCount - 1" class="dots"
+      <span v-if="countList.length && countList[countList.length - 1] !== allCount - 1" class="dots"
         >...</span
       >
       <li
+        v-if="allCount > 1"
         :class="['page-item', { active: currentPage === allCount }]"
         :data-num="allCount"
       >
@@ -57,8 +58,8 @@ export default defineComponent({
     },
     maxCount: {
       type: Number,
-      default: 9
-    }
+      default: 9,
+    },
   },
   setup(props, ctx) {
     const countList = ref<number[]>([]);
@@ -130,7 +131,7 @@ export default defineComponent({
     const changeCountList = (currentPage: number): void => {
       const allCountNum: number = allCount.value;
       const countArr: number[] = countList.value,
-            countArrLen: number = countArr.length;
+        countArrLen: number = countArr.length;
       const newList: Array<number> = [];
       if (allCountNum < props.maxCount) return;
       // 点击第一页时
@@ -154,7 +155,7 @@ export default defineComponent({
         } else {
           countList.value = newList;
         }
-      } else if (currentPage <= countArr[1] && countArr[0]!== 2) {
+      } else if (currentPage <= countArr[1] && countArr[0] !== 2) {
         // 除开第一页和最后一页，点击当前列表前两页时
         for (let i = countArr[0] - 1; i <= countArr[countArrLen - 1] - 1; i++) {
           newList.push(i);
@@ -176,7 +177,7 @@ export default defineComponent({
         props.total && initCountList();
       },
       {
-        immediate: true
+        immediate: true,
       }
     );
 
@@ -185,9 +186,9 @@ export default defineComponent({
       countList,
       handleClickPage,
       movePrev,
-      moveNext
+      moveNext,
     };
-  }
+  },
 });
 </script>
 

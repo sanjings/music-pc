@@ -1,4 +1,4 @@
-import { IComment } from './../../../components/AlbumDetail/typing';
+import { IComment } from '../../../components/PlaylistInfo/typing';
 import { IRankData } from './../../../typings/index';
 
 export interface IRankItem {

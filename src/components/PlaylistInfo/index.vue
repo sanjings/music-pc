@@ -3,9 +3,15 @@
     <!-- 顶部基础信息 -->
     <Top :data='detailData' />
     <!-- 歌曲列表 -->
-    <SongList :listData='detailData.tracks' :playCount='detailData.playCount' />
+    <SongList 
+      :listData='detailData.tracks' 
+      :playCount='detailData.playCount'
+    />
     <!-- 评论 -->
-    <Comment :listData='commentList' :totalCount='detailData.commentCount' />
+    <Comment 
+      :listData='commentList'
+      :totalCount='detailData.commentCount'
+    />
     <!-- 评论分页条 -->
     <div class="pagination">
       <Pagination 
@@ -28,7 +34,7 @@ import Pagination from '/components/Pagination/index.vue';
 import { IComment } from './typing';
 
 export default defineComponent({
-  name: "List",
+  name: "AlbumDetail",
   components: {
     Top,
     SongList,

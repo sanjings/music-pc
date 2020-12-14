@@ -34,7 +34,7 @@ export interface IPlayData extends IUnknowObject {
   copywriter?: string;
   creator?: ICreator;
   coverImgUrl: string;
-  playCount: number,
+  playCount?: number,
   tracks?: null | ISong[]
 }
 

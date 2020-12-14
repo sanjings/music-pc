@@ -1,6 +1,11 @@
 import { ICatSub, ICatData } from './../../pages/Discover/Playlist/typing';
 import { ajaxGet } from '../ajax';
-import { GET_PLAYLIST_CATLIST, GET_PLAYLIST_BY_CAT } from './../url';
+import { 
+  GET_PLAYLIST_CATLIST, 
+  GET_PLAYLIST_BY_CAT, 
+  GET_PLAYLIST_DETAIL, 
+  GET_RELATED_PLAYLIST 
+} from './../url';
 import { IPlayData } from '/@/typings';
 import { IQueryParams } from '/pages/Discover/Playlist/typing';
 
@@ -34,9 +39,27 @@ const getPlaylistRequest = async (params: IQueryParams) => {
       copywriter: item.creator ? item.creator.nickname : ''
     }))
   };
+};
+
+/**
+ * 请求歌单详情数据
+ * @param id 歌单id
+ */
+const getPlaylistDetailRequest = (id: number) => {
+  return ajaxGet(GET_PLAYLIST_DETAIL, { id });
+};
+
+/**
+ * 获取相关歌单推荐
+ * @param id 歌单id
+ */
+const getRelatedPlaylistRequest = (id: number) => {
+  return ajaxGet(GET_RELATED_PLAYLIST, { id })
 }
 
 export {
   getCatListRequest,
-  getPlaylistRequest
+  getPlaylistRequest,
+  getPlaylistDetailRequest,
+  getRelatedPlaylistRequest
 }

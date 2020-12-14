@@ -1,5 +1,5 @@
 <template>
-  <div class="play-item">
+  <router-link class="play-item" :to="{name: 'playlistDetail', params: { id: data.id }}">
     <div
       class="cover-wrap"
       :style="{ 'background-image': `url(${data.coverImgUrl}?param=140y140)` }"
@@ -13,7 +13,7 @@
     </div>
     <p class="name ellipsis">{{ data.name }}</p>
     <p class="writer">by {{ data.copywriter }}</p>
-  </div>
+  </router-link>
 </template>
 
 <script lang='ts'>

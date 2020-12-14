@@ -3,26 +3,31 @@
     <div class="left">
       <h2 class="singer-name">{{ singerInfo.name }}</h2>
       <div class="avatar-wrap">
-        <img :src="singerInfo.picUrl" alt="avatar" class="avatar" />
+        <img :src="singerInfo.picUrl + '?param=628y300'" alt="avatar" class="avatar" />
       </div>
       <!-- 热门歌曲列表 -->
       <HotSongs :listData='hotSongs' />
     </div>
-    <div class="right"></div>
+    <div class="right">
+      <!-- 热门歌手列表 -->
+      <HotSingers :listData='hotSingers' />
+    </div>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, onMounted, reactive, toRefs } from "vue";
+import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 import { useRoute } from 'vue-router';
 import { IState } from "./typing";
-import { getSingerDetailRequest } from '/requests/singer';
+import { getSingerDetailRequest, getRecomSingersRequest } from '/requests/singer';
 import HotSongs from './HotSongs/index.vue';
+import HotSingers from './HotSingers/index.vue';
 
 export default defineComponent({
   name: "Singer",
   components: {
-    HotSongs
+    HotSongs,
+    HotSingers
   },
   setup () {
     const route = useRoute();
@@ -30,6 +35,7 @@ export default defineComponent({
     const state = reactive<IState>({
       singerInfo: null,
       hotSongs: [],
+      hotSingers: [],
       curComponent: 'HotSongs'
     })
 
@@ -43,6 +49,7 @@ export default defineComponent({
     const init = (): void => {
       const { id } = route.params;
       getSingerDetail(Number(id));
+      getHotSinger();
     };
 
     /**
@@ -53,6 +60,25 @@ export default defineComponent({
       state.singerInfo = artist;
       state.hotSongs = hotSongs;
     };
+
+    /**
+     * 获取热门歌手
+     */
+    const getHotSinger = async () => {
+      const { artists } = await getRecomSingersRequest(15);
+      state.hotSingers = artists;
+
+    };
+
+    /**
+     * 监听路由变化，重新请求数据
+     */
+    watch(
+      () => route.params.id,
+      (oldVal, newVal) => {
+        getSingerDetail(Number(oldVal));
+      }
+    )
 
     return {
       ...toRefs(state)
@@ -80,14 +106,11 @@ export default defineComponent({
       height: 300px;
       border: 1px solid #d3d3d3;
       overflow: hidden;
-      .avatar {
-        transform: translateY(-110px);
-      }
     }
   }
   .right {
     width: 270px;
-    padding: 40px 25px;
+    padding: 20px 30px;
     border-left: 1px solid #d3d3d3;
   }
 }

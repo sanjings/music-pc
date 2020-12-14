@@ -6,7 +6,7 @@
     </h2>
     <div class="singer-list">
       <template v-for="item of singerList" :key="item.id">
-        <div class="singer-item">
+        <router-link class="singer-item" :to="{name: 'singer', params: {id: item.id}}">
           <div class="cover-wrap">
             <img :src="item.img1v1Url + '?param=62y62'" class="cover" alt="singer" />
           </div>
@@ -14,7 +14,7 @@
             <p class="alias ellipsis">{{ item.alias.toString() || item.name }}</p>
             <p class="name ellipsis">{{ item.name }}</p>
           </div>
-        </div>
+        </router-link>
       </template>
     </div>
     <div class="apply-wrap">

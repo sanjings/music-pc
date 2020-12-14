@@ -24,7 +24,8 @@
 <script lang='ts'>
 import { defineComponent, onMounted, reactive, toRefs } from 'vue';
 import { getBannersRequest, getHotPlayListRequest, BannerTypeEnum } from '/requests/recommend';
-import { getHotAlbumRequest, getAlbumDetailRequest } from '/requests/album';
+import { getHotAlbumRequest } from '/requests/album';
+import { getPlaylistDetailRequest } from '/requests/playlist';
 import { getSingerListRequest } from '/requests/singer';
 import { IBannerData, IState } from './typing';
 import Banner from './Banner/index.vue';
@@ -98,7 +99,7 @@ export default defineComponent({
      */
     const getRankList = async () => {
       const res = await Promise.all([19723756, 3779629, 2884035].map((item: number) => {
-        return getAlbumDetailRequest(item);
+        return getPlaylistDetailRequest(item);
       }))
 
       state.rankList = res.map(item => item.playlist);

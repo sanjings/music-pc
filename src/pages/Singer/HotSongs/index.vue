@@ -1,8 +1,12 @@
 <template>
-  <div class="hot-songs w-def-container">
+  <div class="hot-songs">
+    <button class="play-btn">
+      <i class="iconfont icon-play-circle" />
+      <span>全部播放</span>
+    </button>
     <ul class="list-wrap">
       <template v-for="(item, index) of listData" :key="item.id">
-        <li :class="['song-item', {'stripe': index % 2 === 0}]">
+        <li :class="['song-item', { stripe: index % 2 === 0 }]">
           <div class="item-index">{{ index + 1 }}</div>
           <div class="item-title ellipsis">
             <i class="iconfont icon-play-circle" />
@@ -19,18 +23,18 @@
 <script lang='ts'>
 import { defineComponent, PropType } from "vue";
 import { ISong } from "/@/typings";
-import { formatPlayTime } from '/utils/format';
+import { formatPlayTime } from "/utils/format";
 
 export default defineComponent({
   name: "HotSongs",
   props: {
-    listData: Array as PropType<ISong[]>
+    listData: Array as PropType<ISong[]>,
   },
-  setup () {
+  setup() {
     return {
-      formatPlayTime
-    }
-  }
+      formatPlayTime,
+    };
+  },
 });
 </script>
 
@@ -38,7 +42,25 @@ export default defineComponent({
 .hot-songs {
   padding-top: 20px;
   width: 100%;
+  .play-btn {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+    padding: 0 15px;
+    height: 31px;
+    line-height: 31px;
+    font-size: 12px;
+    background-color: #2a7bc8;
+    color: #fff;
+    border-color: #2a7bc8;
+    border-radius: 4px;
+    cursor: pointer;
+    .iconfont {
+      margin-right: 5px;
+    }
+  }
   .list-wrap {
+    margin-top: 10px;
     .song-item {
       display: flex;
       align-items: center;
