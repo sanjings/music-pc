@@ -14,7 +14,7 @@ export interface ISong extends IUnknowObject {
   id: number;
   name: string;
   dt: number;
-  al: any[];
+  al: any;
   ar: Array<{id: number; name: string;}>;
 }
 
