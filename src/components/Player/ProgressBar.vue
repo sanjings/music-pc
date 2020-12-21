@@ -6,15 +6,17 @@
         ref="progressBtnRef"
         class="progress-btn"
         @mousedown="handleMouseDown"
-        @mousemove="handleMouseMove"
-        @mouseleave="handleMouseLeave"
       ></span>
     </div>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed, onMounted, watch } from "vue";
+import { IMouseClickInfo } from './typing';
+
+const progressBtnWidth = 16; // 按钮宽度
+const barWidth = 493; // 进度条宽度
 
 export default defineComponent({
   name: "ProgressBar",
@@ -24,32 +26,107 @@ export default defineComponent({
       default: 0,
     },
   },
-  setup() {
-    const barRef = ref<HTMLElement | null>(null),
-      progressRef = ref<HTMLElement | null>(null),
-      progressBtnRef = ref<HTMLElement | null>(null);
+  setup(props, ctx) {
+    const barRef = ref<HTMLElement | null>(null);
+    const progressRef = ref<HTMLElement | null>(null);
+    const progressBtnRef = ref<HTMLElement | null>(null);
+    const clickInfo = ref<IMouseClickInfo>({initiated: false, startX: 0, left: 0});
 
-    const handleMouseDown = (e) => {};
+    watch(
+      () => props.percent,
+      () => {
+        if (props.percent >= 0 && props.percent <= 1 && !clickInfo.value.initiated) {
+          const offsetWidth = (barWidth - progressBtnWidth) * props.percent;
+          _offset(offsetWidth);
+        }
+      }
+    );
 
-    const handleMouseMove = (e) => {};
+    /**
+     * 设置已完成进度条和按钮的偏移值样式
+     * @param offsetWidth 偏移值
+     */
+    const _offset = (offsetWidth: number): void => {
+      const progressDom = progressRef.value as HTMLElement,
+            progressBtnDom = progressBtnRef.value as HTMLElement;
 
-    const handleMouseLeave = (e) => {};
+      if (offsetWidth < 0) {
+        offsetWidth = 0;
+      } else if (offsetWidth >= barWidth - progressBtnWidth) {
+        offsetWidth = barWidth - progressBtnWidth;
+      }
+
+      progressDom.style.width = `${offsetWidth}px`;
+      progressBtnDom.style.left = `${offsetWidth}px`;
+    };
+
+    /**
+     * 根据点击时的偏移值，计算进度百分比，并通知父组件change事件
+     */
+    const _changePercent = () => {
+      const progressDom = progressRef.value as HTMLElement,
+            curPercent = progressDom.clientWidth / (barWidth - progressBtnWidth);
+            
+
+      ctx.emit('change', curPercent);
+    }
+
+    const handleClick = (e: MouseEvent): void => {
+      e.stopPropagation();
+      const barDom = barRef.value as HTMLElement;
+      const offsetLeft = barDom.offsetLeft;
+      const offsetWidth = e.pageX - offsetLeft;
+      _offset(offsetWidth);
+      _changePercent()
+    };
+
+    const handleMouseDown = (e: MouseEvent): void => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      const progressDom = progressRef.value as HTMLElement;
+
+      clickInfo.value = {
+        initiated: true,
+        startX: e.pageX,
+        left: progressDom.clientWidth
+      };
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    };
+
+    const handleMouseMove = (e: MouseEvent): void => {
+      const clickInfoObj = clickInfo.value;
+      if (!clickInfoObj.initiated) return;
+      const scrollX = e.pageX - clickInfoObj.startX,
+            offsetWidth = Math.min(Math.max(0, clickInfoObj.left + scrollX), barWidth);
+
+      _offset (offsetWidth);
+    };
+
+    const handleMouseUp = (e: MouseEvent): void => {
+      clickInfo.value = {
+        startX: Number(clickInfo.value.startX),
+        left: Number(clickInfo.value.left),
+        initiated: false
+      }
+      _changePercent();
+    };
 
     return {
       barRef,
       progressRef,
       progressBtnRef,
-      handleMouseDown,
-      handleMouseMove,
-      handleMouseLeave
+      handleClick,
+      handleMouseDown
     };
-  }
+  },
 });
 </script>
 
 <style lang='scss' scoped>
 .progress-wrap {
   width: 100%;
+  user-select: none;
   .bar-inner {
     position: relative;
     height: 9px;

@@ -3,8 +3,8 @@
     <div class="player-inner w-def-container">
       <div class="controls">
         <i class="iconfont icon-previous" />
-        <i v-if="playingStatus" class="iconfont icon-play-circle" @click="togglePlayStatus" />
-        <i v-else class="iconfont icon-pause" @click="togglePlayStatus" />
+        <i v-if="!playingStatus" class="iconfont icon-play-circle" @click="togglePlayStatus(true)" />
+        <i v-else class="iconfont icon-pause" @click="togglePlayStatus(false)" />
         <i class="iconfont icon-next" />
       </div>
       <div class="song">
@@ -18,7 +18,7 @@
           </p>
           <div class="progress">
             <div class="progress-bar-wrap">
-              <ProgressBar :percent="percent" />
+              <ProgressBar :percent="percent" @change="handleChangePercent" />
             </div>
             <span class="play-time">{{ formatPlayTime(currentTime) }} / {{ formatPlayTime(duration) }}</span>
           </div>
@@ -29,6 +29,7 @@
       ref="audioRef" 
       :src='songUrl' 
       :autoplay='true'
+      @timeupdate="handleUpdateTime"
     />
   </div>
 </template>
@@ -54,26 +55,59 @@ export default defineComponent({
     const store = useStore();
     const state = store.state.player;
     const audioRef = ref<HTMLAudioElement | null>(null);
-    const songUrl = ref('');
-    const currentTime = ref(0);
-    const duration = ref(0);
-    const percent = computed(() => isNaN(currentTime.value / duration.value) ? 0 : currentTime.value / duration.value);
+    const songUrl = ref<string>('');
+    const currentTime = ref<number>(0);
+    const duration = ref<number>(0);
+    const preSongId = ref<string>('');
+
+    const percent = computed<number>(() => {
+      return isNaN(currentTime.value / duration.value) ? 0 : currentTime.value / duration.value
+    });
     
     /**
      * 切换播放状态
      */
-    const togglePlayStatus = () => {
-      store.commit(SET_PLAYING_STATUS, !state.playingStatus)
+    const togglePlayStatus = (status: boolean): void => {
+      store.commit(SET_PLAYING_STATUS, status)
     };
 
     /**
      * 切换播放列表显示
      */
-    const toggleShowPlayList = () => {
+    const toggleShowPlayList = (): void => {
       store.commit(SET_SHOW_PLAY_LIST, !state.showPlayList)
     };
 
-    watch(() => state.currentIndex, (curIndex) => {
+    /**
+     * 更新播放时间
+     */
+    const handleUpdateTime = (e: Event): void => {
+      const target = e.target as HTMLAudioElement;
+      currentTime.value = target.currentTime;
+    };
+
+    /**
+     * 进度改变
+     */
+    const handleChangePercent = (per: number): void => {
+      const audioDom = audioRef.value as HTMLAudioElement;
+
+      currentTime.value = per * duration.value;
+      audioDom.currentTime = currentTime.value;
+      !state.playingStatus && togglePlayStatus(true);
+    };
+
+    /**
+     * 监听歌曲序号变化，获取歌曲信息
+     */
+    watch(() => state.currentIndex, (curIndex: number) => {
+      if (
+        !state.playList.length || 
+        !state.playList[curIndex] || 
+        curIndex === -1 || 
+        state.playList[curIndex].id === preSongId) 
+      return;
+
       const currentSong = state.playList[curIndex];
       store.commit(SET_CURRENT_SONG, state.playList[state.currentIndex]);
       songUrl.value = formatSongUrl(currentSong.id);
@@ -84,7 +118,7 @@ export default defineComponent({
     /**
      * 监听播放状态改变，播放或暂停音乐
      */
-    watch(() => state.playingStatus, (curStatus) => {
+    watch(() => state.playingStatus, (curStatus: boolean) => {
       const audioDom = audioRef.value as HTMLAudioElement;
       curStatus ? audioDom.play() : audioDom.pause()
     });
@@ -97,7 +131,10 @@ export default defineComponent({
       formatSingerName,
       formatPlayTime,
       currentTime,
-      duration
+      percent,
+      duration,
+      handleUpdateTime,
+      handleChangePercent
     }
   }
 });
@@ -130,6 +167,7 @@ export default defineComponent({
         &.icon-pause {
           margin: 0 12px;
           font-size: 32px;
+          color: #f5f5f5;
         }
         &:hover {
           color: #fff;
