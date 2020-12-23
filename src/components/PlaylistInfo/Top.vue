@@ -6,7 +6,7 @@
     <div class="info">
       <p class="title">{{ data.name }}</p>
       <div class="controls">
-        <button class="btn play">
+        <button class="btn play" @click="handleClickPlayAll(data.tracks)">
           <i class="iconfont icon-play-circle" />
           <span>播放</span>
         </button>
@@ -31,19 +31,28 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { IRankData } from "/@/typings";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { IRankData } from '/@/typings';
+import usePlay from '/hooks/usePlay';
 
 export default defineComponent({
-  name: "Top",
+  name: 'Top',
   props: {
-    data: Object as PropType<IRankData>
+    data: Object as PropType<IRankData>,
+
+  },
+  setup(props) {
+    const { handleClickPlayAll } = usePlay();
+
+    return {
+      handleClickPlayAll
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .album-top {
   display: flex;
   padding-bottom: 40px;
@@ -78,7 +87,7 @@ export default defineComponent({
         line-height: 31px;
         font-size: 12px;
         color: #333;
-        background-color: rgba($color: #f6f6f6, $alpha: .8);
+        background-color: rgba($color: #f6f6f6, $alpha: 0.8);
         border: 1px solid #d3d3d3;
         border-radius: 4px;
         cursor: pointer;
@@ -89,9 +98,9 @@ export default defineComponent({
           }
         }
         &.play {
-          background-color: #2A7BC8;
+          background-color: #2a7bc8;
           color: #fff;
-          border-color: #2A7BC8;
+          border-color: #2a7bc8;
         }
       }
     }

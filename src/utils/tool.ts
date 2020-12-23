@@ -10,11 +10,20 @@ const debounce = (fn: Function, delayTime: number = 300) => {
     timer && clearTimeout(timer) && (timer = null);
 
     timer = setTimeout(() => {
-      fn.apply(this, args)
-    }, delayTime)
-  }
-}
+      fn.apply(this, args);
+    }, delayTime);
+  };
+};
 
-export {
-  debounce
-}
+/**
+ * 简易深克隆
+ * @param data 被克隆的值
+ */
+const deepClone = <T>(data: T): T => {
+  return JSON.parse(JSON.stringify(data));
+};
+
+export { 
+  debounce,
+  deepClone
+};

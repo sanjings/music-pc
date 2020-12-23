@@ -1,15 +1,15 @@
 <template>
   <div class="hot-songs">
-    <button class="play-btn">
+    <button class="play-btn" @click="handleClickPlayAll(listData)">
       <i class="iconfont icon-play-circle" />
       <span>全部播放</span>
     </button>
-    <ul class="list-wrap">
+    <ul class="list-wrap" @click="handleClickPlay($event, listData)">
       <template v-for="(item, index) of listData" :key="item.id">
         <li :class="['song-item', { stripe: index % 2 === 0 }]">
           <div class="item-index">{{ index + 1 }}</div>
           <div class="item-title ellipsis">
-            <i class="iconfont icon-play-circle" />
+            <i class="iconfont icon-play-circle" :data-index="index" />
             <span class="song-name">{{ item.name }}</span>
           </div>
           <div class="item-duration">{{ formatPlayTime(item.dt / 1000) }}</div>
@@ -20,25 +20,33 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { ISong } from "/@/typings";
-import { formatPlayTime } from "/utils/format";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { ISong } from '/@/typings';
+import { formatPlayTime } from '/utils/format';
+import usePlay from '/hooks/usePlay';
 
 export default defineComponent({
-  name: "HotSongs",
+  name: 'HotSongs',
   props: {
-    listData: Array as PropType<ISong[]>,
+    listData: {
+      type: Array as PropType<ISong[]>,
+      required: true
+    }
   },
-  setup() {
+  setup(props) {
+    const { handleClickPlay, handleClickPlayAll } = usePlay();
+
     return {
       formatPlayTime,
+      handleClickPlay,
+      handleClickPlayAll
     };
-  },
+  }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .hot-songs {
   padding-top: 20px;
   width: 100%;
@@ -88,12 +96,6 @@ export default defineComponent({
           cursor: pointer;
           &:hover {
             color: #666;
-          }
-        }
-        .song-name {
-          cursor: pointer;
-          &:hover {
-            text-decoration: underline;
           }
         }
       }

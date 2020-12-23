@@ -75,7 +75,7 @@ export default defineComponent({
       e.stopPropagation();
       const barDom = barRef.value as HTMLElement;
       const offsetLeft = barDom.offsetLeft;
-      const offsetWidth = e.pageX - offsetLeft;
+      const offsetWidth = e.pageX - offsetLeft - (progressBtnWidth / 2);
       _offset(offsetWidth);
       _changePercent()
     };
@@ -139,6 +139,7 @@ export default defineComponent({
       width: 0;
       height: 100%;
       background-color: #c20c0c;
+      border-radius: 8px 0 0 8px;
     }
     .progress-btn {
       position: absolute;

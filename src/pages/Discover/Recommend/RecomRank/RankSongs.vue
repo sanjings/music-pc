@@ -2,50 +2,58 @@
   <li class="rank-songs">
     <!-- 排行榜信息 -->
     <div class="top">
-      <router-link :to="{name: 'rank', params: { id: data.id }}" class="cover-wrap">
+      <router-link :to="{ name: 'rank', params: { id: data.id } }" class="cover-wrap">
         <img :src="data.coverImgUrl" alt="cover" class="cover" />
       </router-link>
       <div class="rank-info">
-        <router-link :to="{name: 'rank', params: { id: data.id }}" class="rank-name">
+        <router-link :to="{ name: 'rank', params: { id: data.id } }" class="rank-name">
           {{ data.name }}
         </router-link>
         <p class="controls">
-          <i class="iconfont icon-play-circle" />
+          <i class="iconfont icon-play-circle" @click="handleClickPlayAll(data.tracks)" />
           <i class="iconfont icon-add" />
         </p>
       </div>
     </div>
     <!-- 歌曲列表 -->
-    <ul class="song-list">
-      <template v-for='(item, index) of data.tracks.slice(0, 10)' :key="item.id">
-        <li :class="['song-item', {'stripe': index % 2 === 0}]">
-          <span :class="['song-index', {'top-index': index < 3}]" >{{ index + 1 }}</span>
+    <ul class="song-list" @click="handleClickPlay($event, data.tracks)">
+      <template v-for="(item, index) of data.tracks.slice(0, 10)" :key="item.id">
+        <li :class="['song-item', { stripe: index % 2 === 0 }]">
+          <span :class="['song-index', { 'top-index': index < 3 }]">{{ index + 1 }}</span>
           <span class="song-name ellipsis">{{ item.name }}</span>
+          <i class="iconfont icon-play-circle" :data-index="index" />
         </li>
       </template>
-      <router-link :to="{name: 'rank', params: { id: data.id }}" class="song-item show-all">
+      <router-link :to="{ name: 'rank', params: { id: data.id } }" class="song-item show-all">
         <span>查看全部</span>
       </router-link>
     </ul>
   </li>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { IRankData } from '/@/typings';
+import usePlay from '/hooks/usePlay';
 
 export default defineComponent({
   name: 'RankSongs',
   props: {
-    data: {
-      type: Object as PropType<IRankData>,
-      required: true
-    }
+    data: Object as PropType<IRankData>,
+
+  },
+  setup(props) {
+    const { handleClickPlayAll, handleClickPlay } = usePlay();
+
+    return {
+      handleClickPlayAll,
+      handleClickPlay
+    };
   }
-})
+});
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .rank-songs {
   flex: 1;
   background-color: #f6f6f6;
@@ -87,7 +95,7 @@ export default defineComponent({
             font-size: 26px;
           }
         }
-      } 
+      }
     }
   }
   .song-list {
@@ -111,7 +119,7 @@ export default defineComponent({
           }
         }
       }
-      .song-index{
+      .song-index {
         width: 35px;
         text-align: center;
         font-size: 16px;
@@ -123,6 +131,18 @@ export default defineComponent({
       .song-name {
         flex: 1;
         overflow: hidden;
+      }
+      .icon-play-circle {
+        display: none;
+        margin-left: 6px;
+        color: #888;
+        cursor: pointer;
+        &:hover {
+          color: #666;
+        }
+      }
+      &:hover .icon-play-circle {
+        display: inline-block;
       }
     }
   }

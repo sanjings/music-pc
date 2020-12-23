@@ -1,12 +1,14 @@
 <template>
   <div class="player-bar">
     <div class="player-inner w-def-container">
+      <!-- 播放控制 -->
       <div class="controls">
-        <i class="iconfont icon-previous" />
+        <i class="iconfont icon-previous" @click="handlePlayPrevSong" />
         <i v-if="!playingStatus" class="iconfont icon-play-circle" @click="togglePlayStatus(true)" />
         <i v-else class="iconfont icon-pause" @click="togglePlayStatus(false)" />
-        <i class="iconfont icon-next" />
+        <i class="iconfont icon-next" @click="handlePlayNextSong" />
       </div>
+      <!-- 歌曲信息 -->
       <div class="song">
         <div class="cover-wrap">
           <img v-if="currentSong" :src="currentSong.al.picUrl" alt="songCover" />
@@ -24,34 +26,41 @@
           </div>
         </div>
       </div>
+      <!-- 其他功能 -->
+      <div class="right">
+        <i class="iconfont icon-add" />
+        <i class="iconfont icon-share" />
+        <i class="iconfont icon-volume" />
+        <i class="iconfont icon-loop" />
+        <i class="iconfont icon-playlist">
+          <i class="play-list-count">{{ playList.length }}</i>
+        </i>
+      </div>
     </div>
-    <audio
+    <!-- 播放器 -->
+    <audio 
       ref="audioRef" 
-      :src='songUrl' 
-      :autoplay='true'
+      :src="songUrl" 
+      :autoplay="true" 
       @timeupdate="handleUpdateTime"
+      @ended="handlePlayEnded"
     />
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, ref, watch, toRefs, computed } from "vue";
+<script lang="ts">
+import { defineComponent, ref, watch, toRefs, computed } from 'vue';
 import { useStore } from 'vuex';
 import ProgressBar from './ProgressBar.vue';
 import { formatSongUrl, formatSingerName, formatPlayTime } from '/utils/format';
-import { 
-  SET_CURRENT_INDEX,
-  SET_CURRENT_SONG,
-  SET_PLAYING_STATUS,
-  SET_SHOW_PLAY_LIST 
-} from '/@/store/player/actionTypes';
+import { SET_CURRENT_INDEX, SET_CURRENT_SONG, SET_PLAYING_STATUS, SET_SHOW_PLAY_LIST } from '/@/store/player/actionTypes';
 
 export default defineComponent({
-  name: "Player",
+  name: 'Player',
   components: {
     ProgressBar
   },
-  setup () {
+  setup() {
     const store = useStore();
     const state = store.state.player;
     const audioRef = ref<HTMLAudioElement | null>(null);
@@ -61,21 +70,59 @@ export default defineComponent({
     const preSongId = ref<string>('');
 
     const percent = computed<number>(() => {
-      return isNaN(currentTime.value / duration.value) ? 0 : currentTime.value / duration.value
+      return isNaN(currentTime.value / duration.value) ? 0 : currentTime.value / duration.value;
     });
-    
+
+    /**
+     * 改变当前播放歌曲序号
+     */
+    const changeCurrentIndex = (index: number): void => {
+      const currentIndex: number = state.currentIndex;
+      if (index === currentIndex) return;
+      store.commit(SET_CURRENT_INDEX, index);
+    };
+
     /**
      * 切换播放状态
      */
     const togglePlayStatus = (status: boolean): void => {
-      store.commit(SET_PLAYING_STATUS, status)
+      store.commit(SET_PLAYING_STATUS, status);
     };
 
     /**
      * 切换播放列表显示
      */
     const toggleShowPlayList = (): void => {
-      store.commit(SET_SHOW_PLAY_LIST, !state.showPlayList)
+      store.commit(SET_SHOW_PLAY_LIST, !state.showPlayList);
+    };
+
+    /**
+     * 切换上一首歌曲
+     */
+    const handlePlayPrevSong = (): void => {
+      let index: number = state.currentIndex - 1;
+      if (index < 0) {
+        index = state.playList.length - 1;
+      }
+      changeCurrentIndex(index);
+    };
+
+    /**
+     * 切换下一首歌曲
+     */
+    const handlePlayNextSong = (): void => {
+      let index: number = state.currentIndex + 1;
+      if (index >= state.playList.length) {
+        index = 0;
+      }
+      changeCurrentIndex(index);
+    };
+
+    /**
+     * 当前歌曲播放完成
+     */
+    const handlePlayEnded = (): void => {
+      handlePlayNextSong();
     };
 
     /**
@@ -98,30 +145,34 @@ export default defineComponent({
     };
 
     /**
-     * 监听歌曲序号变化，获取歌曲信息
+     * 监听歌曲序号和播放列表变化，获取歌曲信息并播放
      */
-    watch(() => state.currentIndex, (curIndex: number) => {
-      if (
-        !state.playList.length || 
-        !state.playList[curIndex] || 
-        curIndex === -1 || 
-        state.playList[curIndex].id === preSongId) 
-      return;
+    watch(
+      () => ([state.currentIndex, state.playList]),
+      ([curIndex]) => {
+        if (!state.playList.length || !state.playList[curIndex] || curIndex === -1 || state.playList[curIndex].id === preSongId) return;
 
-      const currentSong = state.playList[curIndex];
-      store.commit(SET_CURRENT_SONG, state.playList[state.currentIndex]);
-      songUrl.value = formatSongUrl(currentSong.id);
-      currentTime.value = 0;
-      duration.value = currentSong.dt / 1000;
-    },{ immediate: true })
+        const currentSong = state.playList[curIndex];
+        store.commit(SET_CURRENT_SONG, state.playList[state.currentIndex]);
+        songUrl.value = formatSongUrl(currentSong.id);
+        preSongId.value = currentSong.id;
+        currentTime.value = 0;
+        duration.value = currentSong.dt / 1000;
+        togglePlayStatus(true);
+      },
+      { immediate: true }
+    );
 
     /**
      * 监听播放状态改变，播放或暂停音乐
      */
-    watch(() => state.playingStatus, (curStatus: boolean) => {
-      const audioDom = audioRef.value as HTMLAudioElement;
-      curStatus ? audioDom.play() : audioDom.pause()
-    });
+    watch(
+      () => state.playingStatus,
+      (curStatus: boolean) => {
+        const audioDom = audioRef.value as HTMLAudioElement;
+        curStatus ? audioDom.play() : audioDom.pause();
+      }
+    );
 
     return {
       ...toRefs(state),
@@ -134,21 +185,24 @@ export default defineComponent({
       percent,
       duration,
       handleUpdateTime,
-      handleChangePercent
-    }
+      handleChangePercent,
+      handlePlayNextSong,
+      handlePlayPrevSong,
+      handlePlayEnded
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .player-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 47px;
+  height: 50px;
   background-color: #343434;
-  box-shadow: 0 2px 10px rgba($color: #000, $alpha: .8);
+  box-shadow: 0 2px 10px rgba($color: #000, $alpha: 0.8);
   .player-inner {
     display: flex;
     align-items: center;
@@ -175,6 +229,7 @@ export default defineComponent({
       }
     }
     .song {
+      flex: 1;
       display: flex;
       font-size: 12px;
       .cover-wrap {
@@ -188,7 +243,6 @@ export default defineComponent({
         overflow: hidden;
       }
       .song-info {
-        width: 700px;
         .singer {
           margin-left: 15px;
           color: #9b9b9b;
@@ -203,6 +257,33 @@ export default defineComponent({
           .play-time {
             margin-left: 15px;
           }
+        }
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      .iconfont {
+        margin-left: 14px;
+        font-size: 20px;
+        color: #ccc;
+        cursor: pointer;
+        &.icon-playlist {
+          display: flex;
+          align-items: center;
+          .play-list-count {
+            display: inline-block;
+            width: 26px;
+            height: 18px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            background-color: #000;
+            border-radius: 0 8px 8px 0;
+          }
+        }
+        &:hover {
+          color: #fff;
         }
       }
     }

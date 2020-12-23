@@ -12,5 +12,6 @@ export default {
     '/requests/': resolve('./src/apis/requests'),
     '/typings/': resolve('./src/typings'),
     '/hooks/': resolve('./src/hooks'),
+    '/store/': resolve('./src/store')
   }
 }

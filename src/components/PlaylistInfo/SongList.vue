@@ -12,7 +12,7 @@
         </p>
       </template>
     </ModuleTitle>
-    <ul class="list-wrap">
+    <ul class="list-wrap" @click="handleClickPlay($event, listData)">
       <li class="list-header">
         <div class="rank"></div>
         <div class="title">标题</div>
@@ -26,7 +26,7 @@
             <div class="cover-wrap" v-if="index < 3">
               <img :src="item.al.picUrl + '?param=50y50'" alt="cover" class="cover" />
             </div>
-            <i class="iconfont icon-play-circle" />
+            <i class="iconfont icon-play-circle" :data-index="index" />
             <span class="item-name" >{{ item.name }}</span>
           </div>
           <div class="item-duration">{{ formatPlayTime(item.dt / 1000) }}</div>
@@ -42,6 +42,7 @@ import { defineComponent, PropType } from "vue";
 import { ISong } from "/@/typings";
 import { formatSingerName, formatPlayTime } from '/utils/format';
 import ModuleTitle from '/components/ModuleTitle/index.vue';
+import usePlay from '/hooks/usePlay';
 
 export default defineComponent({
   name: "SongList",
@@ -50,12 +51,15 @@ export default defineComponent({
   },
   props: {
     playCount: Number,
-    listData: Object as PropType<ISong[]>
+    listData: Object as PropType<ISong[]>,
   },
-  setup () {
+  setup (props) {
+    const { handleClickPlay } = usePlay();
+    
     return {
       formatSingerName,
-      formatPlayTime
+      formatPlayTime,
+      handleClickPlay
     }
   }
 });
@@ -141,12 +145,6 @@ export default defineComponent({
           cursor: pointer;
           &:hover {
             color: #666;
-          }
-        }
-        .item-name {
-          &:hover {
-            text-decoration: underline;
-            cursor: pointer;
           }
         }
       }
