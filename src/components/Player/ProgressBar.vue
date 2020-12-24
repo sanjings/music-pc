@@ -2,35 +2,31 @@
   <div class="progress-wrap">
     <div class="bar-inner" ref="barRef" @click="handleClick">
       <div class="progress" ref="progressRef"></div>
-      <span
-        ref="progressBtnRef"
-        class="progress-btn"
-        @mousedown="handleMouseDown"
-      ></span>
+      <span ref="progressBtnRef" class="progress-btn" @mousedown="handleMouseDown"></span>
     </div>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, ref, computed, onMounted, watch } from "vue";
+<script lang="ts">
+import { defineComponent, ref, computed, onMounted, watch } from 'vue';
 import { IMouseClickInfo } from './typing';
 
 const progressBtnWidth = 16; // 按钮宽度
 const barWidth = 493; // 进度条宽度
 
 export default defineComponent({
-  name: "ProgressBar",
+  name: 'ProgressBar',
   props: {
     percent: {
       type: Number,
-      default: 0,
-    },
+      default: 0
+    }
   },
   setup(props, ctx) {
     const barRef = ref<HTMLElement | null>(null);
     const progressRef = ref<HTMLElement | null>(null);
     const progressBtnRef = ref<HTMLElement | null>(null);
-    const clickInfo = ref<IMouseClickInfo>({initiated: false, startX: 0, left: 0});
+    const clickInfo = ref<IMouseClickInfo>({ initiated: false, startX: 0, left: 0 });
 
     watch(
       () => props.percent,
@@ -48,7 +44,7 @@ export default defineComponent({
      */
     const _offset = (offsetWidth: number): void => {
       const progressDom = progressRef.value as HTMLElement,
-            progressBtnDom = progressBtnRef.value as HTMLElement;
+        progressBtnDom = progressBtnRef.value as HTMLElement;
 
       if (offsetWidth < 0) {
         offsetWidth = 0;
@@ -65,19 +61,18 @@ export default defineComponent({
      */
     const _changePercent = () => {
       const progressDom = progressRef.value as HTMLElement,
-            curPercent = progressDom.clientWidth / (barWidth - progressBtnWidth);
-            
+        curPercent = progressDom.clientWidth / (barWidth - progressBtnWidth);
 
       ctx.emit('change', curPercent);
-    }
+    };
 
     const handleClick = (e: MouseEvent): void => {
       e.stopPropagation();
       const barDom = barRef.value as HTMLElement;
       const offsetLeft = barDom.offsetLeft;
-      const offsetWidth = e.pageX - offsetLeft - (progressBtnWidth / 2);
+      const offsetWidth = e.pageX - offsetLeft - progressBtnWidth / 2;
       _offset(offsetWidth);
-      _changePercent()
+      _changePercent();
     };
 
     const handleMouseDown = (e: MouseEvent): void => {
@@ -100,7 +95,7 @@ export default defineComponent({
       const scrollX = e.pageX - clickInfoObj.startX,
             offsetWidth = Math.min(Math.max(0, clickInfoObj.left + scrollX), barWidth);
 
-      _offset (offsetWidth);
+      _offset(offsetWidth);
     };
 
     const handleMouseUp = (e: MouseEvent): void => {
@@ -108,7 +103,7 @@ export default defineComponent({
         startX: Number(clickInfo.value.startX),
         left: Number(clickInfo.value.left),
         initiated: false
-      }
+      };
       _changePercent();
     };
 
@@ -119,11 +114,11 @@ export default defineComponent({
       handleClick,
       handleMouseDown
     };
-  },
+  }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .progress-wrap {
   width: 100%;
   user-select: none;
@@ -150,7 +145,7 @@ export default defineComponent({
       background-color: #eee;
       border-radius: 50%;
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         left: 0;
         right: 0;

@@ -1,5 +1,5 @@
 <template>
-  <div class="player-bar">
+  <div class="player-bar" v-if="currentSong && playList.length">
     <div class="player-inner w-def-container">
       <!-- 播放控制 -->
       <div class="controls">
@@ -32,18 +32,27 @@
         <i class="iconfont icon-share" />
         <i class="iconfont icon-volume" />
         <i class="iconfont icon-loop" />
-        <i class="iconfont icon-playlist">
+        <i class="iconfont icon-playlist" @click="toggleShowPlayList">
           <i class="play-list-count">{{ playList.length }}</i>
         </i>
       </div>
+      <!-- 子菜单面板 -->
+      <PlayerMenu
+        :songName="currentSong.name"
+        :playList="playList"
+        :show="showPlayList"
+        :currentIndex="currentIndex"
+        :currentLyric="currentLyric"
+        :currentLineNum="currentLineNum"
+      />
     </div>
     <!-- 播放器 -->
     <audio 
       ref="audioRef" 
       :src="songUrl" 
       :autoplay="true" 
-      @timeupdate="handleUpdateTime"
-      @ended="handlePlayEnded"
+      @timeupdate="handleUpdateTime" 
+      @ended="handlePlayEnded" 
     />
   </div>
 </template>
@@ -52,13 +61,18 @@
 import { defineComponent, ref, watch, toRefs, computed } from 'vue';
 import { useStore } from 'vuex';
 import ProgressBar from './ProgressBar.vue';
+import PlayerMenu from './Menu.vue';
 import { formatSongUrl, formatSingerName, formatPlayTime } from '/utils/format';
 import { SET_CURRENT_INDEX, SET_CURRENT_SONG, SET_PLAYING_STATUS, SET_SHOW_PLAY_LIST } from '/@/store/player/actionTypes';
+import { getLyricRequest } from '/requests/song';
+import LyricParser from '/plugins/LyricParser';
+import { IHandler } from '/@/plugins/lyricParser';
 
 export default defineComponent({
   name: 'Player',
   components: {
-    ProgressBar
+    ProgressBar,
+    PlayerMenu
   },
   setup() {
     const store = useStore();
@@ -68,10 +82,32 @@ export default defineComponent({
     const currentTime = ref<number>(0);
     const duration = ref<number>(0);
     const preSongId = ref<string>('');
+    const currentLyric = ref<LyricParser | null>(null);
+    const currentLineNum = ref<number>(0);
 
     const percent = computed<number>(() => {
       return isNaN(currentTime.value / duration.value) ? 0 : currentTime.value / duration.value;
     });
+
+    const handleLyric: IHandler = ({ lineNum, txt }) => {
+      if (!currentLyric.value) return;
+      currentLineNum.value = lineNum;
+    };
+
+    const getLyric = async (id: number) => {
+      const {
+        lrc: { lyric }
+      } = await getLyricRequest(id);
+
+      if (!lyric) {
+        currentLyric.value = null;
+        return;
+      }
+      currentLyric.value = new LyricParser(lyric, handleLyric);
+      currentLyric.value.play();
+      currentLineNum.value = 0;
+      currentLyric.value.seek(0);
+    };
 
     /**
      * 改变当前播放歌曲序号
@@ -87,6 +123,9 @@ export default defineComponent({
      */
     const togglePlayStatus = (status: boolean): void => {
       store.commit(SET_PLAYING_STATUS, status);
+      if (currentLyric.value) {
+        currentLyric.value.togglePlay(currentTime.value * 1000);
+      }
     };
 
     /**
@@ -139,23 +178,26 @@ export default defineComponent({
     const handleChangePercent = (per: number): void => {
       const audioDom = audioRef.value as HTMLAudioElement;
 
-      currentTime.value = per * duration.value;
-      audioDom.currentTime = currentTime.value;
+      const newTime = currentTime.value = per * duration.value;
+      audioDom.currentTime = newTime;
       !state.playingStatus && togglePlayStatus(true);
+      if (currentLyric.value) {
+        currentLyric.value.seek(newTime * 1000);
+      }
     };
 
     /**
      * 监听歌曲序号和播放列表变化，获取歌曲信息并播放
      */
     watch(
-      () => ([state.currentIndex, state.playList]),
+      () => [state.currentIndex, state.playList],
       ([curIndex]) => {
         if (!state.playList.length || !state.playList[curIndex] || curIndex === -1 || state.playList[curIndex].id === preSongId) return;
-
         const currentSong = state.playList[curIndex];
         store.commit(SET_CURRENT_SONG, state.playList[state.currentIndex]);
         songUrl.value = formatSongUrl(currentSong.id);
         preSongId.value = currentSong.id;
+        getLyric(currentSong.id);
         currentTime.value = 0;
         duration.value = currentSong.dt / 1000;
         togglePlayStatus(true);
@@ -170,6 +212,7 @@ export default defineComponent({
       () => state.playingStatus,
       (curStatus: boolean) => {
         const audioDom = audioRef.value as HTMLAudioElement;
+        if (!audioDom) return ;
         curStatus ? audioDom.play() : audioDom.pause();
       }
     );
@@ -179,9 +222,12 @@ export default defineComponent({
       audioRef,
       songUrl,
       togglePlayStatus,
+      toggleShowPlayList,
       formatSingerName,
       formatPlayTime,
       currentTime,
+      currentLyric,
+      currentLineNum,
       percent,
       duration,
       handleUpdateTime,
@@ -201,7 +247,7 @@ export default defineComponent({
   left: 0;
   width: 100%;
   height: 50px;
-  background-color: #343434;
+  background-color: rgba($color: #000000, $alpha: 0.82);
   box-shadow: 0 2px 10px rgba($color: #000, $alpha: 0.8);
   .player-inner {
     display: flex;
@@ -239,7 +285,7 @@ export default defineComponent({
         background: url('../../assets/images/music.png') no-repeat;
         background-size: 100%;
         border: 1px solid #222;
-        border-radius: 2px;
+        border-radius: 4px;
         overflow: hidden;
       }
       .song-info {
@@ -263,6 +309,7 @@ export default defineComponent({
     .right {
       display: flex;
       align-items: center;
+      padding-right: 10px;
       .iconfont {
         margin-left: 14px;
         font-size: 20px;
@@ -273,7 +320,7 @@ export default defineComponent({
           align-items: center;
           .play-list-count {
             display: inline-block;
-            width: 26px;
+            width: 30px;
             height: 18px;
             text-align: center;
             font-size: 12px;

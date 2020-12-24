@@ -16,12 +16,11 @@ const usePlay = () => {
   /**
    * 播放指定歌曲
    */
-  const handleClickPlay = (e: MouseEvent, playList: ISong[]): void => {
+  const handleClickPlay = (e: MouseEvent, playList?: ISong[]): void => {
     const target = e.target as HTMLElement;
-    if (target.className.includes('icon-play-circle')) {
-      const index = target.dataset.index;
-      if (index === undefined) return;
-      store.commit(SET_PLAY_LIST, deepClone(playList));
+    const index = target.dataset.index;
+    if (index !== undefined) {
+      playList && store.commit(SET_PLAY_LIST, deepClone(playList));
       store.commit(SET_CURRENT_INDEX, index);
     }
   };

@@ -22,6 +22,9 @@
       "/utils/*": [
         "src/utils/*"
       ],
+      "/plugins/*": [
+        "src/plugins/*"
+      ],
       "/requests/*": [
         "src/apis/requests/*"
       ],

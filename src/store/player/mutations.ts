@@ -14,7 +14,7 @@ export default {
     state.playingStatus = payload;
   },
   [SET_CURRENT_INDEX] (state: IState, payload: number) {
-    state.currentIndex = payload;
+    state.currentIndex = Number(payload);
   },
   [SET_CURRENT_SONG] (state: IState, payload: ISong) {
     state.currentSong = payload;

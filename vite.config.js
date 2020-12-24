@@ -9,6 +9,7 @@ export default {
     '/components/': resolve('./src/components'),
     '/assets/': resolve('./src/assets'),
     '/utils/': resolve('./src/utils'),
+    '/plugins/': resolve('./src/plugins'),
     '/requests/': resolve('./src/apis/requests'),
     '/typings/': resolve('./src/typings'),
     '/hooks/': resolve('./src/hooks'),
