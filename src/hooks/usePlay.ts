@@ -1,6 +1,6 @@
 import { ISong } from '/typings/index';
 import { useStore } from 'vuex';
-import { SET_CURRENT_INDEX, SET_PLAY_LIST } from '/store/player/actionTypes';
+import { SET_CURRENT_INDEX, SET_PLAY_LIST, DELETE_SONG } from '/store/player/actionTypes';
 import { deepClone } from '/utils/tool';
 
 const usePlay = () => {
@@ -18,16 +18,28 @@ const usePlay = () => {
    */
   const handleClickPlay = (e: MouseEvent, playList?: ISong[]): void => {
     const target = e.target as HTMLElement;
-    const index = target.dataset.index;
+    const index = target.dataset.playIndex;
     if (index !== undefined) {
       playList && store.commit(SET_PLAY_LIST, deepClone(playList));
-      store.commit(SET_CURRENT_INDEX, index);
+      store.commit(SET_CURRENT_INDEX, Number(index));
+    }
+  };
+
+  /**
+   * 播放指定歌曲
+   */
+  const handleClickDelete = (e: MouseEvent): void => {
+    const target = e.target as HTMLElement;
+    const index = target.dataset.deleteIndex;
+    if (index !== undefined) {
+      store.commit(DELETE_SONG, Number(index));
     }
   };
 
   return {
     handleClickPlayAll,
-    handleClickPlay
+    handleClickPlay,
+    handleClickDelete
   };
 }
 

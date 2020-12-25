@@ -1,14 +1,14 @@
 <template>
   <div class="play-list">
     <h2 class="title">播放列表({{ listData.length }})</h2>
-    <ul class="list-wrap" @click="handleClickPlay($event, listData)">
+    <ul class="list-wrap" @click="handleClickPlay($event, listData), handleClickDelete($event)">
       <template v-for="(item, index) of listData" :key="item.id">
         <li :class="['song-item', {'active': Number(currentIndex) === index}]">
           <i class="iconfont icon-play" />
           <span class="song-name ellipsis">{{ item.name }}</span>
           <div class="controls">
-            <i class="iconfont icon-delete" />
-            <i class="iconfont icon-play-circle" :data-index="index" />
+            <i class="iconfont icon-delete" :data-delete-index="index" />
+            <i class="iconfont icon-play-circle" :data-play-index="index" />
           </div>
           <div class="song-info">
             <span class="item-singer ellipsis">{{ formatSingerName(item.ar) }}</span>
@@ -34,12 +34,13 @@ export default defineComponent({
     currentIndex: Number
   },
   setup () {
-    const { handleClickPlay } = usePlay();
+    const { handleClickPlay, handleClickDelete } = usePlay();
 
     return {
       formatPlayTime,
       formatSingerName,
-      handleClickPlay
+      handleClickPlay,
+      handleClickDelete
     }
   }
 });

@@ -26,7 +26,7 @@
             <div class="cover-wrap" v-if="index < 3">
               <img :src="item.al.picUrl + '?param=50y50'" alt="cover" class="cover" />
             </div>
-            <i class="iconfont icon-play-circle" :data-index="index" />
+            <i class="iconfont icon-play-circle" :data-play-index="index" />
             <span class="item-name" >{{ item.name }}</span>
           </div>
           <div class="item-duration">{{ formatPlayTime(item.dt / 1000) }}</div>

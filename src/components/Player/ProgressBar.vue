@@ -11,8 +11,8 @@
 import { defineComponent, ref, computed, onMounted, watch } from 'vue';
 import { IMouseClickInfo } from './typing';
 
-const progressBtnWidth = 16; // 按钮宽度
-const barWidth = 493; // 进度条宽度
+const progressBtnWidth: number = 16; // 按钮宽度
+const barWidth: number = 493; // 进度条宽度
 
 export default defineComponent({
   name: 'ProgressBar',
@@ -28,9 +28,12 @@ export default defineComponent({
     const progressBtnRef = ref<HTMLElement | null>(null);
     const clickInfo = ref<IMouseClickInfo>({ initiated: false, startX: 0, left: 0 });
 
+    /**
+     * 监听进度，设置进度条
+     */
     watch(
-      () => props.percent,
-      () => {
+      (): number => props.percent,
+      (): void => {
         if (props.percent >= 0 && props.percent <= 1 && !clickInfo.value.initiated) {
           const offsetWidth = (barWidth - progressBtnWidth) * props.percent;
           _offset(offsetWidth);
@@ -59,13 +62,16 @@ export default defineComponent({
     /**
      * 根据点击时的偏移值，计算进度百分比，并通知父组件change事件
      */
-    const _changePercent = () => {
+    const _changePercent = (): void => {
       const progressDom = progressRef.value as HTMLElement,
         curPercent = progressDom.clientWidth / (barWidth - progressBtnWidth);
 
       ctx.emit('change', curPercent);
     };
 
+    /**
+     * 点击进度条
+     */
     const handleClick = (e: MouseEvent): void => {
       e.stopPropagation();
       const barDom = barRef.value as HTMLElement;

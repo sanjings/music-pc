@@ -9,7 +9,7 @@
         <li :class="['song-item', { stripe: index % 2 === 0 }]">
           <div class="item-index">{{ index + 1 }}</div>
           <div class="item-title ellipsis">
-            <i class="iconfont icon-play-circle" :data-index="index" />
+            <i class="iconfont icon-play-circle" :data-play-index="index" />
             <span class="song-name">{{ item.name }}</span>
           </div>
           <div class="item-duration">{{ formatPlayTime(item.dt / 1000) }}</div>

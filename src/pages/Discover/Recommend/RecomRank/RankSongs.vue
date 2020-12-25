@@ -21,7 +21,7 @@
         <li :class="['song-item', { stripe: index % 2 === 0 }]">
           <span :class="['song-index', { 'top-index': index < 3 }]">{{ index + 1 }}</span>
           <span class="song-name ellipsis">{{ item.name }}</span>
-          <i class="iconfont icon-play-circle" :data-index="index" />
+          <i class="iconfont icon-play-circle" :data-play-index="index" />
         </li>
       </template>
       <router-link :to="{ name: 'rank', params: { id: data.id } }" class="song-item show-all">

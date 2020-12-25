@@ -65,8 +65,7 @@ import PlayerMenu from './Menu.vue';
 import { formatSongUrl, formatSingerName, formatPlayTime } from '/utils/format';
 import { SET_CURRENT_INDEX, SET_CURRENT_SONG, SET_PLAYING_STATUS, SET_SHOW_PLAY_LIST } from '/@/store/player/actionTypes';
 import { getLyricRequest } from '/requests/song';
-import LyricParser from '/plugins/LyricParser';
-import { IHandler } from '/@/plugins/lyricParser';
+import LyricParser, { IHandler } from '/plugins/LyricParser';
 
 export default defineComponent({
   name: 'Player',
@@ -192,7 +191,7 @@ export default defineComponent({
     watch(
       () => [state.currentIndex, state.playList],
       ([curIndex]) => {
-        if (!state.playList.length || !state.playList[curIndex] || curIndex === -1 || state.playList[curIndex].id === preSongId) return;
+        if (!state.playList.length || !state.playList[curIndex] || curIndex === -1 || state.playList[curIndex].id === preSongId.value) return;
         const currentSong = state.playList[curIndex];
         store.commit(SET_CURRENT_SONG, state.playList[state.currentIndex]);
         songUrl.value = formatSongUrl(currentSong.id);

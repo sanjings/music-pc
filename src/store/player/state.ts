@@ -1,6 +1,6 @@
 import { ISong } from '/typings/index';
 
-export interface IState {
+export interface IPlayerState {
   playingStatus: boolean;
   currentIndex: number;
   currentSong: ISong | null;
@@ -8,7 +8,7 @@ export interface IState {
   showPlayList: boolean;
 }
 
-const state: IState = {
+const state: IPlayerState = {
   playingStatus: false,
   currentIndex: -1,
   currentSong: null,
