@@ -10,19 +10,19 @@
           <i class="iconfont icon-play-circle" />
           <span>播放</span>
         </button>
-        <button class="btn">
+        <button class="btn" @click="toastTip">
           <i class="iconfont icon-add" />
           <span>({{ data.subscribedCount }})</span>
         </button>
-        <button class="btn">
+        <button class="btn" @click="toastTip">
           <i class="iconfont icon-share" />
           <span>({{ data.shareCount }})</span>
         </button>
-        <button class="btn">
+        <button class="btn" @click="toastTip">
           <i class="iconfont icon-download" />
           <span>下载</span>
         </button>
-        <button class="btn">
+        <button class="btn" @click="toastTip">
           <i class="iconfont icon-comment" />
           <span>({{ data.commentCount }})</span>
         </button>
@@ -35,18 +35,29 @@
 import { defineComponent, PropType } from 'vue';
 import { IRankData } from '/@/typings';
 import usePlay from '/hooks/usePlay';
+import createToast from '/components/Toast/index';
 
 export default defineComponent({
   name: 'Top',
   props: {
-    data: Object as PropType<IRankData>,
-
+    data: Object as PropType<IRankData>
   },
   setup(props) {
     const { handleClickPlayAll } = usePlay();
 
+    /**
+     * 暂未开发提示
+     */
+    const toastTip = (): void => {
+      createToast({
+        message: '暂未开发',
+        duration: 2000
+      })
+    };
+
     return {
-      handleClickPlayAll
+      handleClickPlayAll,
+      toastTip
     };
   }
 });

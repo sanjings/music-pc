@@ -14,6 +14,6 @@ const state: IPlayerState = {
   currentSong: null,
   playList: [],
   showPlayList: false
-}
+};
 
 export default state;

@@ -23,7 +23,12 @@ const deepClone = <T>(data: T): T => {
   return JSON.parse(JSON.stringify(data));
 };
 
-export { 
-  debounce,
-  deepClone
+/**
+ * 组装歌曲的url
+ * @param id 歌曲Id
+ */
+const completeSongUrl = (id: number): string => {
+  return `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
 };
+
+export { debounce, deepClone, completeSongUrl };

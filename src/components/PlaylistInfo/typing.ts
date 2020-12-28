@@ -1,4 +1,4 @@
-import { IUser } from "/@/typings";
+import { IUser } from '/@/typings';
 
 export interface IComment {
   liked: boolean;
@@ -6,5 +6,5 @@ export interface IComment {
   content: string;
   time: number;
   user: IUser;
-  beReplied: { content: string; user: IUser }
+  beReplied: { content: string; user: IUser };
 }

@@ -1,65 +1,50 @@
 <template>
   <div class="pagination-wrap" v-if="total">
-    <button
-      :class="['prev-btn', { disabled: currentPage === 1 }]"
-      @click="movePrev"
-    >
-      上一页
-    </button>
+    <button :class="['prev-btn', { disabled: currentPage === 1 }]" @click="movePrev">上一页</button>
     <ul class="page-list" @click="handleClickPage">
       <li :class="['page-item', { active: currentPage === 1 }]" :data-num="1">1</li>
       <span v-if="countList.length && countList[0] !== 2" class="dots">...</span>
       <template v-for="num of countList" :key="num">
-        <li
-          :class="['page-item', { active: num === currentPage }]"
-          :data-num="num"
-        >
+        <li :class="['page-item', { active: num === currentPage }]" :data-num="num">
           {{ num }}
         </li>
       </template>
-      <span v-if="countList.length && countList[countList.length - 1] !== allCount - 1" class="dots"
-        >...</span
-      >
-      <li
-        v-if="allCount > 1"
-        :class="['page-item', { active: currentPage === allCount }]"
+      <span v-if="countList.length && countList[countList.length - 1] !== allCount - 1" class="dots">...</span>
+      <li 
+        v-if="allCount > 1" 
+        :class="['page-item', { active: currentPage === allCount }]" 
         :data-num="allCount"
       >
         {{ allCount }}
       </li>
     </ul>
-    <button
-      :class="['next-btn', { disabled: currentPage === allCount }]"
-      @click="moveNext"
-    >
-      下一页
-    </button>
+    <button :class="['next-btn', { disabled: currentPage === allCount }]" @click="moveNext">下一页</button>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, computed, watch, ref } from "vue";
-import { debounce } from "/utils/tool";
+<script lang="ts">
+import { defineComponent, computed, watch, ref } from 'vue';
+import { debounce } from '/utils/tool';
 
 export default defineComponent({
-  name: "Pagination",
+  name: 'Pagination',
   props: {
     total: {
       type: Number,
-      default: 0,
+      default: 0
     },
     pageSize: {
       type: Number,
-      default: 35,
+      default: 35
     },
     currentPage: {
       type: Number,
-      default: 1,
+      default: 1
     },
     maxCount: {
       type: Number,
-      default: 9,
-    },
+      default: 9
+    }
   },
   setup(props, ctx) {
     const countList = ref<number[]>([]);
@@ -67,9 +52,7 @@ export default defineComponent({
     /**
      * 根据总数和pageSize计算总的分页数
      */
-    const allCount = computed((): number =>
-      Math.ceil(props.total / props.pageSize)
-    );
+    const allCount = computed((): number => Math.ceil(props.total / props.pageSize));
 
     /**
      * 初始化分页列表
@@ -96,9 +79,9 @@ export default defineComponent({
      */
     const handleClickPage = (e: MouseEvent): void => {
       const target = e.target as HTMLElement;
-      if (target.className === "page-item") {
+      if (target.className === 'page-item') {
         const curNum: number = Number(target.dataset.num);
-        ctx.emit("pageChange", curNum);
+        ctx.emit('pageChange', curNum);
         changeCountList(curNum);
       }
     };
@@ -109,7 +92,7 @@ export default defineComponent({
     const movePrev = debounce((): void => {
       if (props.currentPage !== 1) {
         const curNum: number = props.currentPage - 1;
-        ctx.emit("pageChange", curNum);
+        ctx.emit('pageChange', curNum);
         changeCountList(curNum);
       }
     }, 200);
@@ -120,7 +103,7 @@ export default defineComponent({
     const moveNext = debounce((): void => {
       if (props.currentPage !== allCount.value) {
         const curNum: number = props.currentPage + 1;
-        ctx.emit("pageChange", curNum);
+        ctx.emit('pageChange', curNum);
         changeCountList(curNum);
       }
     }, 200);
@@ -177,7 +160,7 @@ export default defineComponent({
         props.total && initCountList();
       },
       {
-        immediate: true,
+        immediate: true
       }
     );
 
@@ -186,13 +169,13 @@ export default defineComponent({
       countList,
       handleClickPage,
       movePrev,
-      moveNext,
+      moveNext
     };
-  },
+  }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .pagination-wrap {
   display: inline-block;
   height: 24px;

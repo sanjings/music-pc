@@ -10,18 +10,18 @@
   </ul>
 </template>
 
-<script lang='ts'>
-import { defineComponent } from "vue";
+<script lang="ts">
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "HeaderNav",
+  name: 'HeaderNav',
   props: {
     listData: Array
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .nav-list {
   display: flex;
   align-items: center;
@@ -40,12 +40,12 @@ export default defineComponent({
         background-color: #000;
         color: #fff;
       }
-      &.router-link-active{
+      &.router-link-active {
         background-color: #000;
         color: #fff;
       }
     }
-    .arrow{
+    .arrow {
       position: absolute;
       left: 50%;
       bottom: 0;

@@ -2,12 +2,12 @@
   <div class="playlist-detail w-def-container">
     <section class="left">
       <PlaylistInfo
-      :detailData="detailData"
-      :commentList="commentList"
-      :currentPage="currentPage"
-      :pageSize="queryParams.limit"
-      :handleChangePage="handleChangePage"
-    />
+        :detailData="detailData"
+        :commentList="commentList"
+        :currentPage="currentPage"
+        :pageSize="queryParams.limit"
+        :handleChangePage="handleChangePage"
+      />
     </section>
     <section class="right">
       <!-- 相关歌单推荐 -->
@@ -16,17 +16,17 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, reactive, onMounted, computed, toRefs, watch } from "vue";
-import { useRoute } from "vue-router";
-import PlaylistInfo from "/components/PlaylistInfo/index.vue";
-import RelatedPlaylist from "./RelatedPlaylist/index.vue";
-import { getPlaylistDetailRequest, getRelatedPlaylistRequest } from "/requests/playlist";
-import { getPlaylistCommentRequest } from "/requests/comment";
-import { IState, IQueryParams } from "./typing";
+<script lang="ts">
+import { defineComponent, reactive, onMounted, computed, toRefs, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import PlaylistInfo from '/components/PlaylistInfo/index.vue';
+import RelatedPlaylist from './RelatedPlaylist/index.vue';
+import { getPlaylistDetailRequest, getRelatedPlaylistRequest } from '/requests/playlist';
+import { getPlaylistCommentRequest } from '/requests/comment';
+import { IState, IQueryParams } from './typing';
 
 export default defineComponent({
-  name: "PlaylistDetail",
+  name: 'PlaylistDetail',
   components: {
     PlaylistInfo,
     RelatedPlaylist
@@ -38,7 +38,7 @@ export default defineComponent({
       queryParams: {
         id: 0,
         limit: 20,
-        offset: 0,
+        offset: 0
       },
       detailData: null,
       commentList: [],
@@ -59,7 +59,7 @@ export default defineComponent({
      */
     const init = (): void => {
       const routeParams = route.params;
-      const id = state.queryParams.id = Number(routeParams.id) || 19723756;
+      const id = (state.queryParams.id = Number(routeParams.id) || 19723756);
       state.queryParams.offset = 0;
       getPlaylistDetail(id);
       getRelatedPlaylist(id);
@@ -103,21 +103,21 @@ export default defineComponent({
      */
     watch(
       () => route.params.id,
-      (oldVal, newVal) => {
+      (oldVal, newVal): void => {
         init();
       }
-    )
+    );
 
     return {
       ...toRefs(state),
       currentPage,
-      handleChangePage,
+      handleChangePage
     };
-  },
+  }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .playlist-detail {
   display: flex;
   background-color: #fff;

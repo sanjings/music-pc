@@ -11,33 +11,33 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent } from "vue";
-import { footerImages } from "/@/apis/data";
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { footerImages } from '/@/apis/data';
 
 export default defineComponent({
-  name: "Enter",
-  setup () {
+  name: 'Enter',
+  setup() {
     return {
       footerImages
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
-.enter{
+<style lang="scss" scoped>
+.enter {
   padding-top: 17px;
-  .images{
+  .images {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 450px;
-    .link-item{
+    .link-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      .image-link{
+      .image-link {
         display: block;
         width: 50px;
         height: 45px;
@@ -54,14 +54,14 @@ export default defineComponent({
       &:nth-child(3) .image-link {
         background-position: 2px 0;
       }
-      &:nth-child(4) .image-link{
+      &:nth-child(4) .image-link {
         background-position: -62px -50px;
       }
-      &:nth-child(5) .image-link{
+      &:nth-child(5) .image-link {
         background-position: 2px -101px;
       }
     }
-    .item-title{
+    .item-title {
       margin-top: 5px;
       color: #999;
     }

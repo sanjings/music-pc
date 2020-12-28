@@ -5,13 +5,9 @@
     </h2>
     <div class="list-wrap">
       <template v-for="item of listData" :key="item.id">
-        <router-link class="playlist-item" :to="{name: 'playlistDetail', params: { id: item.id }}">
+        <router-link class="playlist-item" :to="{ name: 'playlistDetail', params: { id: item.id } }">
           <div class="cover-wrap">
-            <img
-              :src="item.coverImgUrl + '?param=62y62'"
-              class="cover"
-              alt="singer"
-            />
+            <img :src="item.coverImgUrl + '?param=62y62'" class="cover" alt="singer" />
           </div>
           <div class="info">
             <p class="name ellipsis">
@@ -25,22 +21,22 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { IPlayData } from "/@/typings";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { IPlayData } from '/@/typings';
 
 export default defineComponent({
-  name: "RelatedPlaylist",
+  name: 'RelatedPlaylist',
   props: {
     listData: {
       type: Array as PropType<IPlayData[]>,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .related-playlist {
   padding: 20px;
   font-size: 12px;

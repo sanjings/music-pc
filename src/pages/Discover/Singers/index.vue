@@ -3,30 +3,30 @@
     <section class="left">
       <!-- 歌手类型 -->
       <Categories
-        :curField="{type: queryParams.type, area: queryParams.area}" 
-        :listData='singerCategories'
-        @onClick='handleChangeCat'
+        :curField="{ type: queryParams.type, area: queryParams.area }"
+        :listData="singerCategories"
+        @onClick="handleChangeCat"
       />
     </section>
     <section class="right">
       <!-- 标题 -->
-      <ModuleTitle :title='curTitle' size='large' />
+      <ModuleTitle :title="curTitle" size="large" />
       <!-- 首字母筛选 -->
       <template v-if="queryParams.type !== 'RECOM'">
         <Alpha 
-          :listData='alphaTypes' 
-          :curValue='queryParams.initial'
-          @onClick='handleChangeAlpha'
+          :listData="alphaTypes" 
+          :curValue="queryParams.initial" 
+          @onClick="handleChangeAlpha"
         />
       </template>
       <!-- 歌手列表 -->
-      <SingerList :listData='singerList' />
+      <SingerList :listData="singerList" />
     </section>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, reactive, toRefs, onMounted } from "vue";
+<script lang="ts">
+import { defineComponent, reactive, toRefs, onMounted } from 'vue';
 import { getSingerListRequest, getRecomSingersRequest } from '/requests/singer';
 import { singerCategories, alphaTypes } from '/@/apis/data';
 import Categories from './Categories/index.vue';
@@ -34,17 +34,17 @@ import Alpha from './Alpha/index.vue';
 import ModuleTitle from '/components/ModuleTitle/index.vue';
 import SingerList from './List/index.vue';
 import { IState } from './typing';
-import { IRankData } from "/@/typings";
+import { IRankData } from '/@/typings';
 
 export default defineComponent({
-  name: "Singers",
+  name: 'Singers',
   components: {
     Categories,
     Alpha,
     ModuleTitle,
     SingerList
   },
-  setup () {
+  setup() {
     const state = reactive<IState>({
       curTitle: '入驻歌手',
       queryParams: {
@@ -79,9 +79,7 @@ export default defineComponent({
     /**
      * 改变歌手类型
      */
-    const handleChangeCat = (
-      params: { type: number | string; area: number; title: string }
-    ): void => {
+    const handleChangeCat = (params: { type: number | string; area: number; title: string }): void => {
       const { type, area, title } = params;
       state.queryParams.type = type;
       state.queryParams.area = area;
@@ -108,12 +106,12 @@ export default defineComponent({
       alphaTypes,
       handleChangeCat,
       handleChangeAlpha
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .singers-wrap {
   display: flex;
   background-color: #fff;

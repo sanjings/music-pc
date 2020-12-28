@@ -1,6 +1,6 @@
 <template>
   <div class="album-wrap w-def-container">
-    <ModuleTitle title='热门新碟' size='large' />
+    <ModuleTitle title="热门新碟" size="large" />
     <!-- 热门新碟列表 -->
     <ul class="hot-album-list">
       <template v-for="item of hotAlbumList" :key="item.id">
@@ -10,15 +10,11 @@
       </template>
     </ul>
     <div class="all-album-wrap">
-      <ModuleTitle title='全部新碟' size='large'>
-        <Tab
-          :curValue='queryParams.area' 
-          :listData='areaList' 
-          @onClick='handleChangeTab' 
-        />
+      <ModuleTitle title="全部新碟" size="large">
+        <Tab :curValue="queryParams.area" :listData="areaList" @onClick="handleChangeTab" />
       </ModuleTitle>
       <!-- 分类新碟列表 -->
-      <ul class="all-album-list" ref='listRef'>
+      <ul class="all-album-list" ref="listRef">
         <template v-for="item of allAlbumList" :key="item.id">
           <li class="list-item">
             <AlbumCover :data="item" />
@@ -28,29 +24,29 @@
       <!-- 分页条 -->
       <div class="pagination">
         <Pagination 
-          :page-size='queryParams.limit'
-          :total='listTotal'
-          :current-page='currentPage'
-          @pageChange='handleChangePage'
+          :page-size="queryParams.limit" 
+          :total="listTotal" 
+          :current-page="currentPage" 
+          @pageChange="handleChangePage"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, reactive, toRefs, onMounted, computed } from "vue";
-import AlbumCover from "/components/AlbumCover/index.vue";
+<script lang="ts">
+import { defineComponent, reactive, toRefs, onMounted, computed } from 'vue';
+import AlbumCover from '/components/AlbumCover/index.vue';
 import ModuleTitle from '/components/ModuleTitle/index.vue';
 import Tab from '/components/Tab/index.vue';
 import Pagination from '/components/Pagination/index.vue';
-import { getHotAlbumRequest, getNewAlbumListRequest } from "/requests/album";
-import { areaList } from "/@/apis/data";
-import { AreaType } from "/@/typings/localData";
-import { IState } from "./typing";
+import { getHotAlbumRequest, getNewAlbumListRequest } from '/requests/album';
+import { areaList } from '/@/apis/data';
+import { AreaType } from '/@/typings/localData';
+import { IState } from './typing';
 
 export default defineComponent({
-  name: "Album",
+  name: 'Album',
   components: {
     AlbumCover,
     ModuleTitle,
@@ -69,10 +65,10 @@ export default defineComponent({
       listTotal: 0 // 跟单列表总数
     });
 
-     /**
+    /**
      * 计算当前页码
      */
-    const currentPage = computed((): number => (state.queryParams.offset / state.queryParams.limit) + 1);
+    const currentPage = computed((): number => state.queryParams.offset / state.queryParams.limit + 1);
 
     onMounted((): void => {
       getHotAlbumList();
@@ -103,7 +99,7 @@ export default defineComponent({
       state.queryParams.area = value;
       state.queryParams.offset = 0;
       getAlbumList();
-    }
+    };
 
     /**
      * 切换分页
@@ -111,7 +107,7 @@ export default defineComponent({
     const handleChangePage = (value: number): void => {
       state.queryParams.offset = (value - 1) * state.queryParams.limit;
       getAlbumList();
-    }
+    };
 
     return {
       ...toRefs(state),
@@ -124,7 +120,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .album-wrap {
   padding: 40px;
   background-color: #fff;

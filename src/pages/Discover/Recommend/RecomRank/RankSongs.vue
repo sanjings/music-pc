@@ -39,8 +39,7 @@ import usePlay from '/hooks/usePlay';
 export default defineComponent({
   name: 'RankSongs',
   props: {
-    data: Object as PropType<IRankData>,
-
+    data: Object as PropType<IRankData>
   },
   setup(props) {
     const { handleClickPlayAll, handleClickPlay } = usePlay();

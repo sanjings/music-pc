@@ -5,11 +5,11 @@
         <h2 class="categories-title">{{ item.title }}</h2>
         <ul class="sub-list">
           <template v-for="sub of item.subList" :key="sub.id">
-            <li 
+            <li
               :class="['sub-item', { active: curField.type === sub.type && curField.area === item.area }]"
-              :data-type='sub.type'
-              :data-area='item.area'
-              :data-title='sub.title'
+              :data-type="sub.type"
+              :data-area="item.area"
+              :data-title="sub.title"
             >
               {{ sub.title }}
             </li>
@@ -20,12 +20,12 @@
   </ul>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { ISingerCategories } from "/@/typings/localData";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { ISingerCategories } from '/@/typings/localData';
 
 export default defineComponent({
-  name: "Categories",
+  name: 'Categories',
   props: {
     listData: {
       type: Array as PropType<ISingerCategories[]>,
@@ -36,7 +36,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, ctx) {
+  setup(props, ctx) {
     /**
      * 点击事件
      */
@@ -48,19 +48,19 @@ export default defineComponent({
           type: type === 'RECOM' ? 'RECOM' : Number(type),
           area: Number(area),
           title
-        }
+        };
         ctx.emit('onClick', params);
       }
     };
 
     return {
       handleClick
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .categories-wrap {
   color: #333;
   .categories-item {
@@ -85,7 +85,7 @@ export default defineComponent({
         cursor: pointer;
         border: 1px solid transparent;
         &.active {
-          color: #C20C0C;
+          color: #c20c0c;
           border: 1px solid #e3e3e3;
         }
         &:hover {

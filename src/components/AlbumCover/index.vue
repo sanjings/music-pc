@@ -1,40 +1,31 @@
 <template>
   <div :class="['album-cover', size]">
-    <div
-      class="cover-wrap"
-      :style="{ 'background-image': `url(${data.picUrl}?param=130y130)` }"
-    >
+    <div class="cover-wrap" :style="{ 'background-image': `url(${data.picUrl}?param=130y130)` }">
       <div class="mask"></div>
       <i class="iconfont icon-play-circle" />
     </div>
     <p class="name ellipsis">{{ data.name }}</p>
-    <p class="singers ellipsis">{{ formatSingerName(data.artists) }}</p>
+    <p class="singers ellipsis">{{ $filters.formatSingerName(data.artists) }}</p>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { IAlbumData } from "/@/typings";
-import { formatSingerName } from "/utils/format";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { IAlbumData } from '/@/typings';
 
 export default defineComponent({
-  name: "AlbumCover",
+  name: 'AlbumCover',
   props: {
     data: {
       type: Object as PropType<IAlbumData>,
-      required: true,
+      required: true
     },
     size: String
-  },
-  setup() {
-    return {
-      formatSingerName,
-    };
-  },
+  }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .album-cover {
   width: 100%;
   border-radius: 2px;
@@ -66,7 +57,7 @@ export default defineComponent({
       top: 0;
       bottom: 0;
       width: 153px;
-      background: url("../../assets/images/sprite_cover.png") no-repeat 0 -845px;
+      background: url('../../assets/images/sprite_cover.png') no-repeat 0 -845px;
     }
     .icon-play-circle {
       display: none;

@@ -8,15 +8,15 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent } from "vue";
+<script lang="ts">
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "Friend"
+  name: 'Friend'
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .Friend-wrap {
   min-height: 700px;
   background-color: #fff;
@@ -28,7 +28,7 @@ export default defineComponent({
       margin: 0 auto;
       width: 807px;
       height: 484px;
-      background: url("../../assets/images/login_friend.jpg") no-repeat 0 104px;
+      background: url('../../assets/images/login_friend.jpg') no-repeat 0 104px;
       .login-btn {
         position: absolute;
         width: 167px;

@@ -46,8 +46,8 @@ export default defineComponent({
      * @param offsetWidth 偏移值
      */
     const _offset = (offsetWidth: number): void => {
-      const progressDom = progressRef.value as HTMLElement,
-        progressBtnDom = progressBtnRef.value as HTMLElement;
+      const progressDom = progressRef.value as HTMLElement;
+      const progressBtnDom = progressBtnRef.value as HTMLElement;
 
       if (offsetWidth < 0) {
         offsetWidth = 0;
@@ -63,8 +63,8 @@ export default defineComponent({
      * 根据点击时的偏移值，计算进度百分比，并通知父组件change事件
      */
     const _changePercent = (): void => {
-      const progressDom = progressRef.value as HTMLElement,
-        curPercent = progressDom.clientWidth / (barWidth - progressBtnWidth);
+      const progressDom = progressRef.value as HTMLElement;
+      const curPercent = progressDom.clientWidth / (barWidth - progressBtnWidth);
 
       ctx.emit('change', curPercent);
     };
@@ -99,7 +99,7 @@ export default defineComponent({
       const clickInfoObj = clickInfo.value;
       if (!clickInfoObj.initiated) return;
       const scrollX = e.pageX - clickInfoObj.startX,
-            offsetWidth = Math.min(Math.max(0, clickInfoObj.left + scrollX), barWidth);
+        offsetWidth = Math.min(Math.max(0, clickInfoObj.left + scrollX), barWidth);
 
       _offset(offsetWidth);
     };

@@ -6,8 +6,8 @@
         <ul class="sub-list">
           <template v-for="sub of item.subList" :key="sub.id">
             <li 
-              :class="['sub-item', { 'active': curRankId === sub.id }]" 
-              @click="handleItemClick(sub.id)" 
+              :class="['sub-item', { active: curRankId === sub.id }]" 
+              @click="handleItemClick(sub.id)"
             >
               <div class="cover-wrap">
                 <img :src="sub.coverImgUrl + '?param=40y40'" alt="cover" />
@@ -24,12 +24,12 @@
   </ul>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { IRankItem } from "../typing";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { IRankItem } from '../typing';
 
 export default defineComponent({
-  name: "RankList",
+  name: 'RankList',
   props: {
     curRankId: Number,
     rankList: {
@@ -37,22 +37,22 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, ctx) {
+  setup(props, ctx) {
     /**
      * 监听点击事件
      */
     const handleItemClick = (id: number): void => {
-      ctx.emit('onClick', id)
+      ctx.emit('onClick', id);
     };
 
     return {
       handleItemClick
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .rank-list {
   .rank-item {
     padding-top: 20px;

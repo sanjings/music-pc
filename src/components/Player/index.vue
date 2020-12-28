@@ -1,60 +1,60 @@
 <template>
-  <div class="player-bar" v-if="currentSong && playList.length">
-    <div class="player-inner w-def-container">
-      <!-- 播放控制 -->
-      <div class="controls">
-        <i class="iconfont icon-previous" @click="handlePlayPrevSong" />
-        <i v-if="!playingStatus" class="iconfont icon-play-circle" @click="togglePlayStatus(true)" />
-        <i v-else class="iconfont icon-pause" @click="togglePlayStatus(false)" />
-        <i class="iconfont icon-next" @click="handlePlayNextSong" />
-      </div>
-      <!-- 歌曲信息 -->
-      <div class="song">
-        <div class="cover-wrap">
-          <img v-if="currentSong" :src="currentSong.al.picUrl" alt="songCover" />
-        </div>
-        <div class="song-info">
-          <p class="song-name" v-if="currentSong">
-            <span>{{ currentSong.name }}</span>
-            <span class="singer">{{ formatSingerName(currentSong.ar) }}</span>
-          </p>
-          <div class="progress">
-            <div class="progress-bar-wrap">
-              <ProgressBar :percent="percent" @change="handleChangePercent" />
-            </div>
-            <span class="play-time">{{ formatPlayTime(currentTime) }} / {{ formatPlayTime(duration) }}</span>
+  <teleport to="#palyer-target">
+    <transition name="fade">
+      <div class="player-bar" v-if="currentSong && playList.length">
+        <div class="player-inner w-def-container">
+          <!-- 播放控制 -->
+          <div class="controls">
+            <i class="iconfont icon-previous" @click="handlePlayPrevSong" />
+            <i v-if="!playingStatus" class="iconfont icon-play-circle" @click="togglePlayStatus(true)" />
+            <i v-else class="iconfont icon-pause" @click="togglePlayStatus(false)" />
+            <i class="iconfont icon-next" @click="handlePlayNextSong" />
           </div>
+          <!-- 歌曲信息 -->
+          <div class="song">
+            <div class="cover-wrap">
+              <img :src="currentSong.al.picUrl + '?param=34y34'" alt="songCover" />
+            </div>
+            <div class="song-info">
+              <p class="song-name">
+                <span>{{ currentSong.name }}</span>
+                <span class="singer">{{ $filters.formatSingerName(currentSong.ar) }}</span>
+              </p>
+              <div class="progress">
+                <div class="progress-bar-wrap">
+                  <ProgressBar :percent="percent" @change="handleChangePercent" />
+                </div>
+                <span class="play-time">
+                  {{ $filters.formatPlayTime(currentTime) }} / {{ $filters.formatPlayTime(duration) }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- 其他功能 -->
+          <div class="right">
+            <i class="iconfont icon-add" @click="toastTip" />
+            <i class="iconfont icon-share" @click="toastTip" />
+            <i class="iconfont icon-volume" @click="toastTip" />
+            <i class="iconfont icon-loop" @click="toastTip" />
+            <i class="iconfont icon-playlist" @click="toggleShowPlayList">
+              <i class="play-list-count">{{ playList.length }}</i>
+            </i>
+          </div>
+          <!-- 子菜单面板 -->
+          <PlayerMenu
+            :songName="currentSong.name"
+            :playList="playList"
+            :show="showPlayList"
+            :currentIndex="currentIndex"
+            :currentLyric="currentLyric"
+            :currentLineNum="currentLineNum"
+          />
         </div>
+        <!-- 播放器 -->
+        <audio ref="audioRef" :src="songUrl" :autoplay="true" @timeupdate="handleUpdateTime" @ended="handlePlayEnded" />
       </div>
-      <!-- 其他功能 -->
-      <div class="right">
-        <i class="iconfont icon-add" />
-        <i class="iconfont icon-share" />
-        <i class="iconfont icon-volume" />
-        <i class="iconfont icon-loop" />
-        <i class="iconfont icon-playlist" @click="toggleShowPlayList">
-          <i class="play-list-count">{{ playList.length }}</i>
-        </i>
-      </div>
-      <!-- 子菜单面板 -->
-      <PlayerMenu
-        :songName="currentSong.name"
-        :playList="playList"
-        :show="showPlayList"
-        :currentIndex="currentIndex"
-        :currentLyric="currentLyric"
-        :currentLineNum="currentLineNum"
-      />
-    </div>
-    <!-- 播放器 -->
-    <audio 
-      ref="audioRef" 
-      :src="songUrl" 
-      :autoplay="true" 
-      @timeupdate="handleUpdateTime" 
-      @ended="handlePlayEnded" 
-    />
-  </div>
+    </transition>
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -62,10 +62,11 @@ import { defineComponent, ref, watch, toRefs, computed } from 'vue';
 import { useStore } from 'vuex';
 import ProgressBar from './ProgressBar.vue';
 import PlayerMenu from './Menu.vue';
-import { formatSongUrl, formatSingerName, formatPlayTime } from '/utils/format';
+import { completeSongUrl } from '/utils/tool';
 import { SET_CURRENT_INDEX, SET_CURRENT_SONG, SET_PLAYING_STATUS, SET_SHOW_PLAY_LIST } from '/@/store/player/actionTypes';
 import { getLyricRequest } from '/requests/song';
 import LyricParser, { IHandler } from '/plugins/LyricParser';
+import createToast from '/components/Toast/index';
 
 export default defineComponent({
   name: 'Player',
@@ -177,7 +178,7 @@ export default defineComponent({
     const handleChangePercent = (per: number): void => {
       const audioDom = audioRef.value as HTMLAudioElement;
 
-      const newTime = currentTime.value = per * duration.value;
+      const newTime = (currentTime.value = per * duration.value);
       audioDom.currentTime = newTime;
       !state.playingStatus && togglePlayStatus(true);
       if (currentLyric.value) {
@@ -186,15 +187,26 @@ export default defineComponent({
     };
 
     /**
+     * 暂未开发提示
+     */
+    const toastTip = (): void => {
+      createToast({
+        message: '暂未开发',
+        duration: 2000
+      })
+    };
+
+    /**
      * 监听歌曲序号和播放列表变化，获取歌曲信息并播放
      */
     watch(
       () => [state.currentIndex, state.playList],
       ([curIndex]) => {
-        if (!state.playList.length || !state.playList[curIndex] || curIndex === -1 || state.playList[curIndex].id === preSongId.value) return;
+        if (!state.playList.length || !state.playList[curIndex] || curIndex === -1 || state.playList[curIndex].id === preSongId.value)
+          return;
         const currentSong = state.playList[curIndex];
         store.commit(SET_CURRENT_SONG, state.playList[state.currentIndex]);
-        songUrl.value = formatSongUrl(currentSong.id);
+        songUrl.value = completeSongUrl(currentSong.id);
         preSongId.value = currentSong.id;
         getLyric(currentSong.id);
         currentTime.value = 0;
@@ -211,7 +223,7 @@ export default defineComponent({
       () => state.playingStatus,
       (curStatus: boolean) => {
         const audioDom = audioRef.value as HTMLAudioElement;
-        if (!audioDom) return ;
+        if (!audioDom) return;
         curStatus ? audioDom.play() : audioDom.pause();
       }
     );
@@ -222,8 +234,6 @@ export default defineComponent({
       songUrl,
       togglePlayStatus,
       toggleShowPlayList,
-      formatSingerName,
-      formatPlayTime,
       currentTime,
       currentLyric,
       currentLineNum,
@@ -233,17 +243,28 @@ export default defineComponent({
       handleChangePercent,
       handlePlayNextSong,
       handlePlayPrevSong,
-      handlePlayEnded
+      handlePlayEnded,
+      toastTip
     };
   }
 });
 </script>
 
 <style lang="scss" scoped>
+.fade-leave-active,
+.fade-enter-active {
+  transition: all 0.1s ease-out;
+}
+.fade-enter-from,
+.fade-leave-to {
+  transform: translateY(50px);
+  opacity: 0;
+}
 .player-bar {
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
+  z-index: 2000;
   width: 100%;
   height: 50px;
   background-color: rgba($color: #000000, $alpha: 0.82);

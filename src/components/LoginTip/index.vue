@@ -5,27 +5,27 @@
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'LoginTip'
-})
+});
 </script>
 
-<style lang='scss' scoped>
-.login-tip{
+<style lang="scss" scoped>
+.login-tip {
   padding: 16px 22px;
   height: 125px;
   width: 100%;
   background: url('../../assets/images/sprite_login.png') no-repeat 0 9999px;
   background-position: 0 0;
-  .tip-txt{
+  .tip-txt {
     line-height: 22px;
     font-size: 12px;
     color: #666;
   }
-  .login-btn{
+  .login-btn {
     display: block;
     margin: 12px auto 0;
     width: 100px;
@@ -38,7 +38,7 @@ export default defineComponent({
     background-position: 0 -195px;
     text-shadow: 0 1px 0 #8a060b;
     cursor: pointer;
-    &:hover{
+    &:hover {
       background-position: -110px -195px;
     }
   }

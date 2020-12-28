@@ -3,16 +3,9 @@
     <h2 class="title">热门歌手</h2>
     <div class="list-wrap">
       <template v-for="item of listData" :key="item.id">
-        <router-link
-          :to="{ name: 'singer', params: { id: item.id } }"
-          class="singer-item"
-        >
+        <router-link :to="{ name: 'singer', params: { id: item.id } }" class="singer-item">
           <div class="avatar-wrap">
-            <img
-              :src="item.img1v1Url + '?param=60y60'"
-              alt="avatar"
-              class="avatar"
-            />
+            <img :src="item.img1v1Url + '?param=60y60'" alt="avatar" class="avatar" />
           </div>
           <p class="singer-name">{{ item.name }}</p>
         </router-link>
@@ -21,20 +14,20 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { useRouter } from "vue-router";
-import { ISingerData } from "/@/typings";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { useRouter } from 'vue-router';
+import { ISingerData } from '/@/typings';
 
 export default defineComponent({
-  name: "HotSingers",
+  name: 'HotSingers',
   props: {
     listData: Array as PropType<ISingerData[]>
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .hot-singers {
   font-size: 12px;
   .title {

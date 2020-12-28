@@ -1,6 +1,6 @@
 <template>
   <div class="comment-wrap">
-    <ModuleTitle title='评论'>
+    <ModuleTitle title="评论">
       <template #default>
         <span class="comment-count">共{{ totalCount }}评论</span>
       </template>
@@ -21,7 +21,7 @@
               <span class="content">{{ item.beReplied[0].content }}</span>
             </p>
             <div class="other">
-              <span class="time">{{ formatDate(item.time, 'YYYY年MM月DD日 HH:mm') }}</span>
+              <span class="time">{{ $filters.formatDate(item.time, 'YYYY年MM月DD日 HH:mm') }}</span>
               <div class="liked">
                 <span>
                   <i class="iconfont icon-like" />
@@ -38,29 +38,23 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 import ModuleTitle from '/components/ModuleTitle/index.vue';
-import { formatDate } from '/utils/format';
 
 export default defineComponent({
-  name: "Comment",
+  name: 'Comment',
   components: {
     ModuleTitle
   },
   props: {
     listData: Array,
     totalCount: Number
-  },
-  setup () {
-    return {
-      formatDate
-    }
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .comment-wrap {
   font-size: 12px;
   .comment-count {
@@ -84,7 +78,7 @@ export default defineComponent({
         flex: 1;
         overflow: hidden;
         .nickname {
-          color: #0C73C2;
+          color: #0c73c2;
         }
         .content {
           line-height: 20px;
@@ -95,9 +89,9 @@ export default defineComponent({
           width: 100%;
           line-height: 20px;
           background-color: #f4f4f4;
-          border: 1px solid #DEDEDE;
+          border: 1px solid #dedede;
         }
-        .other{
+        .other {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -109,7 +103,7 @@ export default defineComponent({
             color: #666;
             .icon-like {
               margin-right: 4px;
-              color: #0C73C2;
+              color: #0c73c2;
               font-size: 18px;
               cursor: pointer;
             }
@@ -122,7 +116,7 @@ export default defineComponent({
             }
           }
         }
-      } 
+      }
     }
   }
 }

@@ -15,24 +15,24 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, ref, watch } from "vue";
-import { MoveTypeEnum, IChangeParam } from "./typing";
+<script lang="ts">
+import { defineComponent, ref, watch } from 'vue';
+import { MoveTypeEnum, IChangeParam } from './typing';
 
 export default defineComponent({
-  name: "Carousel",
+  name: 'Carousel',
   props: {
     listData: {
       type: Array,
-      required: true,
+      required: true
     },
     autoplay: {
       type: Boolean,
-      default: false,
+      default: false
     },
     interval: {
       type: [Number, String],
-      default: 3000,
+      default: 3000
     },
     pagination: {
       type: Boolean,
@@ -48,7 +48,7 @@ export default defineComponent({
      */
     watch(
       () => props.listData,
-      (newValue, preValue, onInvalidate) => {
+      (newValue, preValue, onInvalidate): void => {
         newValue.length > 1 && props.autoplay && autoplayAction();
         onInvalidate(() => {
           timer && clearAutoplay();
@@ -59,11 +59,11 @@ export default defineComponent({
     /**
      * 轮播切换时，向父组件触发change事件
      */
-    watch(curIndex, () => {
+    watch(curIndex, (): void => {
       const param: IChangeParam = {
-        index: curIndex.value,
+        index: curIndex.value
       };
-      ctx.emit("change", param);
+      ctx.emit('change', param);
     });
 
     /**
@@ -91,18 +91,19 @@ export default defineComponent({
      * 向前或向后切换item
      */
     const move = (type: MoveTypeEnum): void => {
-      const listLengh = props.listData.length;
+      const listLengh: number = props.listData.length;
 
       if (listLengh <= 1) return;
 
-      switch(type) {
+      switch (type) {
         case MoveTypeEnum.NEXT:
           curIndex.value++;
           break;
         case MoveTypeEnum.PREV:
           curIndex.value--;
           break;
-        default: return;
+        default:
+          return;
       }
 
       if (curIndex.value > listLengh - 1) {
@@ -119,7 +120,7 @@ export default defineComponent({
       const tar = e.target as HTMLElement;
 
       if (tar.className === 'dot') {
-        const index = Number(tar.dataset.index);
+        const index: number = Number(tar.dataset.index);
         curIndex.value = index;
         props.autoplay && autoplayAction();
       }
@@ -151,7 +152,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .carousel-wrap {
   position: relative;
   width: 100%;
@@ -187,7 +188,7 @@ export default defineComponent({
       text-align: center;
       background-color: transparent;
       cursor: pointer;
-      &.active{
+      &.active {
         &::after {
           background-color: #c20c0c;
         }
@@ -198,7 +199,7 @@ export default defineComponent({
         }
       }
       &::after {
-        content: "";
+        content: '';
         display: inline-block;
         width: 6px;
         height: 6px;

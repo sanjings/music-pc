@@ -8,7 +8,7 @@
     <!-- 歌词 -->
     <Lyric 
       :currentLyric="currentLyric" 
-      :currentLineNum="currentLineNum"
+      :currentLineNum="currentLineNum" 
       :songName="songName"
     />
   </div>

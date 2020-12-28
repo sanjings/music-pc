@@ -2,30 +2,30 @@
   <div class="search-wrap">
     <i class="iconfont icon-search" />
     <input 
-      type="text"
+      type="text" 
       class="search-input" 
       v-model="searchValue" 
-      placeholder="音乐/视频/电台/用户"
+      placeholder="音乐/视频/电台/用户" 
     />
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, ref } from "vue";
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  name: "Search",
+  name: 'Search',
   setup() {
     const searchValue = ref<String>('');
 
     return {
       searchValue
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .search-wrap {
   display: flex;
   align-items: center;
@@ -35,16 +35,16 @@ export default defineComponent({
   background-color: #fff;
   border-radius: 32px;
   overflow: hidden;
-  .icon-search{
+  .icon-search {
     padding: 0 6px;
     color: #000;
     cursor: pointer;
   }
-  .search-input{
+  .search-input {
     flex: 1;
     color: #333;
     overflow: hidden;
-    &::placeholder{
+    &::placeholder {
       font-size: 12px;
       color: #9b9b9b;
     }

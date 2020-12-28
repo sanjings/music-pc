@@ -1,9 +1,9 @@
 <template>
   <div class="playlist w-def-container">
-    <ModuleTitle :title='queryParams.cat' size='large'>
+    <ModuleTitle :title="queryParams.cat" size="large">
       <!-- 分类选择 -->
       <template #default>
-        <Categories :listData='catList' @onClick='handleChangeCat' />
+        <Categories :listData="catList" @onClick="handleChangeCat" />
       </template>
       <template #right>
         <i class="hot-tag">热门</i>
@@ -13,24 +13,24 @@
     <div class="list-wrap">
       <template v-for="item of playList" :key="item.id">
         <div class="list-item">
-          <PlaylistItem :data='item' />
+          <PlaylistItem :data="item" />
         </div>
       </template>
     </div>
     <!-- 分页 -->
     <div class="pagination">
       <Pagination 
-        :page-size='queryParams.limit'
-        :total='listTotal'
-        :current-page='currentPage'
-        @pageChange='handleChangePage'
+        :page-size="queryParams.limit" 
+        :total="listTotal" 
+        :current-page="currentPage" 
+        @pageChange="handleChangePage"
       />
     </div>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, reactive, toRefs, onMounted, computed } from "vue";
+<script lang="ts">
+import { defineComponent, reactive, toRefs, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import PlaylistItem from '/components/PlaylistItem/index.vue';
 import ModuleTitle from '/components/ModuleTitle/index.vue';
@@ -38,17 +38,17 @@ import Pagination from '/components/Pagination/index.vue';
 import Categories from './Categories/index.vue';
 import { getCatListRequest, getPlaylistRequest } from '/requests/playlist';
 import { IState } from './typing';
-import { IQueryParams } from "./typing";
+import { IQueryParams } from './typing';
 
 export default defineComponent({
-  name: "Playlist",
+  name: 'Playlist',
   components: {
     Categories,
     PlaylistItem,
     ModuleTitle,
     Pagination
   },
-  setup () {
+  setup() {
     const route = useRoute();
 
     const state = reactive<IState>({
@@ -65,7 +65,7 @@ export default defineComponent({
     /**
      * 计算当前页码
      */
-    const currentPage = computed((): number => (state.queryParams.offset / state.queryParams.limit) + 1);
+    const currentPage = computed((): number => state.queryParams.offset / state.queryParams.limit + 1);
 
     onMounted((): void => {
       init();
@@ -73,7 +73,7 @@ export default defineComponent({
 
     const init = (): void => {
       const routeParams = route.params;
-      state.queryParams.cat = routeParams.cat as string || '全部';
+      state.queryParams.cat = (routeParams.cat as string) || '全部';
       getCatList();
       getPlayList(state.queryParams);
     };
@@ -103,7 +103,7 @@ export default defineComponent({
       getPlayList(state.queryParams);
     };
 
-     /**
+    /**
      * 切换分页
      */
     const handleChangePage = (value: number): void => {
@@ -116,12 +116,12 @@ export default defineComponent({
       currentPage,
       handleChangeCat,
       handleChangePage
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .playlist {
   padding: 40px;
   background-color: #fff;

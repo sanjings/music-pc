@@ -2,10 +2,10 @@
   <div class="hot-recom">
     <ModuleTitle title="热门推荐" circle>
       <template #default>
-        <Tab :listData='playlistCatList' @onClick='handleChangeCat' />
+        <Tab :listData="playlistCatList" @onClick="handleChangeCat" />
       </template>
       <template #right>
-        <router-link to='/discover/playlist' class="more">
+        <router-link to="/discover/playlist" class="more">
           <span class="more-text">更多</span>
           <i class="iconfont icon-arrowsright" />
         </router-link>
@@ -21,17 +21,17 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 import { useRouter } from 'vue-router';
-import PlaylistItem from "/components/PlaylistItem/index.vue";
-import ModuleTitle from "/components/ModuleTitle/index.vue";
-import Tab from "/components/Tab/index.vue";
+import PlaylistItem from '/components/PlaylistItem/index.vue';
+import ModuleTitle from '/components/ModuleTitle/index.vue';
+import Tab from '/components/Tab/index.vue';
 import { playlistCatList } from '/@/apis/data';
-import { IPlayData } from "/@/typings";
+import { IPlayData } from '/@/typings';
 
 export default defineComponent({
-  name: "Hot",
+  name: 'Hot',
   components: {
     PlaylistItem,
     ModuleTitle,
@@ -40,10 +40,10 @@ export default defineComponent({
   props: {
     playList: {
       type: Array as PropType<IPlayData[]>,
-      required: true,
+      required: true
     }
   },
-  setup () {
+  setup() {
     const router = useRouter();
     /**
      * 切换推荐类型
@@ -51,21 +51,21 @@ export default defineComponent({
     const handleChangeCat = (value: string): void => {
       router.push({
         name: 'playlist',
-        params: { 
-          cat: value 
+        params: {
+          cat: value
         }
       });
-    }
+    };
 
     return {
       handleChangeCat,
       playlistCatList
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .hot-recom {
   .more {
     display: flex;

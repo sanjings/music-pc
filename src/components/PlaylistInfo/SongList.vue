@@ -1,6 +1,6 @@
 <template>
   <div class="song-list">
-    <ModuleTitle title='歌曲列表'>
+    <ModuleTitle title="歌曲列表">
       <template #default>
         <span class="length">{{ listData.length }}首歌</span>
       </template>
@@ -20,52 +20,49 @@
         <div class="singer">歌手</div>
       </li>
       <template v-for="(item, index) of listData" :key="item.id">
-        <li :class="['song-item', {'stripe': index % 2 === 0}]">
+        <li :class="['song-item', { stripe: index % 2 === 0 }]">
           <div class="item-index">{{ index + 1 }}</div>
           <div class="item-title ellipsis">
             <div class="cover-wrap" v-if="index < 3">
               <img :src="item.al.picUrl + '?param=50y50'" alt="cover" class="cover" />
             </div>
             <i class="iconfont icon-play-circle" :data-play-index="index" />
-            <span class="item-name" >{{ item.name }}</span>
+            <span class="item-name">{{ item.name }}</span>
           </div>
-          <div class="item-duration">{{ formatPlayTime(item.dt / 1000) }}</div>
-          <div class="item-singer ellipsis">{{ formatSingerName(item.ar) }}</div>
+          <div class="item-duration">{{ $filters.formatPlayTime(item.dt / 1000) }}</div>
+          <div class="item-singer ellipsis">{{ $filters.formatSingerName(item.ar) }}</div>
         </li>
       </template>
     </ul>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { ISong } from "/@/typings";
-import { formatSingerName, formatPlayTime } from '/utils/format';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { ISong } from '/@/typings';
 import ModuleTitle from '/components/ModuleTitle/index.vue';
 import usePlay from '/hooks/usePlay';
 
 export default defineComponent({
-  name: "SongList",
+  name: 'SongList',
   components: {
     ModuleTitle
   },
   props: {
     playCount: Number,
-    listData: Object as PropType<ISong[]>,
+    listData: Object as PropType<ISong[]>
   },
-  setup (props) {
+  setup(props) {
     const { handleClickPlay } = usePlay();
-    
+
     return {
-      formatSingerName,
-      formatPlayTime,
       handleClickPlay
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .song-list {
   padding-bottom: 40px;
   font-size: 12px;
@@ -87,24 +84,24 @@ export default defineComponent({
       line-height: 34px;
       font-size: 12px;
       font-weight: 550;
-      background-color: rgba($color: #f1f1f1, $alpha: .3);
-      border-bottom: 1px solid rgba($color: #e3e3e3, $alpha: .6);
+      background-color: rgba($color: #f1f1f1, $alpha: 0.3);
+      border-bottom: 1px solid rgba($color: #e3e3e3, $alpha: 0.6);
       & > div {
         padding: 0 10px;
       }
       .rank {
         width: 78px;
         height: 100%;
-        border-right: 1px solid rgba($color: #e3e3e3, $alpha: .6);
+        border-right: 1px solid rgba($color: #e3e3e3, $alpha: 0.6);
       }
       .title {
         flex: 1;
-        border-right: 1px solid rgba($color: #e3e3e3, $alpha: .6);
+        border-right: 1px solid rgba($color: #e3e3e3, $alpha: 0.6);
         overflow: hidden;
       }
       .duration {
         width: 91px;
-        border-right: 1px solid rgba($color: #e3e3e3, $alpha: .6);
+        border-right: 1px solid rgba($color: #e3e3e3, $alpha: 0.6);
       }
       .singer {
         width: 173px;

@@ -2,10 +2,7 @@
   <div class="alpha-wrap">
     <ul class="alpha-list" @click="handleClick">
       <template v-for="item of listData" :key="item.value">
-        <li 
-          :class="['alpha-item', { 'active': curValue == item.value }]" 
-          :data-value='item.value'
-        >
+        <li :class="['alpha-item', { active: curValue == item.value }]" :data-value="item.value">
           {{ item.name }}
         </li>
       </template>
@@ -13,7 +10,7 @@
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { IAlphaTypes } from '/@/typings/localData';
 
@@ -26,7 +23,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, ctx) {
+  setup(props, ctx) {
     /**
      * 点击事件代理
      */
@@ -36,16 +33,16 @@ export default defineComponent({
         const curValue = target.dataset.value;
         ctx.emit('onClick', curValue);
       }
-    }
+    };
 
     return {
       handleClick
-    }
+    };
   }
-})
+});
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .alpha-wrap {
   padding-top: 20px;
   width: 100%;

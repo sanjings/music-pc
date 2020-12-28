@@ -5,4 +5,4 @@ export default {
   namespace: 'player',
   state,
   mutations
-}
+};

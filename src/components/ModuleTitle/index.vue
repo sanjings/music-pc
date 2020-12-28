@@ -3,20 +3,20 @@
     <span class="circle" v-show="circle"></span>
     <h1 :class="['title-text', size]">{{ title }}</h1>
     <div class="slot-default">
-      <slot name='default' />
+      <slot name="default" />
     </div>
     <div class="slot-right">
-      <slot name='right' />
+      <slot name="right" />
     </div>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { SizeType } from "/@/typings";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { SizeType } from '/@/typings';
 
 export default defineComponent({
-  name: "Header",
+  name: 'Header',
   props: {
     title: {
       type: String,
@@ -34,7 +34,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .module-title {
   position: relative;
   display: flex;

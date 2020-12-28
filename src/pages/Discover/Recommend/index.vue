@@ -1,27 +1,27 @@
 <template>
   <div class="recommend-wrap">
     <!-- banner -->
-    <Banner :bannerList='bannerList' />
+    <Banner :bannerList="bannerList" />
     <div class="recommend-inner w-def-container">
       <section class="inner-left">
         <!-- 热门推荐 -->
-        <Hot :playList='hotPlayList' />
+        <Hot :playList="hotPlayList" />
         <!-- 新碟上架 -->
         <RecomAlbum :albumList="albumList" />
         <!-- 榜单 -->
-        <RecomRank :rankList='rankList' />
+        <RecomRank :rankList="rankList" />
       </section>
       <section class="inner-right">
         <!-- 登录提示 -->
         <LoginTip />
         <!-- 入驻歌手 -->
-        <RecomSinger :singerList='singerList' />
+        <RecomSinger :singerList="singerList" />
       </section>
     </div>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { defineComponent, onMounted, reactive, toRefs } from 'vue';
 import { getBannersRequest, getHotPlayListRequest, BannerTypeEnum } from '/requests/recommend';
 import { getHotAlbumRequest } from '/requests/album';
@@ -45,13 +45,13 @@ export default defineComponent({
     RecomSinger,
     RecomRank
   },
-  setup () {
+  setup() {
     const state = reactive<IState>({
       bannerList: [], // banner
       hotPlayList: [], // 热门歌单
       albumList: [], // 热门新碟
       singerList: [], // 推荐歌手
-      rankList: [], // 推荐榜单
+      rankList: [] // 推荐榜单
     });
 
     onMounted((): void => {
@@ -98,34 +98,36 @@ export default defineComponent({
      * 获取推荐榜单数据
      */
     const getRankList = async () => {
-      const res = await Promise.all([19723756, 3779629, 2884035].map((item: number) => {
-        return getPlaylistDetailRequest(item);
-      }))
+      const res = await Promise.all(
+        [19723756, 3779629, 2884035].map((item: number) => {
+          return getPlaylistDetailRequest(item);
+        })
+      );
 
       state.rankList = res.map(item => item.playlist);
-    }
+    };
 
     return {
       ...toRefs(state)
-    }
+    };
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>
-  .recommend-inner{
-    display: flex;
-    background-color: #fff;
-    .inner-left{
-      flex: 1;
-      padding: 20px;
-      border-left: 1px solid #d3d3d3;
-      border-right: 1px solid #d3d3d3;
-      overflow: hidden;
-    }
-    .inner-right{
-      width: 250px;
-      border-right: 1px solid #d3d3d3;
-    }
+.recommend-inner {
+  display: flex;
+  background-color: #fff;
+  .inner-left {
+    flex: 1;
+    padding: 20px;
+    border-left: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+    overflow: hidden;
   }
+  .inner-right {
+    width: 250px;
+    border-right: 1px solid #d3d3d3;
+  }
+}
 </style>

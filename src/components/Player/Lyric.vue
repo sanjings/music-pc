@@ -4,10 +4,7 @@
     <div class="srcoll-wrap">
       <ul class="lyric-list" v-if="currentLyric" ref="listRef">
         <template v-for="(item, index) of currentLyric.lines" :key="index">
-          <li
-            :ref="setItemRef" 
-            :class="['lyric-item', { highlight: index === currentLineNum }]"
-          >
+          <li :ref="setItemRef" :class="['lyric-item', { highlight: index === currentLineNum }]">
             {{ item.txt }}
           </li>
         </template>
@@ -36,7 +33,7 @@ export default defineComponent({
      */
     const setItemRef = (el: HTMLElement): void => {
       lyricLineRefs.value.push(el);
-    }
+    };
 
     watch(
       () => props.currentLineNum,
@@ -74,7 +71,7 @@ export default defineComponent({
     text-align: center;
     font-weight: 550;
     border-bottom: 1px solid #222;
-    
+
     letter-spacing: 1px;
   }
   .srcoll-wrap {

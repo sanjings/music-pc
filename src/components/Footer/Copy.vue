@@ -12,43 +12,29 @@
     <p class="right">
       <span>网易公司版权所有©1997-2020</span>
       <span class="margin-left-8">杭州乐读科技有限公司运营：</span>
-      <a
-        href="https://p1.music.126.net/Mos9LTpl6kYt6YTutA6gjg==/109951164248627501.png"
-        rel="noopener noreferrer"
-      >
+      <a href="https://p1.music.126.net/Mos9LTpl6kYt6YTutA6gjg==/109951164248627501.png" rel="noopener noreferrer">
         浙网文[2018]3506-263号
       </a>
     </p>
     <p class="contact">
       <span>违法和不良信息举报电话：0571-89853516</span>
-      <a 
-        href="mailto:ncm5990@163.com" 
-        class="margin-left-8"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        举报邮箱：ncm5990@163.com
-      </a>
+      <a href="mailto:ncm5990@163.com" class="margin-left-8" target="_blank" rel="noopener noreferrer"> 举报邮箱：ncm5990@163.com </a>
     </p>
     <p class="right">
       <span>粤B2-20090191-18</span>
-      <a
-        href="https://beian.miit.gov.cn/#/Integrated/index"
-        class="margin-left-8"
-        rel="noopener noreferrer"
-      >
+      <a href="https://beian.miit.gov.cn/#/Integrated/index" class="margin-left-8" rel="noopener noreferrer">
         工业和信息化部备案管理系统网站
       </a>
     </p>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent } from "vue";
-import { footerLinks } from "/@/apis/data";
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { footerLinks } from '/@/apis/data';
 
 export default defineComponent({
-  name: "Copy",
+  name: 'Copy',
   setup() {
     return {
       footerLinks
@@ -57,7 +43,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .copy {
   .footer-links {
     display: flex;
@@ -67,13 +53,13 @@ export default defineComponent({
         color: #999;
       }
       &::after {
-        content: "|";
+        content: '|';
         margin: 0 10px;
         color: #999;
       }
       &:last-of-type {
         &::after {
-          content: "";
+          content: '';
         }
       }
     }

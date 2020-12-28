@@ -41,6 +41,6 @@ const usePlay = () => {
     handleClickPlay,
     handleClickDelete
   };
-}
+};
 
 export default usePlay;

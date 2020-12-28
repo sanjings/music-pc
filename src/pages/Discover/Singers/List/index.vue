@@ -1,13 +1,13 @@
 <template>
-  <div class="singer-list" ref='listRef'>
+  <div class="singer-list" ref="listRef">
     <template v-for="(item, index) of listData" :key="item.id">
-      <router-link :to="{name: 'singer', params: { id: item.id }}" class="singer-item">
+      <router-link :to="{ name: 'singer', params: { id: item.id } }" class="singer-item">
         <div class="cover-wrap" v-if="index < 10">
           <img
-            class="cover" 
-            src='/assets/images/singer.png' 
-            :data-src="item.img1v1Url + '?param=130y130'" 
-            alt="cover" 
+            class="cover"
+            src="/assets/images/singer.png"
+            :data-src="item.img1v1Url + '?param=130y130'"
+            alt="cover"
           />
         </div>
         <div class="info">
@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { defineComponent, PropType, watch } from 'vue';
 import { ISingerData } from '/@/typings';
 import imgLazyload from '/utils/lazyload';
@@ -34,7 +34,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, ctx) {
+  setup(props, ctx) {
     const { listRef, initLazyload } = useLazyload();
 
     /**
@@ -47,12 +47,12 @@ export default defineComponent({
 
     return {
       listRef
-    }
+    };
   }
-})
+});
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .singer-list {
   display: flex;
   justify-content: space-between;

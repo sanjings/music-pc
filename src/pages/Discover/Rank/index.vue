@@ -1,10 +1,10 @@
 <template>
   <div class="rank-wrap w-def-container">
     <section class="left">
-      <RankList
-        :rankList="rankList"
-        :curRankId="queryParams.id"
-        @onClick="handleChangeRank"
+      <RankList 
+        :rankList="rankList" 
+        :curRankId="queryParams.id" 
+        @onClick="handleChangeRank" 
       />
     </section>
     <section class="right">
@@ -19,19 +19,19 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, reactive, toRefs, onMounted, computed } from "vue";
-import { useRoute } from "vue-router";
-import { getRankListRequest } from "/requests/rank";
-import { getPlaylistCommentRequest } from "/requests/comment";
-import { getPlaylistDetailRequest } from "/requests/playlist";
-import RankList from "./RankList/index.vue";
-import PlaylistInfo from "/components/PlaylistInfo/index.vue";
-import { IState, IQueryParams } from "./typing";
-import { IRankData } from "/@/typings";
+<script lang="ts">
+import { defineComponent, reactive, toRefs, onMounted, computed } from 'vue';
+import { useRoute } from 'vue-router';
+import { getRankListRequest } from '/requests/rank';
+import { getPlaylistCommentRequest } from '/requests/comment';
+import { getPlaylistDetailRequest } from '/requests/playlist';
+import RankList from './RankList/index.vue';
+import PlaylistInfo from '/components/PlaylistInfo/index.vue';
+import { IState, IQueryParams } from './typing';
+import { IRankData } from '/@/typings';
 
 export default defineComponent({
-  name: "Rank",
+  name: 'Rank',
   components: {
     RankList,
     PlaylistInfo
@@ -43,7 +43,7 @@ export default defineComponent({
       queryParams: {
         id: 19723756,
         limit: 20,
-        offset: 0,
+        offset: 0
       },
       rankList: [], // 排行榜列表
       rankDetail: null, // 排行榜详情
@@ -77,12 +77,12 @@ export default defineComponent({
       const { list } = await getRankListRequest();
       state.rankList.push(
         {
-          name: "云音乐特色榜",
-          subList: list.filter((item: IRankData) => Boolean(item.ToplistType)),
+          name: '云音乐特色榜',
+          subList: list.filter((item: IRankData) => Boolean(item.ToplistType))
         },
         {
-          name: "全球媒体榜",
-          subList: list.filter((item: IRankData) => !item.ToplistType),
+          name: '全球媒体榜',
+          subList: list.filter((item: IRankData) => !item.ToplistType)
         }
       );
     };
@@ -125,13 +125,13 @@ export default defineComponent({
       ...toRefs(state),
       currentPage,
       handleChangeRank,
-      handleChangePage,
+      handleChangePage
     };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .rank-wrap {
   display: flex;
   background-color: #fff;

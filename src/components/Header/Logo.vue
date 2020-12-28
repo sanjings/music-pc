@@ -2,17 +2,17 @@
   <div class="logo"></div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 export default {
-  name: "Logo"
+  name: 'Logo'
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .logo {
   width: 176px;
   height: 69px;
-  background: url("../../assets/images/sprite_logo.png") no-repeat 0 0;
+  background: url('../../assets/images/sprite_logo.png') no-repeat 0 0;
   overflow: hidden;
 }
 </style>

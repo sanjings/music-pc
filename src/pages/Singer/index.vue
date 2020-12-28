@@ -6,30 +6,30 @@
         <img :src="singerInfo.picUrl + '?param=628y300'" alt="avatar" class="avatar" />
       </div>
       <!-- 热门歌曲列表 -->
-      <HotSongs :listData='hotSongs' />
+      <HotSongs :listData="hotSongs" />
     </div>
     <div class="right">
       <!-- 热门歌手列表 -->
-      <HotSingers :listData='hotSingers' />
+      <HotSingers :listData="hotSingers" />
     </div>
   </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
+<script lang="ts">
+import { defineComponent, onMounted, reactive, toRefs, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { IState } from "./typing";
+import { IState } from './typing';
 import { getSingerDetailRequest, getRecomSingersRequest } from '/requests/singer';
 import HotSongs from './HotSongs/index.vue';
 import HotSingers from './HotSingers/index.vue';
 
 export default defineComponent({
-  name: "Singer",
+  name: 'Singer',
   components: {
     HotSongs,
     HotSingers
   },
-  setup () {
+  setup() {
     const route = useRoute();
 
     const state = reactive<IState>({
@@ -37,7 +37,7 @@ export default defineComponent({
       hotSongs: [],
       hotSingers: [],
       curComponent: 'HotSongs'
-    })
+    });
 
     onMounted((): void => {
       init();
@@ -67,7 +67,6 @@ export default defineComponent({
     const getHotSinger = async () => {
       const { artists } = await getRecomSingersRequest(15);
       state.hotSingers = artists;
-
     };
 
     /**
@@ -78,16 +77,16 @@ export default defineComponent({
       (oldVal, newVal) => {
         getSingerDetail(Number(oldVal));
       }
-    )
+    );
 
     return {
       ...toRefs(state)
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .singer-wrap {
   display: flex;
   background-color: #fff;

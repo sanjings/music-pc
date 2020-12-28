@@ -25,29 +25,29 @@
   </header>
 </template>
 
-<script lang='ts'>
-import { defineComponent } from "vue";
-import { headerNavList } from "/@/apis/data";
-import Logo from "./Logo.vue";
-import Nav from "./Nav.vue";
-import Search from "./Search.vue";
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { headerNavList } from '/@/apis/data';
+import Logo from './Logo.vue';
+import Nav from './Nav.vue';
+import Search from './Search.vue';
 
 export default defineComponent({
-  name: "Header",
+  name: 'Header',
   components: {
     Logo,
     Nav,
     Search
   },
-  setup (props) {
+  setup(props) {
     return {
       headerNavList
-    }
+    };
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .header-wrap {
   .top-wrap {
     width: 100%;
@@ -95,7 +95,7 @@ export default defineComponent({
       }
     }
   }
-  .divider{
+  .divider {
     display: block;
     width: 100%;
     height: 5px;

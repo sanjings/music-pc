@@ -12,7 +12,7 @@
             <i class="iconfont icon-play-circle" :data-play-index="index" />
             <span class="song-name">{{ item.name }}</span>
           </div>
-          <div class="item-duration">{{ formatPlayTime(item.dt / 1000) }}</div>
+          <div class="item-duration">{{ $filters.formatPlayTime(item.dt / 1000) }}</div>
           <div class="item-singer ellipsis">{{ item.al.name }}</div>
         </li>
       </template>
@@ -23,7 +23,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { ISong } from '/@/typings';
-import { formatPlayTime } from '/utils/format';
 import usePlay from '/hooks/usePlay';
 
 export default defineComponent({
@@ -38,7 +37,6 @@ export default defineComponent({
     const { handleClickPlay, handleClickPlayAll } = usePlay();
 
     return {
-      formatPlayTime,
       handleClickPlay,
       handleClickPlayAll
     };

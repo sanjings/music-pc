@@ -1,13 +1,10 @@
 <template>
-  <router-link class="play-item" :to="{name: 'playlistDetail', params: { id: data.id }}">
-    <div
-      class="cover-wrap"
-      :style="{ 'background-image': `url(${data.coverImgUrl}?param=140y140)` }"
-    >
+  <router-link class="play-item" :to="{ name: 'playlistDetail', params: { id: data.id } }">
+    <div class="cover-wrap" :style="{ 'background-image': `url(${data.coverImgUrl}?param=140y140)` }">
       <div class="mask"></div>
       <div class="play-count">
         <i class="iconfont icon-headset" />
-        <span class="count">{{ formatCount(data.playCount) }}</span>
+        <span class="count">{{ $filters.formatCount(data.playCount) }}</span>
         <i class="iconfont icon-play-circle" />
       </div>
     </div>
@@ -16,28 +13,22 @@
   </router-link>
 </template>
 
-<script lang='ts'>
-import { defineComponent, PropType } from "vue";
-import { IPlayData } from "/@/typings";
-import { formatCount } from "/@/utils/format";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { IPlayData } from '/@/typings';
 
 export default defineComponent({
-  name: "PlaylistItem",
+  name: 'PlaylistItem',
   props: {
     data: {
       type: Object as PropType<IPlayData>,
       required: true
-    },
-  },
-  setup() {
-    return {
-      formatCount
-    };
+    }
   }
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .play-item {
   width: 100%;
   .cover-wrap {
@@ -51,7 +42,7 @@ export default defineComponent({
       right: 0;
       top: 0;
       bottom: 0;
-      background: url("../../assets/images/sprite_cover.png") no-repeat 0 0;
+      background: url('../../assets/images/sprite_cover.png') no-repeat 0 0;
     }
     .play-count {
       position: absolute;

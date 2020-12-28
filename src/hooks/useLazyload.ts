@@ -10,22 +10,22 @@ const useLazyload = () => {
   });
 
   /**
-     * 初始化图片懒加载
-     */
+   * 初始化图片懒加载
+   */
   const initLazyload = (): void => {
     const listDom = listRef.value as HTMLElement;
     const oImages = listDom.getElementsByTagName('img');
     setTimeout(() => {
-      imgLazyload(oImages)() // 首次加载显示图片
+      imgLazyload(oImages)(); // 首次加载显示图片
       document.removeEventListener('scroll', () => {}, false);
-      document.addEventListener('scroll', debounce(imgLazyload(oImages), 50), false) // 对scroll事件做防抖处理
+      document.addEventListener('scroll', debounce(imgLazyload(oImages), 50), false); // 对scroll事件做防抖处理
     }, 50);
   };
 
   return {
     listRef,
     initLazyload
-  }
+  };
 };
 
 export default useLazyload;
