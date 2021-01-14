@@ -45,6 +45,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
+    
     /**
      * 切换推荐类型
      */

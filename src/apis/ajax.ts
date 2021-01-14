@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosError } from 'axios';
+import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
 import { BASE_URL, TIME_OUT, errorHandle } from './config';
 import { IUnknowObject } from '/@/typings';
 
@@ -19,7 +19,7 @@ const axiosInstance: AxiosInstance = axios.create({
  * 响应拦截处理
  */
 axiosInstance.interceptors.response.use(
-  (res) => {
+  (res: AxiosResponse) => {
     if (res.status === 200) {
       const code = res.data.code;
       if (code === 200) {

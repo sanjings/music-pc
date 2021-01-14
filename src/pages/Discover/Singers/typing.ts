@@ -1,10 +1,10 @@
 import { ISingerData } from "/@/typings";
 
 export interface IQueryParams {
-  type: number | string;
-  area: number;
+  type?: number | string;
+  area?: number;
   limit: number;
-  initial: number | string;
+  initial?: number | string;
 }
 
 export interface IState {

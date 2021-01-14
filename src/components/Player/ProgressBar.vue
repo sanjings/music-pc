@@ -29,19 +29,6 @@ export default defineComponent({
     const clickInfo = ref<IMouseClickInfo>({ initiated: false, startX: 0, left: 0 });
 
     /**
-     * 监听进度，设置进度条
-     */
-    watch(
-      (): number => props.percent,
-      (): void => {
-        if (props.percent >= 0 && props.percent <= 1 && !clickInfo.value.initiated) {
-          const offsetWidth = (barWidth - progressBtnWidth) * props.percent;
-          _offset(offsetWidth);
-        }
-      }
-    );
-
-    /**
      * 设置已完成进度条和按钮的偏移值样式
      * @param offsetWidth 偏移值
      */
@@ -112,6 +99,19 @@ export default defineComponent({
       };
       _changePercent();
     };
+
+    /**
+     * 监听进度，设置进度条
+     */
+    watch(
+      (): number => props.percent,
+      (): void => {
+        if (props.percent >= 0 && props.percent <= 1 && !clickInfo.value.initiated) {
+          const offsetWidth = (barWidth - progressBtnWidth) * props.percent;
+          _offset(offsetWidth);
+        }
+      }
+    );
 
     return {
       barRef,

@@ -44,29 +44,6 @@ export default defineComponent({
     let timer: NodeJS.Timeout | null = null;
 
     /**
-     * 监听listData，根据autoplay值，判断是否开启自动轮播
-     */
-    watch(
-      () => props.listData,
-      (newValue, preValue, onInvalidate): void => {
-        newValue.length > 1 && props.autoplay && autoplayAction();
-        onInvalidate(() => {
-          timer && clearAutoplay();
-        });
-      }
-    );
-
-    /**
-     * 轮播切换时，向父组件触发change事件
-     */
-    watch(curIndex, (): void => {
-      const param: IChangeParam = {
-        index: curIndex.value
-      };
-      ctx.emit('change', param);
-    });
-
-    /**
      * 自动播放
      */
     const autoplayAction = (): void => {
@@ -141,6 +118,29 @@ export default defineComponent({
       move(MoveTypeEnum.PREV);
       props.autoplay && autoplayAction();
     };
+
+    /**
+     * 监听listData，根据autoplay值，判断是否开启自动轮播
+     */
+    watch(
+      () => props.listData,
+      (newValue, preValue, onInvalidate): void => {
+        newValue.length > 1 && props.autoplay && autoplayAction();
+        onInvalidate(() => {
+          timer && clearAutoplay();
+        });
+      }
+    );
+
+    /**
+     * 轮播切换时，向父组件触发change事件
+     */
+    watch(curIndex, (): void => {
+      const param: IChangeParam = {
+        index: curIndex.value
+      };
+      ctx.emit('change', param);
+    });
 
     return {
       curIndex,

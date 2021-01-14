@@ -52,6 +52,16 @@ export default defineComponent({
     const bgUrl = ref<string>('');
 
     /**
+     * 轮播切换时的回调
+     */
+    const handleCarouselChange = ({ index }: IChangeParam): void => {
+      if (props.bannerList) {
+        const bannerList = props.bannerList;
+        bgUrl.value = bannerList[index].imageUrl;
+      }
+    };
+
+    /**
      * 初始化背景图
      */
     watch(
@@ -62,16 +72,6 @@ export default defineComponent({
         }
       }
     );
-
-    /**
-     * 轮播切换时的回调
-     */
-    const handleCarouselChange = ({ index }: IChangeParam): void => {
-      if (props.bannerList) {
-        const bannerList = props.bannerList;
-        bgUrl.value = bannerList[index].imageUrl;
-      }
-    };
 
     return {
       bgUrl,

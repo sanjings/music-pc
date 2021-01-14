@@ -26,7 +26,7 @@ const usePlay = () => {
   };
 
   /**
-   * 播放指定歌曲
+   * 删除指定歌曲
    */
   const handleClickDelete = (e: MouseEvent): void => {
     const target = e.target as HTMLElement;
