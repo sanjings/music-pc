@@ -70,8 +70,9 @@
     - 其他逻辑代码
     - watch和watchEffect
 12. vuex规范：
-    - 每个页面模块有自己独立的module，在store文件夹下创建对应的文件夹
-    - actionTypes统一管理
+    - 每个页面模块有自己独立的vuex模块，在store文件夹中模块化管理
+    - state、mutations、getters、actions分离，在index中导入
+    - 事件类型，在actionTypes中管理
     
 ### 项目运行
 #### clone项目
