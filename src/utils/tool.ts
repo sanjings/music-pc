@@ -6,7 +6,7 @@
 const debounce = (fn: Function, delayTime: number = 300) => {
   let timer: NodeJS.Timeout | null = null;
 
-  return function (...args: any) {
+  return function (this: any, ...args: any) {
     timer && clearTimeout(timer) && (timer = null);
 
     timer = setTimeout(() => {

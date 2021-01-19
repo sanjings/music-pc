@@ -45,5 +45,7 @@ const ajaxPost = (url: string, params: any): Promise<IResponseData> => axiosInst
 export {
   ajaxGet,
   ajaxPost
-}
+};
+
+export default axiosInstance;
 
