@@ -1,6 +1,7 @@
 {
   "name": "vue3-vite-ts-music-pc",
   "version": "1.0.0",
+  "author": "sanjing",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
