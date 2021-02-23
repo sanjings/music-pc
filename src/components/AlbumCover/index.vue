@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { IAlbumData } from '/@/typings';
+import { IAlbumData } from '@/typings';
 
 export default defineComponent({
   name: 'AlbumCover',
@@ -57,7 +57,7 @@ export default defineComponent({
       top: 0;
       bottom: 0;
       width: 153px;
-      background: url('../../assets/images/sprite_cover.png') no-repeat 0 -845px;
+      background: url('assets/images/sprite_cover.png') no-repeat 0 -845px;
     }
     .icon-play-circle {
       display: none;

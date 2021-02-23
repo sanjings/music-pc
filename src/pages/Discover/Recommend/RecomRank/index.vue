@@ -19,8 +19,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import RankSongs from './RankSongs.vue';
-import ModuleTitle from '/components/ModuleTitle/index.vue';
-import { IRankData } from '/@/typings';
+import ModuleTitle from 'components/ModuleTitle/index.vue';
+import { IRankData } from '@/typings';
 
 export default defineComponent({
   name: 'RecomRank',

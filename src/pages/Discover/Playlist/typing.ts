@@ -1,4 +1,4 @@
-import { IPlayData, IUnknowObject } from "/@/typings";
+import { IPlayData, IUnknowObject } from "@/typings";
 
 export interface ICatSub {
   name: string; 

@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { IPlayData } from '/@/typings';
+import { IPlayData } from '@/typings';
 
 export default defineComponent({
   name: 'RelatedPlaylist',

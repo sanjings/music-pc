@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, watch, ref } from 'vue';
-import { debounce } from '/utils/tool';
+import { debounce } from 'utils/tool';
 
 export default defineComponent({
   name: 'Pagination',

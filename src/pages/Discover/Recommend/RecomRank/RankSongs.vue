@@ -33,8 +33,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { IRankData } from '/@/typings';
-import usePlay from '/hooks/usePlay';
+import { IRankData } from '@/typings';
+import usePlay from 'hooks/usePlay';
 
 export default defineComponent({
   name: 'RankSongs',

@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import ModuleTitle from '/components/ModuleTitle/index.vue';
+import ModuleTitle from 'components/ModuleTitle/index.vue';
 
 export default defineComponent({
   name: 'Comment',

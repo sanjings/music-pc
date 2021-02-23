@@ -27,14 +27,14 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from 'vue';
-import { getSingerListRequest, getRecomSingersRequest } from '/requests/singer';
-import { singerCategories, alphaTypes } from '/@/apis/data';
+import { getSingerListRequest, getRecomSingersRequest } from 'requests/singer';
+import { singerCategories, alphaTypes } from '@/apis/data';
 import Categories from './Categories/index.vue';
 import Alpha from './Alpha/index.vue';
-import ModuleTitle from '/components/ModuleTitle/index.vue';
+import ModuleTitle from 'components/ModuleTitle/index.vue';
 import SingerList from './List/index.vue';
 import { IState } from './typing';
-import { IRankData } from '/@/typings';
+import { IRankData } from '@/typings';
 
 export default defineComponent({
   name: 'Singers',

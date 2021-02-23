@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { IPlayData } from '/@/typings';
+import { IPlayData } from '@/typings';
 
 export default defineComponent({
   name: 'PlaylistItem',
@@ -42,7 +42,7 @@ export default defineComponent({
       right: 0;
       top: 0;
       bottom: 0;
-      background: url('../../assets/images/sprite_cover.png') no-repeat 0 0;
+      background: url('assets/images/sprite_cover.png') no-repeat 0 0;
     }
     .play-count {
       position: absolute;

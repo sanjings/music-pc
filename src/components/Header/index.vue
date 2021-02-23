@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { headerNavList } from '/@/apis/data';
+import { headerNavList } from '@/apis/data';
 import Logo from './Logo.vue';
 import Nav from './Nav.vue';
 import Search from './Search.vue';

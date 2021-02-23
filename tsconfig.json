@@ -3,38 +3,45 @@
     "baseUrl": "./",
     "target": "esnext",
     "module": "esnext",
+    "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
-    "moduleResolution": "node",
+    "sourceMap": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "types": [
+      "vite/client"
+    ],
     "paths": {
-      "/@/*": [
+      "@/*": [
         "src/*"
       ],
-      "/pages/*": [
+      "pages/*": [
         "src/pages/*"
       ],
-      "/components/*": [
+      "components/*": [
         "src/components/*"
       ],
-      "/assets/*": [
+      "assets/*": [
         "src/assets/*"
       ],
-      "/utils/*": [
+      "utils/*": [
         "src/utils/*"
       ],
-      "/plugins/*": [
+      "plugins/*": [
         "src/plugins/*"
       ],
-      "/requests/*": [
+      "requests/*": [
         "src/apis/requests/*"
       ],
-      "/typings/*": [
-        "src/typings/*"
-      ],
-      "/hooks/*": [
+      "hooks/*": [
         "src/hooks/*"
       ],
-      "/store/*": [
+      "store/*": [
         "src/store/*"
       ]
     }

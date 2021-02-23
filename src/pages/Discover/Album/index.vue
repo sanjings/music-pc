@@ -36,13 +36,13 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted, computed } from 'vue';
-import AlbumCover from '/components/AlbumCover/index.vue';
-import ModuleTitle from '/components/ModuleTitle/index.vue';
-import Tab from '/components/Tab/index.vue';
-import Pagination from '/components/Pagination/index.vue';
-import { getHotAlbumRequest, getNewAlbumListRequest } from '/requests/album';
-import { areaList } from '/@/apis/data';
-import { AreaType } from '/@/typings/localData';
+import AlbumCover from 'components/AlbumCover/index.vue';
+import ModuleTitle from 'components/ModuleTitle/index.vue';
+import Tab from 'components/Tab/index.vue';
+import Pagination from 'components/Pagination/index.vue';
+import { getHotAlbumRequest, getNewAlbumListRequest } from 'requests/album';
+import { areaList } from '@/apis/data';
+import { AreaType } from '@/typings/localData';
 import { IState } from './typing';
 
 export default defineComponent({

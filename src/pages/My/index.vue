@@ -28,7 +28,7 @@ export default defineComponent({
       margin: 0 auto;
       width: 807px;
       height: 372px;
-      background: url('../../assets/images/login_my.png') no-repeat 0 104px;
+      background: url('assets/images/login_my.png') no-repeat 0 104px;
       .login-btn {
         position: absolute;
         width: 167px;

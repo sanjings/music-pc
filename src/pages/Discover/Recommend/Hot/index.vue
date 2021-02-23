@@ -24,11 +24,11 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { useRouter } from 'vue-router';
-import PlaylistItem from '/components/PlaylistItem/index.vue';
-import ModuleTitle from '/components/ModuleTitle/index.vue';
-import Tab from '/components/Tab/index.vue';
-import { playlistCatList } from '/@/apis/data';
-import { IPlayData } from '/@/typings';
+import PlaylistItem from 'components/PlaylistItem/index.vue';
+import ModuleTitle from 'components/ModuleTitle/index.vue';
+import Tab from 'components/Tab/index.vue';
+import { playlistCatList } from '@/apis/data';
+import { IPlayData } from '@/typings';
 
 export default defineComponent({
   name: 'Hot',

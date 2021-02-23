@@ -1,5 +1,5 @@
 <template>
-  <teleport to="#palyer-target">
+  <teleport to="#player-target">
     <transition name="fade">
       <div class="player-bar" v-if="currentSong && playList.length">
         <div class="player-inner w-def-container">
@@ -62,11 +62,11 @@ import { defineComponent, ref, watch, toRefs, computed } from 'vue';
 import { useStore } from 'vuex';
 import ProgressBar from './ProgressBar.vue';
 import PlayerMenu from './Menu.vue';
-import { completeSongUrl } from '/utils/tool';
-import { SET_CURRENT_INDEX, SET_CURRENT_SONG, SET_PLAYING_STATUS, SET_SHOW_PLAY_LIST } from '/@/store/player/actionTypes';
-import { getLyricRequest } from '/requests/song';
-import LyricParser, { IHandler } from '/plugins/LyricParser';
-import createToast from '/components/Toast/index';
+import { completeSongUrl } from 'utils/tool';
+import { SET_CURRENT_INDEX, SET_CURRENT_SONG, SET_PLAYING_STATUS, SET_SHOW_PLAY_LIST } from 'store/player/actionTypes';
+import { getLyricRequest } from 'requests/song';
+import LyricParser, { IHandler } from 'plugins/LyricParser';
+import createToast from 'components/Toast/index';
 
 export default defineComponent({
   name: 'Player',
@@ -302,7 +302,7 @@ export default defineComponent({
         margin-right: 15px;
         width: 34px;
         height: 34px;
-        background: url('../../assets/images/music.png') no-repeat;
+        background: url('assets/images/music.png') no-repeat;
         background-size: 100%;
         border: 1px solid #222;
         border-radius: 4px;

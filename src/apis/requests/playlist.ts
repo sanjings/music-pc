@@ -1,4 +1,4 @@
-import { ICatSub, ICatData } from './../../pages/Discover/Playlist/typing';
+import { ICatSub, ICatData } from 'pages/Discover/Playlist/typing';
 import { ajaxGet } from '../ajax';
 import { 
   GET_PLAYLIST_CATLIST, 
@@ -6,8 +6,8 @@ import {
   GET_PLAYLIST_DETAIL, 
   GET_RELATED_PLAYLIST 
 } from './../url';
-import { IPlayData } from '/@/typings';
-import { IQueryParams } from '/pages/Discover/Playlist/typing';
+import { IPlayData } from '@/typings';
+import { IQueryParams } from 'pages/Discover/Playlist/typing';
 
 /**
  * 请求歌单分类数据

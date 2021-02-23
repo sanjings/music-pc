@@ -1,5 +1,5 @@
-import { IAlbumData } from "/@/typings";
-import { AreaType } from "/@/typings/localData";
+import { IAlbumData } from "@/typings";
+import { AreaType } from "@/typings/localData";
 
 export interface IQueryParams {
   area: AreaType;

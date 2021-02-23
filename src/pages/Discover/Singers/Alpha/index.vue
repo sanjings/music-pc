@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { IAlphaTypes } from '/@/typings/localData';
+import { IAlphaTypes } from '@/typings/localData';
 
 export default defineComponent({
   name: 'Alpha',

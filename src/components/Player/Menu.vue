@@ -18,7 +18,7 @@
 import { defineComponent, PropType } from 'vue';
 import PlayList from './PlayList.vue';
 import Lyric from './Lyric.vue';
-import { ISong } from '/@/typings';
+import { ISong } from '@/typings';
 
 export default defineComponent({
   name: 'PlayerMenu',

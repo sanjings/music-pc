@@ -26,11 +26,11 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { IRankData } from '/@/typings';
+import { IRankData } from '@/typings';
 import Top from './Top.vue';
 import SongList from './SongList.vue';
 import Comment from './Comment.vue';
-import Pagination from '/components/Pagination/index.vue';
+import Pagination from 'components/Pagination/index.vue';
 import { IComment } from './typing';
 
 export default defineComponent({

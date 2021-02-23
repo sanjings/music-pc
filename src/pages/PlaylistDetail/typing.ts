@@ -1,5 +1,5 @@
-import { IComment } from "../../components/PlaylistInfo/typing";
-import { IPlayData, IRankData } from "/@/typings";
+import { IComment } from "components/PlaylistInfo/typing";
+import { IPlayData, IRankData } from "@/typings";
 
 export interface IQueryParams {
   id: number;

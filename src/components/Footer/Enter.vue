@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { footerImages } from '/@/apis/data';
+import { footerImages } from '@/apis/data';
 
 export default defineComponent({
   name: 'Enter',
@@ -42,7 +42,7 @@ export default defineComponent({
         width: 50px;
         height: 45px;
         text-align: center;
-        background: url('../../assets/images/sprite_footer_02.png') no-repeat;
+        background: url('assets/images/sprite_footer_02.png') no-repeat;
         background-size: 110px 450px;
       }
       &:nth-child(1) .image-link {

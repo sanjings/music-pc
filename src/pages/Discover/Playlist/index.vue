@@ -32,11 +32,11 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import PlaylistItem from '/components/PlaylistItem/index.vue';
-import ModuleTitle from '/components/ModuleTitle/index.vue';
-import Pagination from '/components/Pagination/index.vue';
+import PlaylistItem from 'components/PlaylistItem/index.vue';
+import ModuleTitle from 'components/ModuleTitle/index.vue';
+import Pagination from 'components/Pagination/index.vue';
 import Categories from './Categories/index.vue';
-import { getCatListRequest, getPlaylistRequest } from '/requests/playlist';
+import { getCatListRequest, getPlaylistRequest } from 'requests/playlist';
 import { IState } from './typing';
 import { IQueryParams } from './typing';
 

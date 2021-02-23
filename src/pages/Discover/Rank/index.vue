@@ -22,13 +22,13 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { getRankListRequest } from '/requests/rank';
-import { getPlaylistCommentRequest } from '/requests/comment';
-import { getPlaylistDetailRequest } from '/requests/playlist';
+import { getRankListRequest } from 'requests/rank';
+import { getPlaylistCommentRequest } from 'requests/comment';
+import { getPlaylistDetailRequest } from 'requests/playlist';
 import RankList from './RankList/index.vue';
-import PlaylistInfo from '/components/PlaylistInfo/index.vue';
+import PlaylistInfo from 'components/PlaylistInfo/index.vue';
 import { IState, IQueryParams } from './typing';
-import { IRankData } from '/@/typings';
+import { IRankData } from '@/typings';
 
 export default defineComponent({
   name: 'Rank',

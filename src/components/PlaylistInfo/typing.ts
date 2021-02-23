@@ -1,4 +1,4 @@
-import { IUser } from '/@/typings';
+import { IUser } from '@/typings';
 
 export interface IComment {
   liked: boolean;

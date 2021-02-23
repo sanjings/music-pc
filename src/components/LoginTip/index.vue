@@ -18,7 +18,7 @@ export default defineComponent({
   padding: 16px 22px;
   height: 125px;
   width: 100%;
-  background: url('../../assets/images/sprite_login.png') no-repeat 0 9999px;
+  background: url('assets/images/sprite_login.png') no-repeat 0 9999px;
   background-position: 0 0;
   .tip-txt {
     line-height: 22px;
@@ -34,7 +34,7 @@ export default defineComponent({
     text-align: center;
     color: #fff;
     text-decoration: none;
-    background: url('../../assets/images/sprite_login.png') no-repeat 0 9999px;
+    background: url('assets/images/sprite_login.png') no-repeat 0 9999px;
     background-position: 0 -195px;
     text-shadow: 0 1px 0 #8a060b;
     cursor: pointer;

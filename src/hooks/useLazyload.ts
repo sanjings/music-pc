@@ -1,6 +1,5 @@
 import { ref, onMounted } from 'vue';
-import imgLazyload from '/utils/lazyload';
-import { debounce } from '/utils/tool';
+import { debounce, imgLazyload } from 'utils/tool';
 
 const useLazyload = () => {
   const listRef = ref<HTMLElement | null>(null);

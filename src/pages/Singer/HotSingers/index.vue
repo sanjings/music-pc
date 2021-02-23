@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { useRouter } from 'vue-router';
-import { ISingerData } from '/@/typings';
+import { ISingerData } from '@/typings';
 
 export default defineComponent({
   name: 'HotSingers',

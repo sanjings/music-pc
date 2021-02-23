@@ -19,10 +19,10 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted, computed, toRefs, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import PlaylistInfo from '/components/PlaylistInfo/index.vue';
+import PlaylistInfo from 'components/PlaylistInfo/index.vue';
 import RelatedPlaylist from './RelatedPlaylist/index.vue';
-import { getPlaylistDetailRequest, getRelatedPlaylistRequest } from '/requests/playlist';
-import { getPlaylistCommentRequest } from '/requests/comment';
+import { getPlaylistDetailRequest, getRelatedPlaylistRequest } from 'requests/playlist';
+import { getPlaylistCommentRequest } from 'requests/comment';
 import { IState, IQueryParams } from './typing';
 
 export default defineComponent({

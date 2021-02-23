@@ -1,6 +1,6 @@
 import { ajaxGet } from '../ajax';
 import { GET_BANNERS, GET_HOT_PLAYLIST } from './../url';
-import { IAlbumData } from '/@/typings';
+import { IAlbumData } from '@/typings';
 
 export enum BannerTypeEnum {
   PC = 0,

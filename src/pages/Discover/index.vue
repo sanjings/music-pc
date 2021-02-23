@@ -7,7 +7,7 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue';
-import { discoverMenu } from '/@/apis/data';
+import { discoverMenu } from '@/apis/data';
 import Menu from './Menu/index.vue';
 
 export default defineComponent({

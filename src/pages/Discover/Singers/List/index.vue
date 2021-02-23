@@ -5,7 +5,7 @@
         <div class="cover-wrap" v-if="index < 10">
           <img
             class="cover"
-            src="/assets/images/singer.png"
+            src="assets/images/singer.png"
             :data-src="item.img1v1Url + '?param=130y130'"
             alt="cover"
           />
@@ -21,10 +21,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType, watch } from 'vue';
-import { ISingerData } from '/@/typings';
-import imgLazyload from '/utils/lazyload';
-import { debounce } from '/utils/tool';
-import useLazyload from '/hooks/useLazyload';
+import { ISingerData } from '@/typings';
+import useLazyload from 'hooks/useLazyload';
 
 export default defineComponent({
   name: 'SingerList',
@@ -34,7 +32,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, ctx) {
+  setup(props) {
     const { listRef, initLazyload } = useLazyload();
 
     /**
@@ -85,7 +83,7 @@ export default defineComponent({
         display: inline-block;
         width: 17px;
         height: 18px;
-        background: url('../../../../assets/images/sprite_icon2.png') no-repeat 0 -740px;
+        background: url('assets/images/sprite_icon2.png') no-repeat 0 -740px;
       }
     }
   }

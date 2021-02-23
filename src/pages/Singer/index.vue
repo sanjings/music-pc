@@ -19,7 +19,7 @@
 import { defineComponent, onMounted, reactive, toRefs, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { IState } from './typing';
-import { getSingerDetailRequest, getRecomSingersRequest } from '/requests/singer';
+import { getSingerDetailRequest, getRecomSingersRequest } from 'requests/singer';
 import HotSongs from './HotSongs/index.vue';
 import HotSingers from './HotSingers/index.vue';
 

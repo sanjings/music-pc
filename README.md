@@ -4,9 +4,9 @@
 基于vue3+vite+typescript开发仿网易云音乐webpc，不使用任何UI框架，所有组件和样式均自主开发。
 
 #### 技术栈
-- **[vite v1.x](https://github.com/vitejs/vite/tree/1.x):**  vite构建工具
-- **[vue v3.0.2](https://github.com/vuejs/vue):**  vue3全家桶 
-- **[typescript v4.1.3](https://github.com/microsoft/TypeScript):**  javascript的超集 
+- **[vite v2](https://github.com/vitejs/vite/tree/1.x):**  vite构建工具
+- **[vue v3.0.5](https://github.com/vuejs/vue):**  vue3全家桶 
+- **[typescript v4.1.5](https://github.com/microsoft/TypeScript):**  javascript的超集 
 - **[axios](https://github.com/axios/axios):**  基于promise的HTTP库
 - **[dayjs](https://github.com/iamkun/dayjs):**  一个轻量的处理时间和日期的库
 - **[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):**  开源的NodeJS版api接口 

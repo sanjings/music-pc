@@ -1,4 +1,4 @@
-import { IQueryParams } from './../../pages/Discover/Album/typing';
+import { IQueryParams } from 'pages/Discover/Album/typing';
 import { ajaxGet } from '../ajax';
 import { GET_HOT_ALBUM, GET_ALBUM_BY_AREA } from './../url';
 

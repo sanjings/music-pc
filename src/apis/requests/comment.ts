@@ -1,4 +1,4 @@
-import { IQueryParams } from '/pages/Discover/Rank/typing';
+import { IQueryParams } from 'pages/Discover/Rank/typing';
 import { ajaxGet } from '../ajax';
 import { GET_PLAYLIST_COMMENT } from '../url';
 

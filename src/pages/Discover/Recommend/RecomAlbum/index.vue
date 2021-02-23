@@ -20,9 +20,9 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { IAlbumData } from '/@/typings';
-import AlbumCover from '/components/AlbumCover/index.vue';
-import ModuleTitle from '/components/ModuleTitle/index.vue';
+import { IAlbumData } from '@/typings';
+import AlbumCover from 'components/AlbumCover/index.vue';
+import ModuleTitle from 'components/ModuleTitle/index.vue';
 
 export default defineComponent({
   name: 'RecomAlbum',

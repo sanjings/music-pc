@@ -9,9 +9,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Header from '/components/Header/index.vue';
-import Footer from '/components/Footer/index.vue';
-import Player from '/components/Player/index.vue';
+import Header from 'components/Header/index.vue';
+import Footer from 'components/Footer/index.vue';
+import Player from 'components/Player/index.vue';
 
 export default defineComponent({
   name: 'HomeLayout',

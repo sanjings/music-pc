@@ -22,8 +22,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { ISong } from '/@/typings';
-import usePlay from '/hooks/usePlay';
+import { ISong } from '@/typings';
+import usePlay from 'hooks/usePlay';
 
 export default defineComponent({
   name: 'PlayList',

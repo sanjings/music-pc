@@ -33,9 +33,9 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { IRankData } from '/@/typings';
-import usePlay from '/hooks/usePlay';
-import createToast from '/components/Toast/index';
+import { IRankData } from '@/typings';
+import usePlay from 'hooks/usePlay';
+import createToast from 'components/Toast/index';
 
 export default defineComponent({
   name: 'Top',

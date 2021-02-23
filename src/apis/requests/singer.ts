@@ -1,4 +1,4 @@
-import { IQueryParams } from './../../pages/Discover/Singers/typing';
+import { IQueryParams } from 'pages/Discover/Singers/typing';
 import { ajaxGet } from '../ajax';
 import { GET_RECOM_SINGERS, GET_SINGER_LIST, GET_SINGER_DETAIL } from './../url';
 

@@ -23,13 +23,13 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, reactive, toRefs } from 'vue';
-import { getBannersRequest, getHotPlayListRequest, BannerTypeEnum } from '/requests/recommend';
-import { getHotAlbumRequest } from '/requests/album';
-import { getPlaylistDetailRequest } from '/requests/playlist';
-import { getSingerListRequest } from '/requests/singer';
-import { IBannerData, IState } from './typing';
+import { getBannersRequest, getHotPlayListRequest, BannerTypeEnum } from 'requests/recommend';
+import { getHotAlbumRequest } from 'requests/album';
+import { getPlaylistDetailRequest } from 'requests/playlist';
+import { getSingerListRequest } from 'requests/singer';
+import { IState } from './typing';
 import Banner from './Banner/index.vue';
-import LoginTip from '/components/LoginTip/index.vue';
+import LoginTip from 'components/LoginTip/index.vue';
 import Hot from './Hot/index.vue';
 import RecomAlbum from './RecomAlbum/index.vue';
 import RecomSinger from './RecomSinger/index.vue';

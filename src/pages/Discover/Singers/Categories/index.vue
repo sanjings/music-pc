@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { ISingerCategories } from '/@/typings/localData';
+import { ISingerCategories } from '@/typings/localData';
 
 export default defineComponent({
   name: 'Categories',

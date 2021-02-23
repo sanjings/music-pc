@@ -15,15 +15,15 @@
       <!-- 客户端下载链接 -->
       <div class="download-wrap" v-once>
         <a href="https://music.163.com/#/download" target="_blank">
-          <img src="/assets/images/download.png" alt="down" />
+          <img src="../../../../assets/images/download.png" alt="down" />
         </a>
       </div>
       <div class="controls" v-once>
         <button class="btn left" @click="carouselRef.movePrev()">
-          <img src="/assets/icons/banner-control-left.png" alt="left" />
+          <img src="../../../../assets/icons/banner-control-left.png" alt="left" />
         </button>
         <button class="btn right" @click="carouselRef.moveNext()">
-          <img src="/assets/icons/banner-control-right.png" alt="right" />
+          <img src="../../../../assets/icons/banner-control-right.png" alt="right" />
         </button>
       </div>
     </div>
@@ -32,9 +32,9 @@
 
 <script lang="ts">
 import { defineComponent, ref, PropType, watch } from 'vue';
-import Carousel from '/components/Carousel/index.vue';
+import Carousel from 'components/Carousel/index.vue';
 import { IBannerData } from '../typing';
-import { IChangeParam } from '/components/Carousel/typing';
+import { IChangeParam } from 'components/Carousel/typing';
 
 export default defineComponent({
   name: 'Banner',

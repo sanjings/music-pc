@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { SizeType } from '/@/typings';
+import { SizeType } from '@/typings';
 
 export default defineComponent({
   name: 'Header',

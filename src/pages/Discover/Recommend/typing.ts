@@ -1,4 +1,4 @@
-import { IUnknowObject, IPlayData, IAlbumData, ISingerData, IRankData } from '/@/typings/index';
+import { IUnknowObject, IPlayData, IAlbumData, ISingerData, IRankData } from '@/typings/index';
 
 export interface IBannerData extends IUnknowObject {
   imageUrl: string;

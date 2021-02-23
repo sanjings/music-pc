@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { ISingerData } from '/@/typings';
+import { ISingerData } from '@/typings';
 
 export default defineComponent({
   name: 'RecomSinger',

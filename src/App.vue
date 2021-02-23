@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
-import createToast from '/components/Toast/index';
+import createToast from 'components/Toast/index';
 
 export default defineComponent({
   name: 'App',

@@ -1,4 +1,4 @@
-import { ISingerData } from "/@/typings";
+import { ISingerData } from "@/typings";
 
 export interface IQueryParams {
   type?: number | string;
