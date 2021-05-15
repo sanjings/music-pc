@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { footerLinks } from '@/apis/data';
+import { footerLinks } from '@/configs/localData';
 
 export default defineComponent({
   name: 'Copy',

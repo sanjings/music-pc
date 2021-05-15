@@ -18,9 +18,10 @@ export default defineConfig({
       'assets': pathResolve('./src/assets'),
       'utils': pathResolve('./src/utils'),
       'plugins': pathResolve('./src/plugins'),
-      'requests': pathResolve('./src/apis/requests'),
+      'requests': pathResolve('./src/requests'),
       'hooks': pathResolve('./src/hooks'),
-      'store': pathResolve('./src/store')
+      'store': pathResolve('./src/store'),
+      'configs': pathResolve('./src/configs')
     }
   }
 });

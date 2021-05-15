@@ -1,18 +1,13 @@
 import { ICatSub, ICatData } from 'pages/Discover/Playlist/typing';
-import { ajaxGet } from '../ajax';
-import { 
-  GET_PLAYLIST_CATLIST, 
-  GET_PLAYLIST_BY_CAT, 
-  GET_PLAYLIST_DETAIL, 
-  GET_RELATED_PLAYLIST 
-} from './../url';
+import { ajaxGet } from '@/utils/http';
+import { GET_PLAYLIST_CATLIST, GET_PLAYLIST_BY_CAT, GET_PLAYLIST_DETAIL, GET_RELATED_PLAYLIST } from '@/configs/api';
 import { IPlayData } from '@/typings';
 import { IQueryParams } from 'pages/Discover/Playlist/typing';
 
 /**
  * 请求歌单分类数据
  */
-const getCatListRequest = async () => {
+export const httpGetCatList = async () => {
   const res = await ajaxGet(GET_PLAYLIST_CATLIST);
   const { categories, sub } = res;
   const values: string[] = Object.values(categories);
@@ -22,15 +17,15 @@ const getCatListRequest = async () => {
       if (cur.category === index) {
         item.children.push(cur);
       }
-    })
-  })
+    });
+  });
   return catList;
-}
+};
 
 /**
  * 请求分类歌单数据
  */
-const getPlaylistRequest = async (params: IQueryParams) => {
+export const httpGetPlaylist = async (params: IQueryParams) => {
   const res = await ajaxGet(GET_PLAYLIST_BY_CAT, params);
   return {
     ...res,
@@ -45,7 +40,7 @@ const getPlaylistRequest = async (params: IQueryParams) => {
  * 请求歌单详情数据
  * @param id 歌单id
  */
-const getPlaylistDetailRequest = (id: number) => {
+export const httpGetPlaylistDetail = (id: number) => {
   return ajaxGet(GET_PLAYLIST_DETAIL, { id });
 };
 
@@ -53,13 +48,6 @@ const getPlaylistDetailRequest = (id: number) => {
  * 获取相关歌单推荐
  * @param id 歌单id
  */
-const getRelatedPlaylistRequest = (id: number) => {
-  return ajaxGet(GET_RELATED_PLAYLIST, { id })
-}
-
-export {
-  getCatListRequest,
-  getPlaylistRequest,
-  getPlaylistDetailRequest,
-  getRelatedPlaylistRequest
-}
+export const httpGetRelatedPlaylist = (id: number) => {
+  return ajaxGet(GET_RELATED_PLAYLIST, { id });
+};

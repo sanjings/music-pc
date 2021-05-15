@@ -62,9 +62,9 @@ import { defineComponent, ref, watch, toRefs, computed } from 'vue';
 import { useStore } from 'vuex';
 import ProgressBar from './ProgressBar.vue';
 import PlayerMenu from './Menu.vue';
-import { completeSongUrl } from 'utils/tool';
+import { completeSongUrl } from 'utils/tools';
 import { SET_CURRENT_INDEX, SET_CURRENT_SONG, SET_PLAYING_STATUS, SET_SHOW_PLAY_LIST } from 'store/player/actionTypes';
-import { getLyricRequest } from 'requests/song';
+import { httpGetLyric } from 'requests/song';
 import LyricParser, { IHandler } from 'plugins/LyricParser';
 import createToast from 'components/Toast/index';
 
@@ -97,7 +97,7 @@ export default defineComponent({
     const getLyric = async (id: number) => {
       const {
         lrc: { lyric }
-      } = await getLyricRequest(id);
+      } = await httpGetLyric(id);
 
       if (!lyric) {
         currentLyric.value = null;

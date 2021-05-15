@@ -21,8 +21,8 @@ import { defineComponent, reactive, onMounted, computed, toRefs, watch } from 'v
 import { useRoute } from 'vue-router';
 import PlaylistInfo from 'components/PlaylistInfo/index.vue';
 import RelatedPlaylist from './RelatedPlaylist/index.vue';
-import { getPlaylistDetailRequest, getRelatedPlaylistRequest } from 'requests/playlist';
-import { getPlaylistCommentRequest } from 'requests/comment';
+import { httpGetPlaylistDetail, httpGetRelatedPlaylist } from 'requests/playlist';
+import { httpGetPlaylistComment } from 'requests/comment';
 import { IState, IQueryParams } from './typing';
 
 export default defineComponent({
@@ -70,7 +70,7 @@ export default defineComponent({
      * 获取歌单详情
      */
     const getPlaylistDetail = async (id: number) => {
-      const { playlist } = await getPlaylistDetailRequest(id);
+      const { playlist } = await httpGetPlaylistDetail(id);
       state.detailData = playlist;
     };
 
@@ -78,7 +78,7 @@ export default defineComponent({
      * 获取相关歌单
      */
     const getRelatedPlaylist = async (id: number) => {
-      const { playlists } = await getRelatedPlaylistRequest(id);
+      const { playlists } = await httpGetRelatedPlaylist(id);
       state.relatedPlaylist = playlists;
     };
 
@@ -86,7 +86,7 @@ export default defineComponent({
      * 获取评论列表
      */
     const getCommentList = async (queryParams: IQueryParams) => {
-      const { comments, total } = await getPlaylistCommentRequest(queryParams);
+      const { comments, total } = await httpGetPlaylistComment(queryParams);
       state.commentList = comments;
     };
 

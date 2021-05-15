@@ -1,7 +1,7 @@
 import { ISong } from '@/typings/index';
 import { useStore } from 'vuex';
 import { SET_CURRENT_INDEX, SET_PLAY_LIST, DELETE_SONG } from 'store/player/actionTypes';
-import { deepClone } from 'utils/tool';
+import { deepClone } from 'utils/tools';
 
 const usePlay = () => {
   const store = useStore();

@@ -40,8 +40,8 @@ import AlbumCover from 'components/AlbumCover/index.vue';
 import ModuleTitle from 'components/ModuleTitle/index.vue';
 import Tab from 'components/Tab/index.vue';
 import Pagination from 'components/Pagination/index.vue';
-import { getHotAlbumRequest, getNewAlbumListRequest } from 'requests/album';
-import { areaList } from '@/apis/data';
+import { httpGetHotAlbum, httpGetNewAlbumList } from 'requests/album';
+import { areaList } from '@/configs/localData';
 import { AreaType } from '@/typings/localData';
 import { IState } from './typing';
 
@@ -79,7 +79,7 @@ export default defineComponent({
      * 获取热门新碟数据
      */
     const getHotAlbumList = async () => {
-      const { albums } = await getHotAlbumRequest();
+      const { albums } = await httpGetHotAlbum();
       state.hotAlbumList = albums.slice(0, 10);
     };
 
@@ -87,7 +87,7 @@ export default defineComponent({
      * 获取分类新碟列表
      */
     const getAlbumList = async () => {
-      const { albums, total } = await getNewAlbumListRequest(state.queryParams);
+      const { albums, total } = await httpGetNewAlbumList(state.queryParams);
       state.allAlbumList = albums;
       state.listTotal = Number(total);
     };

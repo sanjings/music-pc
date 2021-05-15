@@ -36,13 +36,16 @@
         "src/plugins/*"
       ],
       "requests/*": [
-        "src/apis/requests/*"
+        "src/requests/*"
       ],
       "hooks/*": [
         "src/hooks/*"
       ],
       "store/*": [
         "src/store/*"
+      ],
+      "configs/*": [
+        "src/configs/*"
       ]
     }
   },

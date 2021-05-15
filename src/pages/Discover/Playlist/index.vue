@@ -36,7 +36,7 @@ import PlaylistItem from 'components/PlaylistItem/index.vue';
 import ModuleTitle from 'components/ModuleTitle/index.vue';
 import Pagination from 'components/Pagination/index.vue';
 import Categories from './Categories/index.vue';
-import { getCatListRequest, getPlaylistRequest } from 'requests/playlist';
+import { httpGetCatList, httpGetPlaylist } from 'requests/playlist';
 import { IState } from './typing';
 import { IQueryParams } from './typing';
 
@@ -82,14 +82,14 @@ export default defineComponent({
      * 获取歌单分类
      */
     const getCatList = async () => {
-      state.catList = await getCatListRequest();
+      state.catList = await httpGetCatList();
     };
 
     /**
      * 获取歌单列表
      */
     const getPlayList = async (queryParams: IQueryParams) => {
-      const { playlists, total } = await getPlaylistRequest(queryParams);
+      const { playlists, total } = await httpGetPlaylist(queryParams);
       state.playList = playlists;
       state.listTotal = Number(total);
     };

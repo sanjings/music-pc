@@ -22,9 +22,9 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { getRankListRequest } from 'requests/rank';
-import { getPlaylistCommentRequest } from 'requests/comment';
-import { getPlaylistDetailRequest } from 'requests/playlist';
+import { httpGetRankList } from 'requests/rank';
+import { httpGetPlaylistComment } from 'requests/comment';
+import { httpGetPlaylistDetail } from 'requests/playlist';
 import RankList from './RankList/index.vue';
 import PlaylistInfo from 'components/PlaylistInfo/index.vue';
 import { IState, IQueryParams } from './typing';
@@ -74,7 +74,7 @@ export default defineComponent({
      * 获取排行榜分类
      */
     const getRankList = async () => {
-      const { list } = await getRankListRequest();
+      const { list } = await httpGetRankList();
       state.rankList.push(
         {
           name: '云音乐特色榜',
@@ -91,7 +91,7 @@ export default defineComponent({
      * 获取排行榜详情
      */
     const getRankDetail = async (id: number) => {
-      const { playlist } = await getPlaylistDetailRequest(id);
+      const { playlist } = await httpGetPlaylistDetail(id);
       state.rankDetail = playlist;
     };
 
@@ -99,7 +99,7 @@ export default defineComponent({
      * 获取评论列表
      */
     const getCommentList = async (queryParams: IQueryParams) => {
-      const { comments, total } = await getPlaylistCommentRequest(queryParams);
+      const { comments, total } = await httpGetPlaylistComment(queryParams);
       state.commentList = comments;
     };
 

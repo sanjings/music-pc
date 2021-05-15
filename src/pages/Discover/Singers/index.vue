@@ -27,8 +27,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from 'vue';
-import { getSingerListRequest, getRecomSingersRequest } from 'requests/singer';
-import { singerCategories, alphaTypes } from '@/apis/data';
+import { httpGetSingerList, httpGetRecomSingers } from 'requests/singer';
+import { singerCategories, alphaTypes } from '@/configs/localData';
 import Categories from './Categories/index.vue';
 import Alpha from './Alpha/index.vue';
 import ModuleTitle from 'components/ModuleTitle/index.vue';
@@ -64,7 +64,7 @@ export default defineComponent({
      * 获取分类歌手数据
      */
     const getSingerList = async () => {
-      const { artists } = await getSingerListRequest(state.queryParams);
+      const { artists } = await httpGetSingerList(state.queryParams);
       state.singerList = artists;
     };
 
@@ -72,7 +72,7 @@ export default defineComponent({
      * 获取推荐歌手数据
      */
     const getRecomSingerList = async () => {
-      const { artists } = await getRecomSingersRequest(state.queryParams.limit);
+      const { artists } = await httpGetRecomSingers(state.queryParams.limit);
       state.singerList = artists;
     };
 

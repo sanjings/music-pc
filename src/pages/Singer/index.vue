@@ -19,7 +19,7 @@
 import { defineComponent, onMounted, reactive, toRefs, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { IState } from './typing';
-import { getSingerDetailRequest, getRecomSingersRequest } from 'requests/singer';
+import { httpGetSingerDetail, httpGetRecomSingers } from 'requests/singer';
 import HotSongs from './HotSongs/index.vue';
 import HotSingers from './HotSingers/index.vue';
 
@@ -56,7 +56,7 @@ export default defineComponent({
      * 获取歌手详情
      */
     const getSingerDetail = async (id: number) => {
-      const { artist, hotSongs } = await getSingerDetailRequest(id);
+      const { artist, hotSongs } = await httpGetSingerDetail(id);
       state.singerInfo = artist;
       state.hotSongs = hotSongs;
     };
@@ -65,7 +65,7 @@ export default defineComponent({
      * 获取热门歌手
      */
     const getHotSinger = async () => {
-      const { artists } = await getRecomSingersRequest(15);
+      const { artists } = await httpGetRecomSingers(15);
       state.hotSingers = artists;
     };
 

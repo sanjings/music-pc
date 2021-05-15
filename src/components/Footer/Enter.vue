@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { footerImages } from '@/apis/data';
+import { footerImages } from '@/configs/localData';
 
 export default defineComponent({
   name: 'Enter',

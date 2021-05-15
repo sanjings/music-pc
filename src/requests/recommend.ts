@@ -1,5 +1,5 @@
-import { ajaxGet } from '../ajax';
-import { GET_BANNERS, GET_HOT_PLAYLIST } from './../url';
+import { ajaxGet } from '@/utils/http';
+import { GET_BANNERS, GET_HOT_PLAYLIST } from '@/configs/api';
 import { IAlbumData } from '@/typings';
 
 export enum BannerTypeEnum {
@@ -13,15 +13,15 @@ export enum BannerTypeEnum {
  * 请求banner数据
  * @param type 终端类型
  */
-const getBannersRequest = (type: BannerTypeEnum) => {
+export const httpGetBanners = (type: BannerTypeEnum) => {
   return ajaxGet(GET_BANNERS, { type });
-}
+};
 
 /**
  * 请求热门歌单数据
  * @param limit 列表长度
  */
-const getHotPlayListRequest = async (limit: number) => {
+export const httpGetHotPlayList = async (limit: number) => {
   const res = await ajaxGet(GET_HOT_PLAYLIST, { limit });
   return {
     ...res,
@@ -29,12 +29,7 @@ const getHotPlayListRequest = async (limit: number) => {
       return {
         ...item,
         coverImgUrl: item.picUrl
-      }
+      };
     })
   };
-}
-
-export {
-  getBannersRequest,
-  getHotPlayListRequest
-}
+};

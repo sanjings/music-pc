@@ -23,10 +23,10 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, reactive, toRefs } from 'vue';
-import { getBannersRequest, getHotPlayListRequest, BannerTypeEnum } from 'requests/recommend';
-import { getHotAlbumRequest } from 'requests/album';
-import { getPlaylistDetailRequest } from 'requests/playlist';
-import { getSingerListRequest } from 'requests/singer';
+import { httpGetBanners, httpGetHotPlayList, BannerTypeEnum } from 'requests/recommend';
+import { httpGetHotAlbum } from 'requests/album';
+import { httpGetPlaylistDetail } from 'requests/playlist';
+import { httpGetSingerList } from 'requests/singer';
 import { IState } from './typing';
 import Banner from './Banner/index.vue';
 import LoginTip from 'components/LoginTip/index.vue';
@@ -66,7 +66,7 @@ export default defineComponent({
      * 获取banner数据
      */
     const getBannerList = async () => {
-      const { banners } = await getBannersRequest(BannerTypeEnum.PC);
+      const { banners } = await httpGetBanners(BannerTypeEnum.PC);
       state.bannerList = banners;
     };
 
@@ -74,7 +74,7 @@ export default defineComponent({
      * 获取热门歌单数据
      */
     const getHotPlayList = async () => {
-      const { result } = await getHotPlayListRequest(8);
+      const { result } = await httpGetHotPlayList(8);
       state.hotPlayList = result;
     };
 
@@ -82,7 +82,7 @@ export default defineComponent({
      * 获取热门新碟数据
      */
     const getHotAlbumList = async () => {
-      const { albums } = await getHotAlbumRequest();
+      const { albums } = await httpGetHotAlbum();
       state.albumList = albums.slice(0, 5);
     };
 
@@ -90,7 +90,7 @@ export default defineComponent({
      * 获取入驻歌手数据
      */
     const getSingerList = async () => {
-      const { artists } = await getSingerListRequest({ limit: 10 });
+      const { artists } = await httpGetSingerList({ limit: 10 });
       state.singerList = artists;
     };
 
@@ -100,7 +100,7 @@ export default defineComponent({
     const getRankList = async () => {
       const res = await Promise.all(
         [19723756, 3779629, 2884035].map((item: number) => {
-          return getPlaylistDetailRequest(item);
+          return httpGetPlaylistDetail(item);
         })
       );
 

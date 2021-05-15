@@ -27,7 +27,7 @@ import { useRouter } from 'vue-router';
 import PlaylistItem from 'components/PlaylistItem/index.vue';
 import ModuleTitle from 'components/ModuleTitle/index.vue';
 import Tab from 'components/Tab/index.vue';
-import { playlistCatList } from '@/apis/data';
+import { playlistCatList } from '@/configs/localData';
 import { IPlayData } from '@/typings';
 
 export default defineComponent({

@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
-import { BASE_URL, TIME_OUT, errorHandle } from './config';
+import axios, { AxiosInstance, AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
+import { BASE_URL, TIME_OUT, errorHandle } from '@/configs/http';
 import { IUnknowObject } from '@/typings';
 
 interface IResponseData extends IUnknowObject {
@@ -40,7 +40,7 @@ axiosInstance.interceptors.response.use(
 );
 
 const ajaxGet = (url: string, params?: any): Promise<IResponseData> => axiosInstance.get(url, { params });
-const ajaxPost = (url: string, params: any): Promise<IResponseData> => axiosInstance.post(url, params);
+const ajaxPost = (url: string, params: any, config?: AxiosRequestConfig): Promise<IResponseData> => axiosInstance.post(url, params, config);
 
 export {
   ajaxGet,

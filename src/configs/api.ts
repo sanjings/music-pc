@@ -25,8 +25,3 @@ export const GET_ALBUM_BY_AREA: string = '/album/new'; // 根据区域获取全�
 export const GET_PLAYLIST_COMMENT: string = '/comment/playlist'; // 获取歌单评论
 
 export const GET_LYRIC = '/lyric' // 歌词
-
-
-
-
-
