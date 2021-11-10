@@ -1,7 +1,7 @@
-# vue3-vite-ts-music-pc
+# musi-pc
 
 ### 项目简介
-基于vue3+vite+typescript开发仿网易云音乐webpc，不使用任何UI框架，所有组件和样式均自主开发。
+基于vue3+vite+typescript开发的仿网易云音乐web-pc端，不使用任何UI框架，所有组件和样式均自主开发。
 
 #### 技术栈
 - **[vite v2](https://github.com/vitejs/vite/tree/1.x):**  vite构建工具
