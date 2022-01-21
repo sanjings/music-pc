@@ -1,4 +1,4 @@
-# musi-pc
+# music-pc
 
 ### 项目简介
 基于vue3+vite+typescript开发的仿网易云音乐web-pc端，不使用任何UI框架，所有组件和样式均自主开发。
@@ -79,10 +79,10 @@
 ```
 git clone https://github.com/sanjings/vue3-vite-ts-music.git
 ```
-#### 安装依赖（如果没有yarn推荐使用cnpm）
+#### 安装依赖（推荐使用pnpm）
 ```
-npm install cnpm -g --registry=https://registry.npm.taobao.org
-yarn install or cnpm install
+npm install pnpm -g
+pnpm install
 ```
 
 #### 本地运行
